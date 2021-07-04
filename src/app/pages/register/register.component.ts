@@ -53,7 +53,14 @@ export class RegisterComponent implements OnInit {
       privacyPolicy: [false, [Validators.required]],
       phone: new FormControl(null, [Validators.required]),
       country: ["", [Validators.required]],
-      adress: ["", [Validators.required]],
+      adress: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern("[A-Za-z .'-]+"),
+          Validators.minLength(2),
+        ],
+      ],
       region: ["", [Validators.required]],
     };
     this.register = this.formBuilder.group(formControls);
