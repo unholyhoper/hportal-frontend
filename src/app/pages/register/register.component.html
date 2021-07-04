@@ -9,7 +9,14 @@
     </div>
   </div>
   <div class="separator separator-bottom separator-skew zindex-100">
-    <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      x="0"
+      y="0"
+      viewBox="0 0 2560 100"
+      preserveAspectRatio="none"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
     </svg>
   </div>
@@ -21,86 +28,415 @@
     <div class="col-lg-6 col-md-8">
       <div class="card bg-secondary shadow border-0">
         <div class="card-header bg-transparent pb-5">
-          <div class="text-muted text-center mt-2 mb-4"><small>Sign up with</small></div>
+          <div class="text-muted text-center mt-2 mb-4">
+            <small>Sign up with</small>
+          </div>
           <div class="text-center">
             <a href="javascript:void(0)" class="btn btn-neutral btn-icon mr-4">
-              <span class="btn-inner--icon"><img src="assets/img/icons/common/github.svg"></span>
+              <span class="btn-inner--icon"
+                ><img src="assets/img/icons/common/github.svg"
+              /></span>
               <span class="btn-inner--text">Github</span>
             </a>
             <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
-              <span class="btn-inner--icon"><img src="assets/img/icons/common/google.svg"></span>
+              <span class="btn-inner--icon"
+                ><img src="assets/img/icons/common/google.svg"
+              /></span>
               <span class="btn-inner--text">Google</span>
             </a>
           </div>
         </div>
         <ul class="nav justify-content-center">
           <li class="nav-item">
-            <a class="nav-link " href="#login">Login</a>
+            <a class="nav-link" href="#login">Login</a>
           </li>
           <li>
             <a class="nav-link active" href="#register">Register</a>
           </li>
         </ul>
         <div class="card-body px-lg-5 py-lg-5">
-          <div class="text-center text-muted mb-4">
-          </div>
-          <form role="form">
+          <div class="text-center text-muted mb-4"></div>
+          <form class="form" [formGroup]="register" (ngSubmit)="addPerson()">
+            <!--firstName-->
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                  <span class="input-group-text"
+                    ><i class="fa fa-user"></i
+                  ></span>
                 </div>
-                <input class="form-control" placeholder="First Name" type="text">
+                <input
+                  class="form-control"
+                  placeholder="First Name"
+                  type="text"
+                  formControlName="firstname"
+                  required
+                />
+              </div>
+              <div *ngIf="firstname.touched && firstname.invalid">
+                <small *ngIf="firstname.errors.required" class="text-danger"
+                  >Firstname is required<br
+                /></small>
+                <small *ngIf="firstname.errors.pattern" class="text-danger"
+                  >Invalid Firstname<br
+                /></small>
+                <small *ngIf="firstname.errors.minlength" class="text-danger"
+                  >Firstname must contain two characters at least</small
+                >
               </div>
             </div>
+            <!--lastName-->
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                  <span class="input-group-text"
+                    ><i class="fa fa-user"></i
+                  ></span>
                 </div>
-                <input class="form-control" placeholder="Last Name" type="text">
+                <input
+                  class="form-control"
+                  placeholder="Last Name"
+                  type="text"
+                  required
+                  formControlName="lastname"
+                />
+              </div>
+              <div *ngIf="lastname.touched && lastname.invalid">
+                <small *ngIf="lastname.errors.required" class="text-danger"
+                  >Lastname is required<br
+                /></small>
+                <small *ngIf="lastname.errors.pattern" class="text-danger"
+                  >Invalid Lastname<br
+                /></small>
+                <small *ngIf="lastname.errors.minlength" class="text-danger"
+                  >Lastname must contain two characters at least</small
+                >
               </div>
             </div>
+            <!--email-->
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                  <span class="input-group-text"
+                    ><i class="ni ni-email-83"></i
+                  ></span>
                 </div>
-                <input class="form-control" placeholder="Email" type="email">
+                <input
+                  class="form-control"
+                  placeholder="E-mail"
+                  type="email"
+                  required
+                  formControlName="email"
+                />
+              </div>
+              <div *ngIf="email.touched && email.invalid">
+                <small *ngIf="email.errors.required" class="text-danger"
+                  >E-mail is required<br
+                /></small>
+                <small *ngIf="email.errors.pattern" class="text-danger"
+                  >Invalid E-mail<br
+                /></small>
               </div>
             </div>
+            <!--gender-->
+            <div class="form-group">
+              <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-4" style="padding-top: 10px">
+                  Gender :
+                </div>
+                <div class="col-lg-8 col-md-8">
+                  <div class="custom-control custom-radio">
+                    <input
+                      id="male"
+                      type="radio"
+                      class="custom-control-input"
+                      value="male"
+                      name="gender"
+                      formControlName="gender"
+                    />
+                    <label class="custom-control-label" for="male">Male</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input
+                      id="female"
+                      type="radio"
+                      class="custom-control-input"
+                      value="female"
+                      name="gender"
+                      formControlName="gender"
+                    />
+                    <label class="custom-control-label" for="female"
+                      >Female</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Role-->
+            <div class="form-group">
+              <select
+                class="custom-select"
+                (change)="changeDropDown($event, role)"
+                formControlName="role"
+              >
+                <option value="" selected>You are !</option>
+                <option *ngFor="let role of roles" [ngValue]="role">
+                  {{ role }}
+                </option>
+              </select>
+              <!--Medicale serial-->
+              <div
+                class="form-group"
+                *ngIf="
+                  this.role['value'] === '1: Doctor' ||
+                  this.role['value'] === '3: Delegate'
+                "
+              >
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="ni ni-badge"></i
+                    ></span>
+                  </div>
+                  <input
+                    class="form-control"
+                    placeholder="Medial serial"
+                    type="number"
+                    required
+                    formControlName="medicalSerial"
+                  />
+                  <div *ngIf="medicalSerial.touched && medicalSerial.invalid">
+                    <small
+                      *ngIf="medicalSerial.errors.required"
+                      class="text-danger"
+                      >Medical Serial is required<br
+                    /></small>
+                    <small
+                      *ngIf="
+                        medicalSerial.errors.minlength &&
+                        medicalSerial.errors.maxlength
+                      "
+                      class="text-danger"
+                      >Medical Serial must contain eight least</small
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Cin-->
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-badge"></i
+                  ></span>
+                </div>
+                <input
+                  class="form-control"
+                  placeholder="Carte d'Identité National"
+                  type="number"
+                  required
+                  formControlName="cin"
+                  maxlength="8"
+                />
+              </div>
+              <div *ngIf="cin.touched && cin.invalid">
+                <small *ngIf="cin.errors.required" class="text-danger"
+                  >Carte d'Identité National is required<br
+                /></small>
+                <small *ngIf="cin.errors.minlength" class="text-danger"
+                  >Carte d'Identité National must contain eight number</small
+                >
+              </div>
+            </div>
+            <!--Phone-->
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="fa fa-phone"></i
+                  ></span>
+                </div>
+                <input
+                  class="form-control"
+                  placeholder="+216 00 00 00 00"
+                  type="tel"
+                  formControlName="phone"
+                  required
+                />
+              </div>
+              <div *ngIf="phone.touched && phone.invalid">
+                <small *ngIf="phone.errors.required" class="text-danger"
+                  >Phone number is required<br
+                /></small>
+                <small *ngIf="phone.errors.pattern" class="text-danger"
+                  >Invalid phone number<br
+                /></small>
+              </div>
+            </div>
+            <!--Country-->
+            <div class="form-group">
+              <select
+                class="custom-select"
+                (change)="changeDropDown($event, country)"
+                formControlName="country"
+              >
+                <option value="" selected>Country</option>
+                <option
+                  *ngFor="let country of arrayOfCountry"
+                  [ngValue]="country.name"
+                >
+                  {{ country.name }}
+                </option>
+              </select>
+              <!--Medicale serial-->
+              <div
+                class="form-group"
+                *ngIf="
+                  this.role['value'] === '1: Doctor' ||
+                  this.role['value'] === '3: Delegate'
+                "
+              >
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="ni ni-badge"></i
+                    ></span>
+                  </div>
+                  <input
+                    class="form-control"
+                    placeholder="Medial serial"
+                    type="number"
+                    required
+                    formControlName="medicalSerial"
+                  />
+                </div>
+              </div>
+            </div>
+            <!--Address-->
+            <div class="form-group">
+              <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-6">
+                  <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"
+                        ><i class="fa fa-map-marker"></i
+                      ></span>
+                    </div>
+                    <input
+                      class="form-control"
+                      placeholder="adress"
+                      type="text"
+                      formControlName="adress"
+                      required
+                    />
+                  </div>
+                  <div *ngIf="adress.touched && adress.invalid">
+                    <small *ngIf="adress.errors.required" class="text-danger"
+                      >Adress is required<br
+                    /></small>
+                    <small *ngIf="adress.errors.pattern" class="text-danger"
+                      >Invalid Adress<br
+                    /></small>
+                    <small *ngIf="adress.errors.minlength" class="text-danger"
+                      >Adress must contain two characters at least</small
+                    >
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <select
+                    class="custom-select"
+                    (change)="changeDropDown($event, region)"
+                    formControlName="region"
+                  >
+                    <option value="">Region</option>
+                    <option
+                      *ngFor="let region of arrayOfRegion"
+                      [ngValue]="region.name"
+                    >
+                      {{ region.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <!--password-->
             <div class="form-group">
               <div class="input-group input-group-alternative">
                 <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                  <span class="input-group-text"
+                    ><i class="ni ni-lock-circle-open"></i
+                  ></span>
                 </div>
-                <input class="form-control" placeholder="Password" type="password">
+                <input
+                  class="form-control"
+                  placeholder="Password"
+                  type="password"
+                  (keyup)="verifPassword($event.target.value)"
+                  formControlName="password"
+                />
+              </div>
+              <div class="text-muted font-italic">
+                <small
+                  >password strength:
+                  <span class="font-weight-700" [ngClass]="pwdstrengthColor">{{
+                    pwdstrength
+                  }}</span></small
+                >
               </div>
             </div>
-            <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>
+            <!--confirm password-->
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-lock-circle-open"></i
+                  ></span>
+                </div>
+                <input
+                  class="form-control"
+                  placeholder="confirm the Password"
+                  type="password"
+                  (keyup)="confirmPassword($event.target.value)"
+                  formControlName="confirmPasword"
+                />
+              </div>
+              <div class="text-muted font-italic">
+                <small
+                  >password
+                  <span class="font-weight-700" [ngClass]="pswdMatchColor">{{
+                    pswdMatch
+                  }}</span></small
+                >
+              </div>
+            </div>
+            <!--agree Privacy-->
             <div class="row my-4">
               <div class="col-12">
-                <div class="custom-control custom-control-alternative custom-checkbox">
-                  <input class="custom-control-input" id="customCheckRegister" type="checkbox">
+                <div
+                  class="
+                    custom-control custom-control-alternative custom-checkbox
+                  "
+                >
+                  <input
+                    class="custom-control-input"
+                    id="customCheckRegister"
+                    type="checkbox"
+                    formControlName="privacyPolicy"
+                  />
                   <label class="custom-control-label" for="customCheckRegister">
-                    <span class="text-muted">I agree with the <a href="#!">Privacy Policy</a></span>
+                    <span class="text-muted"
+                      >I agree with the <a href="#!">Privacy Policy</a></span
+                    >
                   </label>
                 </div>
               </div>
             </div>
+            <!--createA account-->
             <div class="text-center">
-              <button type="button" class="btn btn-primary mt-4">Create account</button>
-            </div>
-            <div class="form-group">
-              Gender : 
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                <label class="form-check-label" for="inlineRadio1">Male</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                <label class="form-check-label" for="inlineRadio2">Female</label>
-              </div>
+              <button type="button" class="btn btn-primary mt-4" type="submit">
+                Create account
+              </button>
             </div>
           </form>
         </div>
