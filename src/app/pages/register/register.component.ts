@@ -15,13 +15,12 @@ import { Region } from "src/app/model/enum/region.enum";
   styleUrls: ["./register.component.scss"],
 })
 export class RegisterComponent implements OnInit {
+  private register: FormGroup;
   roles: any = ["Doctor", "Client", "Delegate"];
   pwdstrength = "You should add your password";
-  private register: FormGroup;
   pwdstrengthColor = "text-danger";
   pswdMatch = "Not matching";
   pswdMatchColor: string;
-
   countries = Country;
   arrayOfRegion;
   arrayOfCountry;
