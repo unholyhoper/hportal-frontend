@@ -142,7 +142,7 @@
             <div class="form-group">
               <div class="row justify-content-center">
                 <div class="col-lg-4 col-md-4" style="padding-top: 10px">
-                  Gender :
+                  <i class="fas fa-restroom"></i> Gender :
                 </div>
                 <div class="col-lg-8 col-md-8">
                   <div class="custom-control custom-radio">
@@ -289,29 +289,7 @@
                   {{ country.name }}
                 </option>
               </select>
-              <!--Medicale serial-->
-              <div
-                class="form-group"
-                *ngIf="
-                  this.role['value'] === '1: Doctor' ||
-                  this.role['value'] === '3: Delegate'
-                "
-              >
-                <div class="input-group input-group-alternative mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"
-                      ><i class="ni ni-badge"></i
-                    ></span>
-                  </div>
-                  <input
-                    class="form-control"
-                    placeholder="Medial serial"
-                    type="number"
-                    required
-                    formControlName="medicalSerial"
-                  />
-                </div>
-              </div>
+
             </div>
             <!--Address-->
             <div class="form-group">

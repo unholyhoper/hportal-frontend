@@ -1,4 +1,3 @@
-import { Address } from "cluster";
 import { Country } from "./enum/country.enum";
 import { Gender } from "./enum/gender.enm";
 import { Region } from "./enum/region.enum";
@@ -15,7 +14,7 @@ export class RegisterUser {
   role: Role;
   medicalSerial: number;
   cin: number;
-  adress: Address;
+  adress: string;
   privacyPolicy: boolean;
   phone: number;
   constructor(
@@ -29,7 +28,7 @@ export class RegisterUser {
     role: Role,
     medicalSerial: number,
     cin: number,
-    adress: Address,
+    adress: string,
     privacyPolicy: boolean,
     phone: number
   ) {

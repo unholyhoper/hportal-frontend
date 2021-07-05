@@ -15,7 +15,13 @@ import {
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
+  name = 'jessica'
+  role ='client'
+  roleIcon='fas fa-user-shield'
+  numberOfDoctors= 100;
+  numberOfPatients= 300
+  numberOfDelegates = 50;
+  
   public datasets: any;
   public data: any;
   public salesChart;
@@ -23,6 +29,19 @@ export class DashboardComponent implements OnInit {
   public clicked1: boolean = false;
 
   ngOnInit() {
+
+    if(this.role ==='Admin'){
+      this.roleIcon='fas fa-user-shield'
+    }
+    else if(this.role ==='Doctor'){
+      this.roleIcon='fas fa-user-md'
+    }
+    else if(this.role ==='delegate'){
+      this.roleIcon='fas fa-briefcase-medical'
+    }
+    else if(this.role ==='client'){
+      this.roleIcon="fas fa-user"
+    }
 
     this.datasets = [
       [0, 20, 10, 30, 15, 40, 20, 60, 60],
