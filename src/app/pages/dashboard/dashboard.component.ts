@@ -30,10 +30,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
 
-    if(this.role ==='Admin'){
+    if(this.role ==='admin'){
       this.roleIcon='fas fa-user-shield'
     }
-    else if(this.role ==='Doctor'){
+    else if(this.role ==='doctor'){
       this.roleIcon='fas fa-user-md'
     }
     else if(this.role ==='delegate'){

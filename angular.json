@@ -65,6 +65,10 @@
             "production": {
               "browserTarget": "argon-dashboard-angular:build:production"
             }
+          },
+          "dev": {
+            "proxyConfig": "proxy.config.json",
+            "browserTarget": "generator:build"
           }
         },
         "extract-i18n": {
