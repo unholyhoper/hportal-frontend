@@ -7,8 +7,7 @@
           <div class="card card-stats mb-12 mb-xl-12">
             <div class="card-body">
               <div class="row">
-                <div class="col-lg-5"></div>
-                <div class="col-auto">
+                <div class="col-auto  container-fluid">
                   Welcome {{ name }} ({{ role }})
                   <div
                     class="
@@ -22,7 +21,6 @@
                     <i [ngClass]="roleIcon"></i>
                   </div>
                 </div>
-                <div class="col-lg-5"></div>
               </div>
             </div>
           </div>
@@ -31,268 +29,633 @@
     </div>
   </div>
 </div>
-<div class="container-fluid mt--7">
-  <div class="container-fluid">
-    <div class="header-body">
-      <!-- Card stats -->
-      <div class="row">
-        <div class="col-xl-1 col-lg-6"></div>
-        <div class="col-xl-3 col-lg-6">
-          <div class="card card-stats mb-4 mb-xl-0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">
-                    Doctors                    
-                  </h5>
-                  <span class="h2 font-weight-bold mb-0">{{numberOfDoctors}}</span>
-                </div>
-                <div class="col-auto">
-                  <div
-                    class="
-                      icon icon-shape
-                      bg-warning
-                      text-white
-                      rounded-circle
-                      shadow
-                    "
-                  >
-                    <i class="fas fa-user-md"></i>
+<div *ngIf=" role === 'admin'">
+  <div class="container-fluid mt--7">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+        <div class="row">
+          <div class="col-xl-1 col-lg-6"></div>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      Doctors
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0">{{
+                      numberOfDoctors
+                    }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-warning
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i class="fas fa-user-md"></i>
+                    </div>
                   </div>
                 </div>
+                <p class="mb-0 text-muted text-sm">
+                  <button
+                    type="button"
+                    class="btn btn-primary my-4 button-background"
+                  >
+                    View and manage Doctors
+                  </button>
+                </p>
               </div>
-              <p class="mb-0 text-muted text-sm">
-                <button type="button" class="btn btn-primary my-4 button-background" >View and manage Doctors</button>
-              </p>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      Patients
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0">{{
+                      numberOfPatients
+                    }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-yellow
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i class="fas fa-users"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mb-0 text-muted text-sm">
+                  <button
+                    type="button"
+                    class="btn btn-primary my-4 button-background"
+                  >
+                    View and manage Patients
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      Delegates
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0">{{
+                      numberOfDelegates
+                    }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-info
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i class="fas fa-briefcase-medical"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mb-0 text-muted text-sm">
+                  <button
+                    type="button"
+                    class="btn btn-primary my-4 button-background"
+                  >
+                    View and manage Delegates
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-2 col-lg-6"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid info-1">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+        <div class="row">
+          <div class="col-xl-1 col-lg-6"></div>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      Medicines
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0">{{
+                      numberOfMedicines
+                    }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-warning
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i class="fas fa-pills"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mb-0 text-muted text-sm">
+                  <button
+                    type="button"
+                    class="btn btn-primary my-4 button-background"
+                  >
+                    View and manage Medicines
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      disease
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0">{{
+                      numberOfDisease
+                    }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-yellow
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i class="fas fa-diagnoses"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mb-0 text-muted text-sm">
+                  <button
+                    type="button"
+                    class="btn btn-primary my-4 button-background"
+                  >
+                    View and manage Patients
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      material
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0">{{
+                      numberOfMaterial
+                    }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-info
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i class="fas fa-bed"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mb-0 text-muted text-sm">
+                  <button
+                    type="button"
+                    class="btn btn-primary my-4 button-background"
+                  >
+                    View and manage Material
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-2 col-lg-6"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid info-1">
+    <div class="container-fluid info-2">
+      <div class="header-body">
+        <!-- Card stats -->
+        <div class="row">
+          <div class="col-xl-6 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      Statistics
+                    </h5>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-danger
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i class="fas fa-chart-bar"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mb-0 text-muted text-sm">
+                  <a href="" class="text-light">
+                    Use visual charts to communicate info more effectively
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      Appointement Management
+                    </h5>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-warning
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i class="fas fa-chart-pie"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mb-0 text-muted text-sm">
+                  <a href="" class="text-light"
+                    >Use visual charts to communicate info more effectively</a
+                  >
+                </p>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-lg-6">
-          <div class="card card-stats mb-4 mb-xl-0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">
-                    Patients
-                  </h5>
-                  <span class="h2 font-weight-bold mb-0">{{numberOfPatients}}</span>
-                </div>
-                <div class="col-auto">
-                  <div
-                    class="
-                      icon icon-shape
-                      bg-yellow
-                      text-white
-                      rounded-circle
-                      shadow
-                    "
-                  >
-                    <i class="fas fa-users"></i>
-                  </div>
-                </div>
-              </div>
-              <p class="mb-0 text-muted text-sm">
-                <button type="button" class="btn btn-primary my-4 button-background" >View and manage Patients</button>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-lg-6">
-          <div class="card card-stats mb-4 mb-xl-0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">
-                    Delegates
-                  </h5>
-                  <span class="h2 font-weight-bold mb-0">{{numberOfDelegates}}</span>
-                </div>
-                <div class="col-auto">
-                  <div
-                    class="
-                      icon icon-shape
-                      bg-info
-                      text-white
-                      rounded-circle
-                      shadow
-                    "
-                  >
-                    <i class="fas fa-user-nurse"></i>
-                  </div>
-                </div>
-              </div>
-              <p class="mb-0 text-muted text-sm">
-                <button type="button" class="btn btn-primary my-4 button-background" >View and manage Delegates</button>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-2 col-lg-6"></div>
       </div>
     </div>
   </div>
 </div>
-<div class="container-fluid  info-1">
-  <div class="container-fluid">
-    <div class="header-body">
-      <!-- Card stats -->
-      <div class="row">
-        <div class="col-xl-1 col-lg-6"></div>
-        <div class="col-xl-3 col-lg-6">
-          <div class="card card-stats mb-4 mb-xl-0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">
-                    Medicines                    
-                  </h5>
-                  <span class="h2 font-weight-bold mb-0">{{numberOfMedicines}}</span>
-                </div>
-                <div class="col-auto">
-                  <div
-                    class="
-                      icon icon-shape
-                      bg-warning
-                      text-white
-                      rounded-circle
-                      shadow
-                    "
-                  >
-                    <i class="fas fa-pills"></i>
+<div *ngIf=" role === 'client'">
+  <div class="container-fluid mt--7">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+        <div class="row">
+          <div class="col-xl-1 col-lg-6"></div>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      Doctors
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0">{{
+                      numberOfDoctors
+                    }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-warning
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i class="fas fa-user-md"></i>
+                    </div>
                   </div>
                 </div>
+                <p class="mb-0 text-muted text-sm">
+                  <button
+                    type="button"
+                    class="btn btn-primary my-4 button-background"
+                  >
+                    View and manage Doctors
+                  </button>
+                </p>
               </div>
-              <p class="mb-0 text-muted text-sm">
-                <button type="button" class="btn btn-primary my-4 button-background" >View and manage Medicines</button>
-              </p>
             </div>
           </div>
-        </div>
-        <div class="col-xl-3 col-lg-6">
-          <div class="card card-stats mb-4 mb-xl-0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">
-                    disease
-                  </h5>
-                  <span class="h2 font-weight-bold mb-0">{{numberOfDisease}}</span>
-                </div>
-                <div class="col-auto">
-                  <div
-                    class="
-                      icon icon-shape
-                      bg-yellow
-                      text-white
-                      rounded-circle
-                      shadow
-                    "
-                  >
-                  <i class="fas fa-diagnoses"></i>
-                </div>
-                </div>
-              </div>
-              <p class="mb-0 text-muted text-sm">
-                <button type="button" class="btn btn-primary my-4 button-background" >View and manage Patients</button>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-lg-6">
-          <div class="card card-stats mb-4 mb-xl-0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">
-                    material
-                  </h5>
-                  <span class="h2 font-weight-bold mb-0">{{numberOfMaterial}}</span>
-                </div>
-                <div class="col-auto">
-                  <div
-                    class="
-                      icon icon-shape
-                      bg-info
-                      text-white
-                      rounded-circle
-                      shadow
-                    "
-                  >
-                    <i class="fas fa-bed"></i>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      Patients
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0">{{
+                      numberOfPatients
+                    }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-yellow
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i class="fas fa-users"></i>
+                    </div>
                   </div>
                 </div>
+                <p class="mb-0 text-muted text-sm">
+                  <button
+                    type="button"
+                    class="btn btn-primary my-4 button-background"
+                  >
+                    View and manage Patients
+                  </button>
+                </p>
               </div>
-              <p class="mb-0 text-muted text-sm">
-                <button type="button" class="btn btn-primary my-4 button-background" >View and manage Delegates</button>
-              </p>
             </div>
           </div>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      Delegates
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0">{{
+                      numberOfDelegates
+                    }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-info
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i class="fas fa-briefcase-medical"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mb-0 text-muted text-sm">
+                  <button
+                    type="button"
+                    class="btn btn-primary my-4 button-background"
+                  >
+                    View and manage Delegates
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-2 col-lg-6"></div>
         </div>
-        <div class="col-xl-2 col-lg-6"></div>
       </div>
     </div>
   </div>
-</div>
-<div class="container-fluid info-1">
-  <div class="container-fluid info-2">
-    <div class="header-body">
-      <!-- Card stats -->
-      <div class="row">
-        <div class="col-xl-6 col-lg-6">
-          <div class="card card-stats mb-4 mb-xl-0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">
-                    Statistics
-                  </h5>
-                </div>
-                <div class="col-auto">
-                  <div
-                    class="
-                      icon icon-shape
-                      bg-danger
-                      text-white
-                      rounded-circle
-                      shadow
-                    "
-                  >
-                    <i class="fas fa-chart-bar"></i>
+  <div class="container-fluid info-1">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+        <div class="row">
+          <div class="col-xl-1 col-lg-6"></div>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      Medicines
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0">{{
+                      numberOfMedicines
+                    }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-warning
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i class="fas fa-pills"></i>
+                    </div>
                   </div>
                 </div>
+                <p class="mb-0 text-muted text-sm">
+                  <button
+                    type="button"
+                    class="btn btn-primary my-4 button-background"
+                  >
+                    View and manage Medicines
+                  </button>
+                </p>
               </div>
-              <p class=" mb-0 text-muted text-sm">
-                 <a href="" class="text-light"> Use visual charts to communicate info more effectively  </a>
-              </p>
             </div>
           </div>
-        </div>
-        <div class="col-xl-6 col-lg-6">
-          <div class="card card-stats mb-4 mb-xl-0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">
-                    Appointement Management
-                  </h5>
-                </div>
-                <div class="col-auto">
-                  <div
-                    class="
-                      icon icon-shape
-                      bg-warning
-                      text-white
-                      rounded-circle
-                      shadow
-                    "
-                  >
-                    <i class="fas fa-chart-pie"></i>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      disease
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0">{{
+                      numberOfDisease
+                    }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-yellow
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i class="fas fa-diagnoses"></i>
+                    </div>
                   </div>
                 </div>
+                <p class="mb-0 text-muted text-sm">
+                  <button
+                    type="button"
+                    class="btn btn-primary my-4 button-background"
+                  >
+                    View and manage Patients
+                  </button>
+                </p>
               </div>
-              <p class=" mb-0 text-muted text-sm">
-                <a href="" class="text-light">Use visual charts to communicate info more effectively</a>
-              </p>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      material
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0">{{
+                      numberOfMaterial
+                    }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-info
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i class="fas fa-bed"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mb-0 text-muted text-sm">
+                  <button
+                    type="button"
+                    class="btn btn-primary my-4 button-background"
+                  >
+                    View and manage Delegates
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-2 col-lg-6"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid info-1">
+    <div class="container-fluid info-2">
+      <div class="header-body">
+        <!-- Card stats -->
+        <div class="row">
+          <div class="col-xl-6 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      Statistics
+                    </h5>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-danger
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i class="fas fa-chart-bar"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mb-0 text-muted text-sm">
+                  <a href="" class="text-light">
+                    Use visual charts to communicate info more effectively
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      Appointement Management
+                    </h5>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-warning
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i class="fas fa-chart-pie"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mb-0 text-muted text-sm">
+                  <a href="" class="text-light"
+                    >Use visual charts to communicate info more effectively</a
+                  >
+                </p>
+              </div>
             </div>
           </div>
         </div>
