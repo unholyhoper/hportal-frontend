@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit {
   numberOfDoctors = 100;
   numberOfPatients = 300;
   numberOfDelegates = 50;
+  numberOfDisease = 100;
   private BookAppointmetForm: FormGroup;
   diseasesArray: string[];
   emergencyArray: string[];

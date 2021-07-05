@@ -490,3 +490,177 @@
     </div>
   </div>
 </div>
+<div *ngIf="role === 'doctor'">
+  <div class="container-fluid mt--7">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+        <div class="row">
+          <div class="col-xl-1 col-lg-6"></div>
+          <div class="col-xl-5 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      Doctors
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0">{{
+                      numberOfDoctors
+                    }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-warning
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i class="fas fa-user-md"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mb-0 text-muted text-sm">
+                  <button
+                    type="button"
+                    class="btn btn-primary my-4 button-background"
+                  >
+                    View and manage Doctors
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-5 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      Patients
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0">{{
+                      numberOfPatients
+                    }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-yellow
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i class="fas fa-users"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mb-0 text-muted text-sm">
+                  <button
+                    type="button"
+                    class="btn btn-primary my-4 button-background"
+                  >
+                    View and manage Patients
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-1 col-lg-6"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid info-1">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+        <div class="row">
+          <div class="col-xl-1 col-lg-6"></div>
+          <div class="col-xl-5 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      Disease management
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0">{{
+                      numberOfDisease
+                    }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-warning
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i class="fas fa-user-md"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mb-0 text-muted text-sm">
+                  <button
+                    type="button"
+                    class="btn btn-primary my-4 button-background"
+                  >
+                    View and manage Doctors
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-5 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">
+                      Patients
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0">{{
+                      numberOfPatients
+                    }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-yellow
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i class="fas fa-users"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mb-0 text-muted text-sm">
+                  <button
+                    type="button"
+                    class="btn btn-primary my-4 button-background"
+                  >
+                    View and manage Patients
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-1 col-lg-6"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="role === 'delegate'">
+</div>
