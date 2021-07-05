@@ -127,20 +127,6 @@ export class RegisterComponent implements OnInit {
     }
     return arrayObjects;
   }
-  login() {
-    console.log(this.register.value);
-  }
-  // Choose city using select dropdown
-  changeRole(e) {
-    this.role.setValue(e.target.value, {
-      onlySelf: true,
-    });
-  }
-  changeCountry(e) {
-    this.role.setValue(e.target.value, {
-      onlySelf: true,
-    });
-  }
   changeDropDown(e, component) {
     component.setValue(e.target.value, {
       onlySelf: true,
