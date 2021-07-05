@@ -6,8 +6,11 @@ import {
   NgForm,
   Validators,
 } from "@angular/forms";
+import { Router } from "@angular/router";
 import { Country } from "src/app/model/enum/country.enum";
 import { Region } from "src/app/model/enum/region.enum";
+import { RegisterUser } from "src/app/model/register-user";
+import { RegisterService } from "src/app/services/register.service";
 
 @Component({
   selector: "app-register",
@@ -24,7 +27,10 @@ export class RegisterComponent implements OnInit {
   countries = Country;
   arrayOfRegion;
   arrayOfCountry;
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,    private regiterService: RegisterService,
+    private router: Router,
+    // private toast: ToastrService
+    ) {
     let formControls = {
       firstname: new FormControl("", [
         Validators.required,
@@ -144,7 +150,7 @@ export class RegisterComponent implements OnInit {
     if (e.length > 0 && e.length < 5) {
       this.pwdstrength = "Low";
       this.pwdstrengthColor = "text-warning";
-    } else if (e.length > 5 && e.length < 10) {
+    } else if (e.length >= 5 && e.length < 10) {
       this.pwdstrength = "Medium";
       this.pwdstrengthColor = "text-warning";
     } else if (e.length >= 10) {
@@ -165,18 +171,18 @@ export class RegisterComponent implements OnInit {
       this.pswdMatchColor = "text-danger";
     }
   }
-  addPerson() {
+  addPerson(registerForm) {
     console.log(this.register.value);
-    // let data = this.register.value;
-    // let enseignant = new Person(null,data.identifiant,data.firstname,data.lastname,data.email,data.password,null,null,null,null,null,null,null);
-    // this.enseignantService.addEnseignant(enseignant).subscribe(
-    //   res=>{
-    //     this.toastr.success(res.message);
-    //     this.router.navigate(['/enseignants']);
-    //   },
-    //   err=>{
-    //     console.log(err);
-    //   }
-    // )
+    let data = this.register.value;
+    let user = new RegisterUser(data.firstname,data.lastname,data.email,data.gender,data.country,data.region,data.password,data.role,data.medicalSerial,data.cin,data.adress,data.privacyPolicy,data.phone);
+    this.regiterService.addUser(user).subscribe(
+      res=>{
+        // this.toastr.success(res.message);
+        this.router.navigate(['/login']);
+      },
+      err=>{
+        console.log(err);
+      }
+    )
   }
 }
