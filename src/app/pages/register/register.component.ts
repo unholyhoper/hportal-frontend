@@ -113,8 +113,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.arrayOfCountry = this.enumToArray(Country);
     this.arrayOfRegion = this.enumToArray(Region);
-    console.log(this.arrayOfRegion);
-    console.log(this.arrayOfCountry);
   }
 
   enumToArray(enumValue: any) {
@@ -159,7 +157,7 @@ export class RegisterComponent implements OnInit {
   }
   addPerson(registerForm) {
     console.log(this.register.value);
-    let data = this.register.value;
+    let data = registerForm.value;
     let user = new RegisterUser(data.firstname,data.lastname,data.email,data.gender,data.country,data.region,data.password,data.role,data.medicalSerial,data.cin,data.adress,data.privacyPolicy,data.phone);
     this.regiterService.addUser(user).subscribe(
       res=>{
