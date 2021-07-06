@@ -14,6 +14,7 @@ import {
   chartExample1,
   chartExample2,
 } from "../../variables/charts";
+import {Router} from '@angular/router';
 
 @Component({
   selector: "app-dashboard",
@@ -36,7 +37,8 @@ export class DashboardComponent implements OnInit {
   selectedItems: { item_id: number; item_text: string; }[];
   dropdownSettings: { singleSelection: boolean; idField: string; textField: string; selectAllText: string; unSelectAllText: string; itemsShowLimit: number; allowSearchFilter: boolean; };
   requiredField: boolean = false;
-  constructor(private formBuilder: FormBuilder) {
+
+  constructor(private router: Router, private formBuilder: FormBuilder) {
     let formControls = {
       diseases: new FormControl("", []),
       date:["",[Validators.required]],
@@ -115,5 +117,18 @@ export class DashboardComponent implements OnInit {
     this.setStatus();
     if (this.selectedItems.length > 0) { return 'validField' }
     else { return 'invalidField' }
+  }
+  public management(source) {
+    switch (source) {
+      case 'Medecines': {
+        console.log('loading medecines managmeent page');
+        this.router.navigate([`/tables/${source}`]);
+        break;
+      }
+
+      default: {
+        break;
+      }
+    }
   }
 }
