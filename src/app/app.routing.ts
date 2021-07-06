@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import {TablesComponent} from './pages/tables/tables.component';
 
 const routes: Routes =[
   {
@@ -12,6 +13,15 @@ const routes: Routes =[
     redirectTo: 'dashboard',
     pathMatch: 'full',
   }, {
+    path: 'tables/:model',
+    component: TablesComponent,
+    // children: [
+    //   {
+    //     path: '',
+    //     loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+    //   }
+    // ]
+  },{
     path: '',
     component: AdminLayoutComponent,
     children: [
