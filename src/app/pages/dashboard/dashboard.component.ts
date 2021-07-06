@@ -22,7 +22,7 @@ import {
 })
 export class DashboardComponent implements OnInit {
   name = "jessica";
-  role = "client";
+  role = "doctor";
   roleIcon = "fas fa-user-shield";
   numberOfDoctors = 100;
   numberOfPatients = 300;
@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit {
     } else if (this.role === "doctor") {
       this.roleIcon = "fas fa-user-md";
     } else if (this.role === "delegate") {
-      this.roleIcon = "fas fa-briefcase-medical";
+        this.roleIcon = "fas fa-briefcase-medical";
     } else if (this.role === "client") {
       this.roleIcon = "fas fa-user";
     }
