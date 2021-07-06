@@ -20,7 +20,6 @@ export class TablesComponent implements OnInit {
   public field6: String;
   private thead: String[];
   private theadList: String[];
-
   constructor(private route: ActivatedRoute, private medecineService: MedecineService) {
   }
 
@@ -50,5 +49,17 @@ export class TablesComponent implements OnInit {
     }
 
   }
+
+  public delete(source) {
+    this.medecineService.deleteMedecine(source).subscribe(
+      (res: any) => {
+        window.location.reload();
+      }, error => {
+      }
+    );
+
+
+  }
+
 
 }

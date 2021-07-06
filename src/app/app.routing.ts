@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import {TablesComponent} from './pages/tables/tables.component';
+import {FormComponent} from './form/form.component';
 
 const routes: Routes =[
   {
@@ -15,13 +16,11 @@ const routes: Routes =[
   }, {
     path: 'tables/:model',
     component: TablesComponent,
-    // children: [
-    //   {
-    //     path: '',
-    //     loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
-    //   }
-    // ]
-  },{
+
+  }, {
+    path: 'form/:entity/:id',
+    component: FormComponent,
+  }, {
     path: '',
     component: AdminLayoutComponent,
     children: [

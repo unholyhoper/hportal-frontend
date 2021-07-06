@@ -5,6 +5,7 @@ export class Medecine {
   quantity: number;
   expirationDate: Date;
   price: number;
+
   constructor(id: number, reference: string, manufacturer: string, quantity: number, expirationDate: Date, price: number) {
     this.id = id;
     this.reference = reference;
@@ -13,4 +14,5 @@ export class Medecine {
     this.expirationDate = expirationDate;
     this.price = price;
   }
+
 }
