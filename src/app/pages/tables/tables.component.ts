@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MedecineService} from '../../services/medecine.service';
 import {Medecine} from '../../model/Medecine';
 import {CommonModule} from '@angular/common';
@@ -20,7 +20,7 @@ export class TablesComponent implements OnInit {
   public field6: String;
   private thead: String[];
   private theadList: String[];
-  constructor(private route: ActivatedRoute, private medecineService: MedecineService) {
+  constructor(private route: ActivatedRoute, private medecineService: MedecineService,private router: Router, ) {
   }
 
   ngOnInit() {
@@ -61,5 +61,10 @@ export class TablesComponent implements OnInit {
 
   }
 
-
+  edit(id){
+    this.router.navigate([`form/medecine/${id}`])
+  }
+  add(){
+    this.router.navigate([`form/medecine`])
+  }
 }

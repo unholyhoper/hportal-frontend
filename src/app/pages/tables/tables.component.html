@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="header-body">
       <!-- Card stats -->
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-xl-3 col-lg-6">
           <div class="card card-stats mb-4 mb-xl-0">
             <div class="card-body">
@@ -87,7 +87,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
@@ -98,7 +98,10 @@
     <div class="col">
       <div class="card shadow">
         <div class="card-header border-0">
-          <h3 class="mb-0">{{entity2}} management</h3>
+          <h3 class="">{{entity}} management</h3>
+            <button class="btn btn-primary  button-background"  placement="top-center" type="button" (click)="add(medecine)">
+              add {{entity}}<i class="ni ni-fat-remove"></i>
+            </button>
         </div>
         <div class="table-responsive">
           <table class="table align-items-center table-flush">
@@ -141,22 +144,14 @@
               </td>
 
               <td>
-                <div _ngcontent-c10="" class="col-lg-3 col-md-6">
-                  <button _ngcontent-c10="" class="btn-icon-clipboard" ngxclipboard="" placement="top-center"
-                          triggers="hover focus click" type="button" (click)="delete(medecine.id)">
-                    <div _ngcontent-c10=""><i _ngcontent-c10="" class="ni ni-fat-remove"></i><span _ngcontent-c10="">fat-remove</span>
-                    </div>
+                  <button class="btn btn-primary my-4 button-background"  placement="top-center" type="button" (click)="delete(medecine)">
+                    <i class="ni ni-fat-remove"></i>
                   </button>
-                </div>
-              </td>
+                </td>
               <td>
-                <div _ngcontent-c10="" class="col-lg-3 col-md-6">
-                  <button _ngcontent-c10="" class="btn-icon-clipboard" ngxclipboard="" placement="top-center"
-                          triggers="hover focus click" type="button">
-                    <div _ngcontent-c10=""><i _ngcontent-c10="" class="ni ni-ui-04"></i><span
-                      _ngcontent-c10="">ui-04</span></div>
+                  <button class="btn btn-primary my-4 button-background" placement="top-center" type="button" (click)="edit(medecine.id)">
+                   <i class="ni ni-ui-04"></i>
                   </button>
-                </div>
               </td>
 
             </tbody>

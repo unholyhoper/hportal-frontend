@@ -2,6 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {LoginUser} from '../model/login-user';
 import {environment} from '../../environments/environment';
+import { Medecine } from '../model/medecine';
 
 const BASE_PATH = environment.basePath;
 
@@ -9,6 +10,7 @@ const BASE_PATH = environment.basePath;
   providedIn: 'root'
 })
 export class MedecineService {
+
   constructor(private httpClient: HttpClient) {
   }
 
@@ -22,5 +24,8 @@ export class MedecineService {
 
   getMedecine(id: number) {
     return this.httpClient.get<any>(`${BASE_PATH}/user/${id}`);
+  }
+  addMedecine(medecine) {
+    return this.httpClient.post<any>(`${BASE_PATH}/medecine`,medecine);
   }
 }

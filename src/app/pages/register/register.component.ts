@@ -11,7 +11,8 @@ import { Country } from "src/app/model/enum/country.enum";
 import { Region } from "src/app/model/enum/region.enum";
 import { RegisterUser } from "src/app/model/register-user";
 import { RegisterService } from "src/app/services/register.service";
-
+import { enumToArray , changeDropDown} from "src/app/shared-module/service";
+    
 @Component({
   selector: "app-register",
   templateUrl: "./register.component.html",
@@ -111,25 +112,12 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.arrayOfCountry = this.enumToArray(Country);
-    this.arrayOfRegion = this.enumToArray(Region);
+    this.arrayOfCountry = enumToArray(Country);
+    this.arrayOfRegion = enumToArray(Region);
   }
 
-  enumToArray(enumValue: any) {
-    let arrayObjects = [];
-    for (const [propertyKey, propertyValue] of Object.entries(enumValue)) {
-      if (!Number.isNaN(Number(propertyKey))) {
-        continue;
-      }
-      arrayObjects.push({ id: propertyValue, name: propertyKey });
-    }
-    return arrayObjects;
-  }
-  changeDropDown(e, component) {
-    component.setValue(e.target.value, {
-      onlySelf: true,
-    });
-  }
+
+
   verifPassword(e) {
     if (e.length > 0 && e.length < 5) {
       this.pwdstrength = "Low";

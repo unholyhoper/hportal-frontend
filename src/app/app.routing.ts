@@ -17,6 +17,13 @@ const routes: Routes =[
     path: 'tables/:model',
     component: TablesComponent,
 
+  }
+  , {
+    path: 'form/:entity/:id',
+    component: FormComponent,
+  }, {
+    path: 'form/:entity',
+    component: FormComponent,
   }, {
     path: 'form/:entity/:id',
     component: FormComponent,
