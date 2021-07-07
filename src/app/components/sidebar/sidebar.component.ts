@@ -7,15 +7,18 @@ declare interface RouteInfo {
     icon: string;
     class: string;
 }
-export const ROUTES: RouteInfo[] = [
+export const ROUTESCLIENT: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
-    { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '' },
-    { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '' },
-    { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '' },
-    { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
-    { path: '/login', title: 'Login',  icon:'ni-key-25 text-info', class: '' },
-    { path: '/register', title: 'Register',  icon:'ni-circle-08 text-pink', class: '' }
 ];
+export const ROUTESADMIN: RouteInfo[] = [
+  { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
+  { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
+];
+export const ROUTESDOCTOR: RouteInfo[] = [
+  { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
+  { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
+]
+
 
 @Component({
   selector: 'app-sidebar',
@@ -26,11 +29,26 @@ export class SidebarComponent implements OnInit {
 
   public menuItems: any[];
   public isCollapsed = true;
+  role: any;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
+    this.role='client'
+    switch(this.role){
+      case('admin'):{
+        this.menuItems = ROUTESADMIN.filter(menuItem => menuItem);
+        break;
+      }
+      case('doctor'):{
+        this.menuItems = ROUTESDOCTOR.filter(menuItem => menuItem);
+        break;
+      }
+      case('client'):{
+        this.menuItems = ROUTESCLIENT.filter(menuItem => menuItem);
+        break;
+      }
+    }
     this.router.events.subscribe((event) => {
       this.isCollapsed = true;
    });

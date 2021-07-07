@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { ROUTES } from '../sidebar/sidebar.component';
+import { ROUTESADMIN,ROUTESCLIENT,ROUTESDOCTOR } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -12,12 +12,29 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
+  role: string;
+  useName: string;
   constructor(location: Location,  private element: ElementRef, private router: Router) {
     this.location = location;
   }
 
   ngOnInit() {
-    this.listTitles = ROUTES.filter(listTitle => listTitle);
+    this.role="admin"
+    this.useName="Heni"
+    switch(this.role){
+      case('admin'):{
+        this.listTitles = ROUTESADMIN.filter(listTitle => listTitle);
+        break;
+      }
+      case('doctor'):{
+        this.listTitles = ROUTESDOCTOR.filter(listTitle => listTitle);
+        break;
+      }
+      case('client'):{
+        this.listTitles = ROUTESCLIENT.filter(listTitle => listTitle);
+        break;
+      }
+    }
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());
