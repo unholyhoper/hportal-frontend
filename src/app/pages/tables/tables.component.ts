@@ -9,6 +9,7 @@ import {CommonModule} from '@angular/common';
   templateUrl: './tables.component.html',
   styleUrls: ['./tables.component.scss']
 })
+
 export class TablesComponent implements OnInit {
   public medecines: Medecine[];
   public entity2: String;
@@ -31,6 +32,9 @@ export class TablesComponent implements OnInit {
 
         this.theadList = ['ID', 'Reference', 'Manufacturer', 'Quantity', 'Expiration date', 'Price'];
         console.log('loading medecines managmeent page');
+        console.log('loading medecines managmeent page');
+        console.log(this.theadList);
+        console.log();
         this.medecineService.allMedecines()
           .subscribe((medecineList: Medecine[]) => {
             this.medecines = medecineList;
@@ -51,10 +55,13 @@ export class TablesComponent implements OnInit {
   }
 
   public delete(source) {
-    this.medecineService.deleteMedecine(source).subscribe(
+    let index = this.medecines.indexOf(source);
+    this.medecines.splice(index, 1);
+    this.medecineService.deleteMedecine(source.id).subscribe(
       (res: any) => {
-        window.location.reload();
+        console.log(res)
       }, error => {
+        console.log(error)
       }
     );
 

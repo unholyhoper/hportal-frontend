@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { FormComponent } from './form/form.component';
+import {TablesComponent} from './pages/tables/tables.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { FormComponent } from './form/form.component';
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    FormComponent
+    FormComponent,
+    TablesComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -24,13 +24,13 @@
               <div class="col-auto container-fluid">
                 <h5
                   class="card-title text-uppercase text-muted mb-0"
-                  *ngIf="isUpdate === true"
+                  *ngIf="isUpdate === false"
                 >
                   Add {{ entity }}
                 </h5>
                 <h5
                   class="card-title text-uppercase text-muted mb-0"
-                  *ngIf="isUpdate === false"
+                  *ngIf="isUpdate === true"
                 >
                   Update {{ entity }}
                 </h5>
@@ -52,9 +52,11 @@
                   </div>
                   <input
                     class="form-control"
-                    placeholder="{{ field.label }}"
-                    type="{{ field.type }}"
-                    formControlName="{{ field.formControleName }}"
+                    placeholder="{{field.label}}"
+                    type="{{field.type}}"
+                    [(ngModel)]="field.value"
+                    formControlName="{{field.formControleName}}"
+                    disabled="{{field.disabled}}"
                     required
                   />
                 </div>
