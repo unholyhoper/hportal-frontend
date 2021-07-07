@@ -23,7 +23,7 @@ import {Router} from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   name = "jessica";
-  role = "doctor";
+  role = "client";
   roleIcon = "fas fa-user-shield";
   numberOfDoctors = 100;
   numberOfPatients = 300;

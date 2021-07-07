@@ -30,7 +30,6 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
   declarations: [
     DashboardComponent,
     UserProfileComponent,
-    TablesComponent,
     IconsComponent,
     MapsComponent
   ]
