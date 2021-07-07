@@ -17,6 +17,7 @@ export class RegisterUser {
   adress: string;
   privacyPolicy: boolean;
   phone: number;
+  hospitalName : string;
   constructor(
     firstname: String,
     lastname: String,
@@ -30,7 +31,8 @@ export class RegisterUser {
     cin: number,
     adress: string,
     privacyPolicy: boolean,
-    phone: number
+    phone: number,
+    hospitalName : string
   ) {
     this.firstname=firstname
     this.lastname=lastname
@@ -45,5 +47,6 @@ export class RegisterUser {
     this.adress=adress
     this.privacyPolicy=privacyPolicy
     this.phone=phone
+    this.hospitalName = hospitalName
   }
 }
