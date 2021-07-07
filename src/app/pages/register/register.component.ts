@@ -158,7 +158,7 @@ export class RegisterComponent implements OnInit {
   addPerson(registerForm) {
     console.log(this.register.value);
     let data = registerForm.value;
-    let user = new RegisterUser(data.firstname,data.lastname,data.email,data.gender,data.country,data.region,data.password,data.role,data.medicalSerial,data.cin,data.adress,data.privacyPolicy,data.phone);
+    let user = new RegisterUser(data.firstname,data.lastname,data.email,data.gender,data.country,data.region,data.password,data.role,data.medicalSerial,data.cin,data.adress,data.privacyPolicy,data.phone,data.hospitalName);
     this.regiterService.addUser(user).subscribe(
       res=>{
         // this.toastr.success(res.message);
