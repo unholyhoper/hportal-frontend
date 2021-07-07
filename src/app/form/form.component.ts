@@ -118,15 +118,20 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.entity = this.route.snapshot.paramMap.get("entity");
     this.id = parseInt(this.route.snapshot.paramMap.get("id"));
-    this.isUpdate = this.id.toString() === 'NaN' 
+    console.log("iiiiiii",this.id);
+    this.isUpdate = this.id.toString() !== 'NaN';
     switch (this.entity) {
       case "medecine": {
+        console.log("iiiiiiiiiiiiiiiiiiiiddddddddddddd",this.id);
+
         this.fields = [
           {
             label: "Id",
             type: "text",
             formControleName: "id",
             icon: "fa fa-user",
+            disabled:'true',
+            value:this.id
           },
           {
             label: "Reference",
@@ -252,16 +257,8 @@ export class FormComponent implements OnInit {
   editForm(form) {
     let data = form.value;
     console.log("dataaaaa", data);
-
-    let medecine = new Medecine(
-      data.id,
-      data.reference,
-      data.manufacturer,
-      data.quantity,
-      data.expirationDate,
-      data.price,
-    );
-    this.medecineService.addMedecine(medecine).subscribe(
+    if(this.isUpdate)
+    this.medecineService.updateMedecine(data).subscribe(
       (res) => {
         console.log(res);
         // this.toastr.success(res.message);
@@ -272,5 +269,19 @@ export class FormComponent implements OnInit {
         console.log(err);
       }
     );
+    else{
+      this.medecineService.addMedecine(data).subscribe(
+        (res) => {
+          console.log(res);
+          // this.toastr.success(res.message);
+          // this.router.navigate(['/enseignants']);
+          this.router.navigate([`/tables/Medecines`]);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    }
   }
+
 }

@@ -28,4 +28,7 @@ export class MedecineService {
   addMedecine(medecine) {
     return this.httpClient.post<any>(`${BASE_PATH}/medecine`,medecine);
   }
+  updateMedecine(medecine) {
+    return this.httpClient.put<any>(`${BASE_PATH}/medecine/${medecine.id}`, medecine);
+  }
 }
