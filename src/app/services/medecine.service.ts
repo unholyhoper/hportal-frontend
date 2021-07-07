@@ -31,4 +31,7 @@ export class MedecineService {
   updateMedecine(medecine) {
     return this.httpClient.put<any>(`${BASE_PATH}/medecine/${medecine.id}`, medecine);
   }
+  medecineCount() {
+    return this.httpClient.get<any>(`${BASE_PATH}/countMedecines`);
+  }
 }

@@ -1,23 +1,23 @@
-import { Component, OnInit } from "@angular/core";
-import { Medecine } from "../model/medecine";
-import { ActivatedRoute, Router } from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {Medecine} from '../model/medecine';
+import {ActivatedRoute, Router} from '@angular/router';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
-} from "@angular/forms";
-import { RegisterUser } from "../model/register-user";
-import { MedecineService } from "../services/medecine.service";
-import { DoctorService } from "../services/doctor.service";
-import { enumToArray } from "../shared-module/service";
-import { Country } from "../model/enum/country.enum";
-import { Region } from "../model/enum/region.enum";
+} from '@angular/forms';
+import {RegisterUser} from '../model/register-user';
+import {MedecineService} from '../services/medecine.service';
+import {DoctorService} from '../services/doctor.service';
+import {enumToArray} from '../shared-module/service';
+import {Country} from '../model/enum/country.enum';
+import {Region} from '../model/enum/region.enum';
 
 @Component({
-  selector: "app-form",
-  templateUrl: "./form.component.html",
-  styleUrls: ["./form.component.css"],
+  selector: 'app-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.css'],
 })
 export class FormComponent implements OnInit {
   fieldsCount: Number;
@@ -38,56 +38,56 @@ export class FormComponent implements OnInit {
     private doctorService: DoctorService
   ) {
     let formControls = {};
-    let entity = this.route.snapshot.paramMap.get("entity");
+    let entity = this.route.snapshot.paramMap.get('entity');
     switch (entity) {
-      case "medecine": {
+      case 'medecine': {
         formControls = {
-          id: new FormControl("", [
+          id: new FormControl('', [
             Validators.required,
-            Validators.pattern("[A-Za-z .'-]+"),
+            Validators.pattern('[A-Za-z .\'-]+'),
             Validators.minLength(2),
           ]),
-          reference: new FormControl("", [
+          reference: new FormControl('', [
             Validators.required,
-            Validators.pattern("[A-Za-z .'-]+"),
+            Validators.pattern('[A-Za-z .\'-]+'),
             Validators.minLength(2),
           ]),
-          quantity: new FormControl("", [
+          quantity: new FormControl('', [
             Validators.required,
-            Validators.pattern("[A-Za-z .'-]+"),
+            Validators.pattern('[A-Za-z .\'-]+'),
             Validators.minLength(2),
           ]),
-          expirationdate: new FormControl("", [
+          expirationdate: new FormControl('', [
             Validators.required,
-            Validators.pattern("[A-Za-z .'-]+"),
+            Validators.pattern('[A-Za-z .\'-]+'),
             Validators.minLength(2),
           ]),
-          price: new FormControl("", [
+          price: new FormControl('', [
             Validators.required,
-            Validators.pattern("[A-Za-z .'-]+"),
+            Validators.pattern('[A-Za-z .\'-]+'),
             Validators.minLength(2),
           ]),
         };
         break;
       }
-      case "doctor": {
+      case 'doctor': {
         formControls = {
-          firstname: new FormControl("", [
+          firstname: new FormControl('', [
             Validators.required,
-            Validators.pattern("[A-Za-z .'-]+"),
+            Validators.pattern('[A-Za-z .\'-]+'),
             Validators.minLength(2),
           ]),
-          lastname: new FormControl("", [
+          lastname: new FormControl('', [
             Validators.required,
-            Validators.pattern("[A-Za-z .'-]+"),
+            Validators.pattern('[A-Za-z .\'-]+'),
             Validators.minLength(2),
           ]),
-          email: new FormControl("", [
+          email: new FormControl('', [
             Validators.required,
-            Validators.pattern("^^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"),
+            Validators.pattern('^^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
           ]),
-          gender: ["male", [Validators.required]],
-          role: ["", [Validators.required]],
+          gender: ['male', [Validators.required]],
+          role: ['', [Validators.required]],
           medicalSerial: [null, [Validators.required, Validators.minLength(8)]],
           cin: [
             null,
@@ -97,65 +97,72 @@ export class FormComponent implements OnInit {
           confirmPasword: [null, [Validators.required]],
           privacyPolicy: [false, [Validators.required]],
           phone: new FormControl(null, [Validators.required]),
-          country: ["", [Validators.required]],
+          country: ['', [Validators.required]],
           adress: [
-            "",
+            '',
             [
               Validators.required,
-              Validators.pattern("[A-Za-z .'-]+"),
+              Validators.pattern('[A-Za-z .\'-]+'),
               Validators.minLength(2),
             ],
           ],
-          region: ["", [Validators.required]],
-        }
+          region: ['', [Validators.required]],
+        };
         break;
       }
     }
     this.edit = this.formBuilder.group(formControls);
-    console.log(this.edit)
+    console.log(this.edit);
   }
 
   ngOnInit(): void {
-    this.entity = this.route.snapshot.paramMap.get("entity");
-    this.id = parseInt(this.route.snapshot.paramMap.get("id"));
-    console.log("iiiiiii",this.id);
-    this.isUpdate = this.id.toString() !== 'NaN';
+    this.entity = this.route.snapshot.paramMap.get('entity');
+    if (Object.is(parseInt(this.route.snapshot.paramMap.get('id')), NaN)) {
+      this.isUpdate = false;
+      this.medecineService.medecineCount().subscribe(res => {
+        this.id = res;
+      });
+
+    } else {
+      this.id = parseInt(this.route.snapshot.paramMap.get('id'));
+    }
+    console.log('iiiiiii', this.id);
     switch (this.entity) {
-      case "medecine": {
-        console.log("iiiiiiiiiiiiiiiiiiiiddddddddddddd",this.id);
+      case 'medecine': {
+        console.log('iiiiiiiiiiiiiiiiiiiiddddddddddddd', this.id);
 
         this.fields = [
           {
-            label: "Id",
-            type: "text",
-            formControleName: "id",
-            icon: "fa fa-user",
-            disabled:'true',
-            value:this.id
+            label: 'Id',
+            type: 'text',
+            formControleName: 'id',
+            icon: 'fa fa-user',
+            disabled: 'true',
+            value: this.id
           },
           {
-            label: "Reference",
-            type: "text",
-            formControleName: "reference",
-            icon: "fas fa-barcode",
+            label: 'Reference',
+            type: 'text',
+            formControleName: 'reference',
+            icon: 'fas fa-barcode',
           },
           {
-            label: "Quantity",
-            type: "text",
-            formControleName: "quantity",
-            icon: "fas fa-cubes",
+            label: 'Quantity',
+            type: 'text',
+            formControleName: 'quantity',
+            icon: 'fas fa-cubes',
           },
           {
-            label: "Expiration date",
-            type: "text",
-            formControleName: "expirationdate",
-            icon: "fas fa-clock",
+            label: 'Expiration date',
+            type: 'text',
+            formControleName: 'expirationdate',
+            icon: 'fas fa-clock',
           },
           {
-            label: "Price",
-            type: "text",
-            formControleName: "price",
-            icon: "fas fa-dollar-sign",
+            label: 'Price',
+            type: 'text',
+            formControleName: 'price',
+            icon: 'fas fa-dollar-sign',
           },
         ];
         this.medecineService.getMedecine(this.id).subscribe((res) => {
@@ -170,75 +177,75 @@ export class FormComponent implements OnInit {
         });
         break;
       }
-      case "doctor": {
+      case 'doctor': {
         let arrayOfCountry = enumToArray(Country);
         let arrayOfRegion = enumToArray(Region);
         this.fields = [
           {
-            label: "First Name",
-            type: "text",
-            formControleName: "firstname",
-            icon: "fa fa-user",
-            disable:'false'
+            label: 'First Name',
+            type: 'text',
+            formControleName: 'firstname',
+            icon: 'fa fa-user',
+            disable: 'false'
           },
           {
-            label: "Last Name",
-            type: "text",
-            formControleName: "lastname",
-            icon: "fa fa-user",
-            disable:'false'
+            label: 'Last Name',
+            type: 'text',
+            formControleName: 'lastname',
+            icon: 'fa fa-user',
+            disable: 'false'
           },
           {
-            label: "Gender",
-            type: "text",
-            formControleName: "gender",
-            value:['male','female'],
-            icon: "",
-            disable:'false'
+            label: 'Gender',
+            type: 'text',
+            formControleName: 'gender',
+            value: ['male', 'female'],
+            icon: '',
+            disable: 'false'
           },
           {
-            label: "Medical Serial",
-            type: "text",
-            formControleName: "medicalSerial",
-            icon: "ni ni-badge",
-            disable:'false'
+            label: 'Medical Serial',
+            type: 'text',
+            formControleName: 'medicalSerial',
+            icon: 'ni ni-badge',
+            disable: 'false'
           },
           {
-            label: "Carte d'Identité National",
-            type: "number",
-            formControleName: "cin",
-            icon: "fas fa-dollar-sign",
-            disable:'false'
+            label: 'Carte d\'Identité National',
+            type: 'number',
+            formControleName: 'cin',
+            icon: 'fas fa-dollar-sign',
+            disable: 'false'
           },
           {
-            label: "Phone number",
-            type: "number",
-            formControleName: "phone",
-            icon: "fa fa-phone",
-            disable:'false'
+            label: 'Phone number',
+            type: 'number',
+            formControleName: 'phone',
+            icon: 'fa fa-phone',
+            disable: 'false'
           },
           {
-            label: "country",
-            type: "dropdown",
+            label: 'country',
+            type: 'dropdown',
             value: arrayOfCountry,
-            formControleName: "country",
-            icon: "",
-            disable:'false'
+            formControleName: 'country',
+            icon: '',
+            disable: 'false'
           },
           {
-            label: "Adress",
-            type: "number",
-            formControleName: "adress",
-            icon: "",
-            disable:'false'
+            label: 'Adress',
+            type: 'number',
+            formControleName: 'adress',
+            icon: '',
+            disable: 'false'
           },
           {
-            label: "region",
-            type: "dropdown",
-            formControleName: "region",
-            value:arrayOfRegion,
-            icon: "",
-            disable:'false'
+            label: 'region',
+            type: 'dropdown',
+            formControleName: 'region',
+            value: arrayOfRegion,
+            icon: '',
+            disable: 'false'
           },
         ];
         this.doctorService.getdoctors(this.id).subscribe((res) => {
@@ -256,20 +263,20 @@ export class FormComponent implements OnInit {
 
   editForm(form) {
     let data = form.value;
-    console.log("dataaaaa", data);
-    if(this.isUpdate)
-    this.medecineService.updateMedecine(data).subscribe(
-      (res) => {
-        console.log(res);
-        // this.toastr.success(res.message);
-        // this.router.navigate(['/enseignants']);
-        this.router.navigate([`/tables/Medecines`]);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-    else{
+    console.log('dataaaaa', data);
+    if (this.isUpdate) {
+      this.medecineService.updateMedecine(data).subscribe(
+        (res) => {
+          console.log(res);
+          // this.toastr.success(res.message);
+          // this.router.navigate(['/enseignants']);
+          this.router.navigate([`/tables/Medecines`]);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    } else {
       this.medecineService.addMedecine(data).subscribe(
         (res) => {
           console.log(res);
