@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import { of } from 'rxjs/internal/observable/of';
 
 const BASE_PATH = environment.basePath;
 
@@ -14,7 +15,8 @@ export class DiseaseService {
   }
 
   allDiseases() {
-    return this.httpClient.get<any>(`${BASE_PATH}/allDiseases`);
+    return of([])
+    // return this.httpClient.get<any>(`${BASE_PATH}/allDiseases`);
   }
   getDisease(id: number) {
     return this.httpClient.get<any>(`${BASE_PATH}/disease/${id}`);

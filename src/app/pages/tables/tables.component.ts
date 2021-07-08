@@ -10,6 +10,7 @@ import { DiseaseService } from "src/app/services/disease.service";
 import { MedicalRecordService } from "src/app/services/medical-record.service";
 import { Disease } from "src/app/model/disease";
 import { MaterialService } from "src/app/services/material.service";
+import { MedicalRecord } from "src/app/model/medical-records";
 
 @Component({
   selector: "app-tables",
@@ -47,79 +48,85 @@ export class TablesComponent implements OnInit {
           .allMedecines()
           .subscribe((medecineList: Medecine[]) => {
             this.rows = medecineList;
+            console.log('rows',this.rows)
+            this.headers = [
+              { label: "ID", value: "id" },
+              { label: "Reference", value: "reference" },
+              { label: "Manufacturer", value: "manufacturer" },
+              { label: "Quantity", value: "quantity" },
+              { label: "Expiration date", value: "expirationDate" },
+              { label: "Price", value: "price" },
+            ];
           });
 
-        this.headers = [
-          { label: "ID", value: "id" },
-          { label: "Reference", value: "reference" },
-          { label: "Manufacturer", value: "manufacturer" },
-          { label: "Quantity", value: "quantity" },
-          { label: "Expiration date", value: "expirationDate" },
-          { label: "Price", value: "price" },
-        ];
+        
       }
       case "doctor": {
-        this.headers = [
-          { label: "FirstName", value: "firstName" },
-          { label: "LastName", value: "lastName" },
-          { label: "Serial Number", value: "serialNumber" },
-          { label: "Gender", value: "gender" },
-          { label: "Hosting Hospital", value: "hostingHospital" },
-          { label: "Country", value: "country" },
-        ];
         this.doctorService.allDoctor().subscribe((doctor: RegisterUser[]) => {
           this.rows = doctor;
+          this.headers = [
+            { label: "FirstName", value: "firstName" },
+            { label: "LastName", value: "lastName" },
+            { label: "Serial Number", value: "serialNumber" },
+            { label: "Gender", value: "gender" },
+            { label: "Hosting Hospital", value: "hostingHospital" },
+            { label: "Country", value: "country" },
+          ];
         });
       }
       case "patients": {
-        this.headers = [
-          { label: "FirstName", value: "firstName" },
-          { label: "LastName", value: "lastName" },
-          { label: "Serial Number", value: "serialNumber" },
-          { label: "Gender", value: "gender" },
-          { label: "Country", value: "country" },
-        ];
+
         this.patientService
           .allPatient()
           .subscribe((patient: RegisterUser[]) => {
             this.rows = patient;
+            this.headers = [
+              { label: "FirstName", value: "firstName" },
+              { label: "LastName", value: "lastName" },
+              { label: "Serial Number", value: "serialNumber" },
+              { label: "Gender", value: "gender" },
+              { label: "Country", value: "country" },
+            ];
           });
       }
-      case "diseases": {
-        this.headers = [
-          { label: "ID", value: "id" },
-          { label: "Name", value: "name" },
-          { label: "Description", value: "description" },
-          { label: "Medecines", value: "medecines" },
-        ];
+      case "disease": {
+
         this.diseaseService.allDiseases().subscribe((disease: Disease[]) => {
           this.rows = disease;
+          this.headers = [
+            { label: "ID", value: "id" },
+            { label: "Name", value: "name" },
+            { label: "Description", value: "description" },
+            { label: "Medecines", value: "medecines" },
+          ];
         });
         break;
       }
       case "medicalRecords": {
-        this.headers = [
-          { label: "PatientFirstName", value: "firstName" },
-          { label: "PatientLastName", value: "lastName" },
-          { label: "PatientDiseases", value: "disease" },
-          { label: "PatientGender", value: "gender" },
-        ];
+
         this.medicalRecordService
           .allMedicalRecord()
-          .subscribe((patient: RegisterUser[]) => {
-            this.rows = patient;
+          .subscribe((medicalRecords: MedicalRecord[]) => {
+            this.rows = medicalRecords;
+            this.headers = [
+              { label: "Patient First Name", value: "firstName" },
+              { label: "Patient Last Name", value: "lastName" },
+              { label: "Patient Diseases", value: "disease" },
+              { label: "Patient Gender", value: "gender" },
+            ];
           });
       }
       case "material": {
-        this.headers = [
-          { label: "Name", value: "name" },
-          { label: "Quantity", value: "quantity" },
-          { label: "Price", value: "price" },
-        ];
+
         this.materialService
           .allMaterial()
           .subscribe((patient: RegisterUser[]) => {
             this.rows = patient;
+            this.headers = [
+              { label: "Name", value: "name" },
+              { label: "Quantity", value: "quantity" },
+              { label: "Price", value: "price" },
+            ];
           });
       }
       case "Another": {
