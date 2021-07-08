@@ -64,6 +64,7 @@
                 </div>
                 <p class="mb-0 text-muted text-sm">
                   <button
+                    (click)="management('doctor')"
                     type="button"
                     class="btn btn-primary my-4 button-background"
                   >
@@ -101,6 +102,7 @@
                 </div>
                 <p class="mb-0 text-muted text-sm">
                   <button
+                  (click)="management('patients')"                    
                     type="button"
                     class="btn btn-primary my-4 button-background"
                   >
@@ -138,6 +140,7 @@
                 </div>
                 <p class="mb-0 text-muted text-sm">
                   <button
+                  (click)="management('delegate')"
                     type="button"
                     class="btn btn-primary my-4 button-background"
                   >
@@ -186,6 +189,7 @@
                 </div>
                 <p class="mb-0 text-muted text-sm">
                   <button
+                  (click)="management('medecine')"
                     type="button"
                     class="btn btn-primary my-4 button-background"
                   >
@@ -223,10 +227,11 @@
                 </div>
                 <p class="mb-0 text-muted text-sm">
                   <button
+                    (click)="management('disease')"
                     type="button"
                     class="btn btn-primary my-4 button-background"
                   >
-                    View and manage Patients
+                    View and manage Disease
                   </button>
                 </p>
               </div>
@@ -260,6 +265,7 @@
                 </div>
                 <p class="mb-0 text-muted text-sm">
                   <button
+                    (click)="management('material')"
                     type="button"
                     class="btn btn-primary my-4 button-background"
                   >
@@ -524,6 +530,7 @@
                 </div>
                 <p class="mb-0 text-muted text-sm">
                   <button
+                    (click)="management('disease')"
                     type="button"
                     class="btn btn-primary my-4 button-background"
                   >
@@ -561,6 +568,7 @@
                 </div>
                 <p class="mb-0 text-muted text-sm">
                   <button
+                   (click)="management('patients')"
                     type="button"
                     class="btn btn-primary my-4 button-background"
                   >
@@ -596,18 +604,18 @@
                     <div
                       class="
                         icon icon-shape
-                        bg-warning
+                        bg-danger
                         text-white
                         rounded-circle
                         shadow
                       "
                     >
-                      <i class="fas fa-user-md"></i>
+                      <i class="fas fa-pills"></i>
                     </div>
                   </div>
                 </div>
                 <p class="mb-0 text-muted text-sm">
-                  <button (click)="management('Medecines')"
+                  <button (click)="management('medecines')"
                           type="button"
                           class="btn btn-primary my-4 button-background"
                   >
@@ -625,25 +633,26 @@
                     <h5 class="card-title text-uppercase text-muted mb-0">
                       Medical records management                    </h5>
                     <span class="h2 font-weight-bold mb-0">{{
-                      numberOfPatients
+                      numberOfMedicalRecords
                     }}</span>
                   </div>
                   <div class="col-auto">
                     <div
                       class="
                         icon icon-shape
-                        bg-yellow
+                        bg-info
                         text-white
                         rounded-circle
                         shadow
                       "
                     >
-                      <i class="fas fa-users"></i>
+                      <i class="fas fa-notes-medical"></i>
                     </div>
                   </div>
                 </div>
                 <p class="mb-0 text-muted text-sm">
                   <button
+                    (click)="management('medicalRecords')"
                     type="button"
                     class="btn btn-primary my-4 button-background"
                   >
