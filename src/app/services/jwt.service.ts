@@ -15,7 +15,7 @@ export class AuthService {
     }
     constructor(private http: HttpClient, private router: Router) { }
     login(username: string, password: string): void {
-       this.http.post(`${BASE_PATH}/login_check`, {  password, username})
+       this.http.post(`${BASE_PATH}/login_check`, {username,password})
             .subscribe(response => {
                     console.log(response)
                     // login successful if there's a jwt token in the response
