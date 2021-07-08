@@ -35,7 +35,7 @@ export class SidebarComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.role='doctor'
+    this.role='doctor '
     switch(this.role){
       case('admin'):{
         this.menuItems = ROUTESADMIN.filter(menuItem => menuItem);
