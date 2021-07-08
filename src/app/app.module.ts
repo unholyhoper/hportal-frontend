@@ -35,7 +35,7 @@ import {TablesComponent} from './pages/tables/tables.component';
     FormComponent,
     TablesComponent
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}, ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

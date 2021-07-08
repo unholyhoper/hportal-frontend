@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     let formControls = {
-      cin: new FormControl(null, [
+      username: new FormControl(null, [
         Validators.required,
         Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(2),
@@ -53,6 +53,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login(loginForm) {
     let data = loginForm.value;
-    this.loginService.login(data.cin,data.password)
+    this.loginService.login(data.username,data.password)
   }
 }

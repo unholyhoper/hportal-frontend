@@ -1,8 +1,9 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {LoginUser} from '../model/login-user';
 import {environment} from '../../environments/environment';
 import { Medecine } from '../model/medecine';
+import { AuthService } from '../shared-module/jwt.service';
 
 const BASE_PATH = environment.basePath;
 

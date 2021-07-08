@@ -1,8 +1,8 @@
 export class LoginUser {
-    cin:number;
+    userName:string;
     password:string;
-    constructor(cin:number,password:string){
-        this.cin=cin
+    constructor(userName:string,password:string){
+        this.userName=userName
         this.password=password
     }
 }

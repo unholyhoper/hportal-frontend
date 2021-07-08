@@ -9,7 +9,12 @@ const BASE_PATH = environment.basePath
 })
 export class LoginService {
   constructor(private httpClient:HttpClient) { }
-  loginUser(login: LoginUser){
-    return this.httpClient.post<any>(`${BASE_PATH}/authenticate`,login);
-  }
+  
+  login(body) {
+    try {
+      return this.httpClient.post<any>(`${BASE_PATH}/login_check`, body)
+    } catch (error) {
+      console.log("error  ")
+    }
+ }
 }
