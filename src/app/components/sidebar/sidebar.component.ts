@@ -16,6 +16,7 @@ export const ROUTESADMIN: RouteInfo[] = [
 ];
 export const ROUTESDOCTOR: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
+  { path: '/appointement', title: 'Appointments',  icon: 'ni-tv-2 text-primary', class: '' },
   { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
 ]
 
@@ -34,7 +35,7 @@ export class SidebarComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.role='client'
+    this.role='doctor'
     switch(this.role){
       case('admin'):{
         this.menuItems = ROUTESADMIN.filter(menuItem => menuItem);
@@ -53,4 +54,5 @@ export class SidebarComponent implements OnInit {
       this.isCollapsed = true;
    });
   }
+
 }
