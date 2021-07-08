@@ -118,18 +118,9 @@ export class DashboardComponent implements OnInit {
     if (this.selectedItems.length > 0) { return 'validField' }
     else { return 'invalidField' }
   }
-  public management(source) {
-    switch (source) {
-      case 'Medecines': {
-        console.log('loading medecines managmeent page');
-        this.router.navigate([`/tables/${source}`]);
-        break;
-      }
-
-      default: {
-        break;
-      }
-    }
+  public management(screen) {
+    console.log(screen)
+    this.router.navigate([`/tables/${screen}`]);
   }
 
 

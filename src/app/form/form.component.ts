@@ -110,6 +110,36 @@ export class FormComponent implements OnInit {
         };
         break;
       }
+      case 'disease': {
+        formControls = {
+          id: new FormControl('', [
+            Validators.required,
+            Validators.pattern('[A-Za-z .\'-]+'),
+            Validators.minLength(2),
+          ]),
+          reference: new FormControl('', [
+            Validators.required,
+            Validators.pattern('[A-Za-z .\'-]+'),
+            Validators.minLength(2),
+          ]),
+          quantity: new FormControl('', [
+            Validators.required,
+            Validators.pattern('[A-Za-z .\'-]+'),
+            Validators.minLength(2),
+          ]),
+          expirationdate: new FormControl('', [
+            Validators.required,
+            Validators.pattern('[A-Za-z .\'-]+'),
+            Validators.minLength(2),
+          ]),
+          price: new FormControl('', [
+            Validators.required,
+            Validators.pattern('[A-Za-z .\'-]+'),
+            Validators.minLength(2),
+          ]),
+        };
+        break;
+      }
     }
     this.edit = this.formBuilder.group(formControls);
     console.log(this.edit);
@@ -126,11 +156,8 @@ export class FormComponent implements OnInit {
     } else {
       this.id = parseInt(this.route.snapshot.paramMap.get('id'));
     }
-    console.log('iiiiiii', this.id);
     switch (this.entity) {
       case 'medecine': {
-        console.log('iiiiiiiiiiiiiiiiiiiiddddddddddddd', this.id);
-
         this.fields = [
           {
             label: 'Id',
