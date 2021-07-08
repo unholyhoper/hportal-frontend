@@ -1,11 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, OnInit} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
-} from "@angular/forms";
-import Chart from "chart.js";
+} from '@angular/forms';
+import Chart from 'chart.js';
 
 // core components
 import {
@@ -13,18 +13,20 @@ import {
   parseOptions,
   chartExample1,
   chartExample2,
-} from "../../variables/charts";
+} from '../../variables/charts';
 import {Router} from '@angular/router';
+import {Appointment} from '../../model/appointment';
+import {AppointmentService} from '../../services/appointment.service';
 
 @Component({
-  selector: "app-dashboard",
-  templateUrl: "./dashboard.component.html",
-  styleUrls: ["./dashboard.component.scss"],
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  name = "jessica";
-  role = "doctor";
-  roleIcon = "fas fa-user-shield";
+  name = 'jessica';
+  role = 'client';
+  roleIcon = 'fas fa-user-shield';
   numberOfDoctors = 100;
   numberOfPatients = 300;
   numberOfDelegates = 50;
@@ -33,52 +35,69 @@ export class DashboardComponent implements OnInit {
   diseasesArray: string[];
   emergencyArray: string[];
   //multiselect
-  dropdownList: { item_id: number; item_text: string; }[];
-  selectedItems: { item_id: number; item_text: string; }[];
-  dropdownSettings: { singleSelection: boolean; idField: string; textField: string; selectAllText: string; unSelectAllText: string; itemsShowLimit: number; allowSearchFilter: boolean; };
+  dropdownList: { item_id: number; item_text: string }[];
+  selectedItems: { item_id: number; item_text: string }[];
+  dropdownSettings: {
+    singleSelection: boolean;
+    idField: string;
+    textField: string;
+    selectAllText: string;
+    unSelectAllText: string;
+    itemsShowLimit: number;
+    allowSearchFilter: boolean;
+  };
   requiredField: boolean = false;
 
-  constructor(private router: Router, private formBuilder: FormBuilder) {
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private appointmentService: AppointmentService
+  ) {
     let formControls = {
-      diseases: new FormControl("", []),
-      date:["",[Validators.required]],
-      emergency:["",[Validators.required]],
-      description:["",[Validators.required]],
-      medicines:["",[Validators.required]],
+      diseases: new FormControl('', []),
+      date: ['', [Validators.required]],
+      emergency: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      medicines: ['', [Validators.required]],
     };
     this.BookAppointmetForm = this.formBuilder.group(formControls);
   }
+
   get diseases() {
-    return this.BookAppointmetForm.get("diseases");
+    return this.BookAppointmetForm.get('diseases');
   }
+
   get date() {
-    return this.BookAppointmetForm.get("date");
+    return this.BookAppointmetForm.get('date');
   }
+
   get emergency() {
-    return this.BookAppointmetForm.get("emergency");
+    return this.BookAppointmetForm.get('emergency');
   }
+
   get description() {
-    return this.BookAppointmetForm.get("description");
+    return this.BookAppointmetForm.get('description');
   }
+
   ngOnInit() {
-    this.diseasesArray = ["corona-virus"];
-    this.emergencyArray=["low","medium",'high']
-    if (this.role === "admin") {
-      this.roleIcon = "fas fa-user-shield";
-    } else if (this.role === "doctor") {
-      this.roleIcon = "fas fa-user-md";
-    } else if (this.role === "delegate") {
-        this.roleIcon = "fas fa-briefcase-medical";
-    } else if (this.role === "client") {
-      this.roleIcon = "fas fa-user";
+    this.diseasesArray = ['corona-virus'];
+    this.emergencyArray = ['low', 'medium', 'high'];
+    if (this.role === 'admin') {
+      this.roleIcon = 'fas fa-user-shield';
+    } else if (this.role === 'doctor') {
+      this.roleIcon = 'fas fa-user-md';
+    } else if (this.role === 'delegate') {
+      this.roleIcon = 'fas fa-briefcase-medical';
+    } else if (this.role === 'client') {
+      this.roleIcon = 'fas fa-user';
     }
     this.dropdownList = [
-      { "item_id": 1, "item_text": "Panadol" },
-      { "item_id": 2, "item_text": "doliprane" },
-      { "item_id": 3, "item_text": "smecta" },
-      { "item_id": 4, "item_text": "alergica" },
-      { "item_id": 5, "item_text": "deslore" },
-      { "item_id": 6, "item_text": "analgon" }
+      {item_id: 1, item_text: 'Panadol'},
+      {item_id: 2, item_text: 'doliprane'},
+      {item_id: 3, item_text: 'smecta'},
+      {item_id: 4, item_text: 'alergica'},
+      {item_id: 5, item_text: 'deslore'},
+      {item_id: 6, item_text: 'analgon'},
     ];
 
     this.selectedItems = [];
@@ -90,38 +109,76 @@ export class DashboardComponent implements OnInit {
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 3,
-      allowSearchFilter: true
+      allowSearchFilter: true,
     };
     this.setStatus();
   }
+
   changeDropDown(e, component) {
     component.setValue(e.target.value, {
       onlySelf: true,
     });
   }
+
   addAppointment(appointementForm) {
-    console.log(appointementForm.value)
+    console.log(appointementForm.value);
+    //todo set the user value
+    let appointment = new Appointment(
+      null,
+      null,
+      new Date(appointementForm.value.date),
+      appointementForm.value.emergency.toString().substr(3),
+      'PENDING',
+      null,
+      appointementForm.value.description.toString()
+    );
+    console.log('Appintment :::::!', appointment);
+    this.appointmentService.addAppointment(appointment).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+
   }
+
   setStatus() {
-    (this.selectedItems.length > 0) ? this.requiredField = true : this.requiredField = false;
+    this.selectedItems.length > 0
+      ? (this.requiredField = true)
+      : (this.requiredField = false);
   }
 
   //multiselect
   onItemSelect(item: any) {
     this.setClass();
   }
+
   onSelectAll(items: any) {
     this.setClass();
   }
+
   setClass() {
     this.setStatus();
-    if (this.selectedItems.length > 0) { return 'validField' }
-    else { return 'invalidField' }
-  }
-  public management(screen) {
-    console.log(screen)
-    this.router.navigate([`/tables/${screen}`]);
+    if (this.selectedItems.length > 0) {
+      return 'validField';
+    } else {
+      return 'invalidField';
+    }
   }
 
+  public management(source) {
+    switch (source) {
+      case 'Medecines': {
+        console.log('loading medecines managmeent page');
+        this.router.navigate([`/tables/${source}`]);
+        break;
+      }
 
+      default: {
+        break;
+      }
+    }
+  }
 }
