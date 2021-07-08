@@ -6,10 +6,7 @@ import {
   Validators,
 } from "@angular/forms";
 import { Router } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
-import { LoginUser } from "src/app/model/login-user";
-import { LoginService } from "src/app/services/login.service";
-import { AuthService } from "src/app/shared-module/jwt.service";
+import { AuthService } from "src/app/services/jwt.service";
 
 @Component({
   selector: "app-login",

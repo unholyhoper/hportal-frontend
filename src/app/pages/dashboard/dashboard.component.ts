@@ -25,7 +25,7 @@ import {AppointmentService} from '../../services/appointment.service';
 })
 export class DashboardComponent implements OnInit {
   name = 'jessica';
-  role = 'client';
+  role = 'admin';
   roleIcon = 'fas fa-user-shield';
   numberOfDoctors = 100;
   numberOfPatients = 300;
@@ -169,16 +169,6 @@ export class DashboardComponent implements OnInit {
   }
 
   public management(source) {
-    switch (source) {
-      case 'Medecines': {
-        console.log('loading medecines managmeent page');
-        this.router.navigate([`/tables/${source}`]);
-        break;
-      }
-
-      default: {
-        break;
-      }
-    }
+    this.router.navigate([`/tables/${source}`]);
   }
 }

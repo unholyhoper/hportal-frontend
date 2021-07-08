@@ -8,7 +8,7 @@ export class MedicalRecordService {
 
   constructor() { }
   allMedicalRecord(){
-    return of()
+    return of([])
   }
   deleteMedecine(id){
     return of()
