@@ -13,34 +13,7 @@ export class AuthService {
     static getToken(): string {
         return JSON.parse(localStorage.getItem('jwt'))
     }
-    // private loggedUserSubject: BehaviorSubject<LoginUser>;
-    // public loggedInUser: Observable<any>;
-    // getLoggedUser: any;
-
-    constructor(private http: HttpClient, private router: Router) {
-        // this.getLoggedUser = JSON.parse(localStorage.getItem('loggedInUser'));
-        // this.loggedUserSubject = new BehaviorSubject(this.getLoggedUser);
-        // this.loggedInUser = this.loggedUserSubject.asObservable();
-    }
-
-    // loginUser(cin: string, password: string) {
-    //     return this.http.post<any>(`${BASE_PATH}/login`, { cin, password })
-    //         .pipe(map(response=> {
-    //             localStorage.setItem('loggedInUser', JSON.stringify(response));
-    //             this.loggedUserSubject.next(response);
-    //             console.log(response);
-    //             return response;
-    //         }));
-    // }
-
-    // logoutUser() {
-    //     localStorage.removeItem('loggedInUser');
-    //     this.loggedUserSubject.next(null);
-    // }
-    // public get loggedInUserValue(){
-    //     return this.loggedUserSubject.value;
-    // }
-    
+    constructor(private http: HttpClient, private router: Router) { }
     login(username: string, password: string): void {
        this.http.post(`${BASE_PATH}/login_check`, {  password, username})
             .subscribe(response => {
