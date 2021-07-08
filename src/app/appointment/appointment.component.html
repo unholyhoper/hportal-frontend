@@ -50,8 +50,8 @@ Dark table
                 </button>
                 <p *ngIf="appointment.doctor">{{appointment.doctor.first_name}} {{appointment.doctor.last_name}}</p>
               <td>
-                <span class="badge badge-dot mr-4">
-                  <i class="bg-warning"></i> {{ appointment.patient }}
+                <span class="badge badge-dot mr-4" *ngIf="appointment.patient">
+                  <i class="bg-warning"></i> {{ appointment.patient.first_name }}
                 </span>
               </td>
               <td>
@@ -61,7 +61,7 @@ Dark table
               </td>
               <td>
                 <span class="badge badge-dot mr-4">
-                  <i class="bg-warning"></i> {{ appointment.description }}
+                  <i class="bg-warning"></i> {{ appointment.priority }}
                 </span>
               </td>
               <td class="text-right">
@@ -75,6 +75,11 @@ Dark table
                     {{ status }}
                   </option>
                 </select>
+              </td>
+              <td>
+                <span class="badge badge-dot mr-4">
+                  <i class="bg-warning"></i> {{ appointment.description }}
+                </span>
               </td>
             </tr>
           </tbody>
