@@ -24,9 +24,9 @@ import {AppointmentService} from '../../services/appointment.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  name = 'jessica';
-  role = 'admin';
-  roleIcon = 'fas fa-user-shield';
+  name;
+  role;
+  roleIcon;
   numberOfDoctors = 100;
   numberOfPatients = 300;
   numberOfDelegates = 50;
@@ -47,6 +47,7 @@ export class DashboardComponent implements OnInit {
     allowSearchFilter: boolean;
   };
   requiredField: boolean = false;
+  roleName: string;
 
   constructor(
     private router: Router,
@@ -80,16 +81,22 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.role = localStorage.getItem('role')
+    this.name = localStorage.getItem('userName')
     this.diseasesArray = ['corona-virus'];
     this.emergencyArray = ['low', 'medium', 'high'];
-    if (this.role === 'admin') {
+    if (this.role === 'ROLE_ADMIN') {
       this.roleIcon = 'fas fa-user-shield';
-    } else if (this.role === 'doctor') {
+      this.roleName = 'Admin'
+    } else if (this.role === 'ROLE_DOCTOR') {
       this.roleIcon = 'fas fa-user-md';
+      this.roleName = 'Doctor'
     } else if (this.role === 'delegate') {
       this.roleIcon = 'fas fa-briefcase-medical';
-    } else if (this.role === 'client') {
+      this.roleName = 'Delegate'
+    } else if (this.role === 'ROLE_USER') {
       this.roleIcon = 'fas fa-user';
+      this.roleName = 'Patient'
     }
     this.dropdownList = [
       {item_id: 1, item_text: 'Panadol'},

@@ -77,6 +77,5 @@ export class AppointmentComponent implements OnInit {
         console.log(err);
       }
     );
-    console.log('qsdf',changedAppointment);
   }
 }

@@ -1,12 +1,20 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { ROUTESADMIN,ROUTESCLIENT,ROUTESDOCTOR } from '../sidebar/sidebar.component';
-import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { Router } from '@angular/router';
+import { Component, OnInit, ElementRef } from "@angular/core";
+import {
+  ROUTESADMIN,
+  ROUTESCLIENT,
+  ROUTESDOCTOR,
+} from "../sidebar/sidebar.component";
+import {
+  Location,
+  LocationStrategy,
+  PathLocationStrategy,
+} from "@angular/common";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  selector: "app-navbar",
+  templateUrl: "./navbar.component.html",
+  styleUrls: ["./navbar.component.scss"],
 })
 export class NavbarComponent implements OnInit {
   public focus;
@@ -14,40 +22,50 @@ export class NavbarComponent implements OnInit {
   public location: Location;
   role: string;
   useName: string;
-  constructor(location: Location,  private element: ElementRef, private router: Router) {
+  constructor(
+    location: Location,
+    private element: ElementRef,
+    private router: Router
+  ) {
     this.location = location;
   }
 
   ngOnInit() {
-    this.role="admin"
-    this.useName="Heni"
-    switch(this.role){
-      case('admin'):{
-        this.listTitles = ROUTESADMIN.filter(listTitle => listTitle);
+    this.role = localStorage.getItem("role");
+    this.useName = localStorage.getItem("userName");
+    switch (this.role) {
+      case "ROLE_ADMIN": {
+        this.listTitles = ROUTESADMIN.filter((listTitle) => listTitle);
         break;
       }
-      case('doctor'):{
-        this.listTitles = ROUTESDOCTOR.filter(listTitle => listTitle);
+      case "ROLE_DOCTOR": {
+        this.listTitles = ROUTESDOCTOR.filter((listTitle) => listTitle);
         break;
       }
-      case('client'):{
-        this.listTitles = ROUTESCLIENT.filter(listTitle => listTitle);
+      case "ROLE_USER": {
+        this.listTitles = ROUTESCLIENT.filter((listTitle) => listTitle);
         break;
       }
     }
   }
-  getTitle(){
+  getTitle() {
     var titlee = this.location.prepareExternalUrl(this.location.path());
-    if(titlee.charAt(0) === '#'){
-        titlee = titlee.slice( 1 );
+    if (titlee.charAt(0) === "#") {
+      titlee = titlee.slice(1);
     }
 
-    for(var item = 0; item < this.listTitles.length; item++){
-        if(this.listTitles[item].path === titlee){
-            return this.listTitles[item].title;
-        }
+    for (var item = 0; item < this.listTitles.length; item++) {
+      if (this.listTitles[item].path === titlee) {
+        return this.listTitles[item].title;
+      }
     }
-    return 'Dashboard';
+    return "Dashboard";
   }
 
+  logout() {
+    localStorage.removeItem("jwt");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("role");
+    return this.router.navigate(["/login"]);
+  }
 }

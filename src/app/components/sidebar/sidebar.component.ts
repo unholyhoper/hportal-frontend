@@ -31,21 +31,23 @@ export class SidebarComponent implements OnInit {
   public menuItems: any[];
   public isCollapsed = true;
   role: any;
+  name: string;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.role='doctor '
+    this.role = localStorage.getItem('role')
+    this.name = localStorage.getItem('userName')
     switch(this.role){
-      case('admin'):{
+      case('ROLE_ADMIN'):{
         this.menuItems = ROUTESADMIN.filter(menuItem => menuItem);
         break;
       }
-      case('doctor'):{
+      case('ROLE_DOCTOR'):{
         this.menuItems = ROUTESDOCTOR.filter(menuItem => menuItem);
         break;
       }
-      case('client'):{
+      case('ROLE_USER'):{
         this.menuItems = ROUTESCLIENT.filter(menuItem => menuItem);
         break;
       }
