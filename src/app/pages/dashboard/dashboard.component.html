@@ -8,7 +8,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-auto container-fluid">
-                  Welcome {{ name }} ({{ role }})
+                  Welcome {{ name }} ({{ roleName }})
                   <div
                     class="
                       icon icon-shape
@@ -29,7 +29,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="role === 'admin'">
+<div *ngIf="role === 'ROLE_ADMIN'">
   <div class="container-fluid mt--7">
     <div class="container-fluid">
       <div class="header-body">
@@ -352,7 +352,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="role === 'client'">
+<div *ngIf="role === 'ROLE_USER'">
   <div class="container-fluid mt--7">
     <div class="container-fluid">
       <div class="header-body">
@@ -496,7 +496,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="role === 'doctor'">
+<div *ngIf="role === 'ROLE_DOCTOR'">
   <div class="container-fluid mt--7">
     <div class="container-fluid">
       <div class="header-body">
