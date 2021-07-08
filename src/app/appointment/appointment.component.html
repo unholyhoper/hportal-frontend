@@ -39,22 +39,16 @@ Dark table
                   </div>
                 </div>
               </th>
-              <td>
-                <button
+              <td >
+                <button *ngIf="!appointment.doctor"
                   placement="top-center"
-                  type="submit"
-                  class="btn btn-primary button-background"
-                >
+                  type="button"
+                  (click)="assignCurrentUser(appointment.id)"
+                  class="btn btn-primary button-background">
                   Assign to me
                   <i class="ni ni-fat-remove"></i>
                 </button>
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="alert"
-                  aria-label="Close"
-                ></button>
-              </td>
+                <p *ngIf="appointment.doctor">{{appointment.doctor.first_name}} {{appointment.doctor.last_name}}</p>
               <td>
                 <span class="badge badge-dot mr-4">
                   <i class="bg-warning"></i> {{ appointment.patient }}

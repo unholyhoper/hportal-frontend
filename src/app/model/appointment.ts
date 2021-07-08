@@ -5,7 +5,7 @@ export class Appointment {
 
 
   id: number;
-  doctor: User;
+  private _doctor: User;
   date: Date;
   priorite: string;
   status: string;
@@ -14,7 +14,7 @@ export class Appointment {
 
   constructor(id: number, doctor: User, date: Date, priorite: string, status: string, patient: User, description: string) {
     this.id = id;
-    this.doctor = doctor;
+    this._doctor = doctor;
     this.date = date;
     this.priorite = priorite;
     this.status = status;
@@ -22,4 +22,19 @@ export class Appointment {
     this.description = description;
   }
 
+  hasDoctor() {
+    if (this._doctor == null ){
+      return false;
+    }
+    return true
+  }
+
+
+  get doctor(): User {
+    return this._doctor;
+  }
+
+  set doctor(value: User) {
+    this._doctor = value;
+  }
 }

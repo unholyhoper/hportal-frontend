@@ -4,8 +4,8 @@ export class User {
   id: number;
   username: string;
   roles: string;
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   cin: number;
   address: number;
   country: number;
@@ -18,8 +18,8 @@ export class User {
     this.id = id;
     this.username = username;
     this.roles = roles;
-    this.firstName = firstName;
-    this.lastName = lastName;
+    this.first_name = firstName;
+    this.last_name = lastName;
     this.cin = cin;
     this.address = address;
     this.country = country;
