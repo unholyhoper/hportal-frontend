@@ -16,6 +16,7 @@ import { FormComponent } from './form/form.component';
 import { JwtInterceptor } from './shared-module/auth.interceptor';
 import {TablesComponent} from './pages/tables/tables.component';
 import { AppointmentComponent } from './appointment/appointment.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { AppointmentComponent } from './appointment/appointment.component';
     AuthLayoutComponent,
     FormComponent,
     TablesComponent,
-    AppointmentComponent
+    AppointmentComponent,
+    ForgotPasswordComponent
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}, ],
   bootstrap: [AppComponent]
