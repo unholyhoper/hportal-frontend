@@ -24,7 +24,7 @@ export class MedecineService {
   }
 
   getMedecine(id: number) {
-    return this.httpClient.get<any>(`${BASE_PATH}/user/${id}`);
+    return this.httpClient.get<any>(`${BASE_PATH}/medecine/${id}`);
   }
   addMedecine(medecine) {
     return this.httpClient.post<any>(`${BASE_PATH}/medecine`,medecine);

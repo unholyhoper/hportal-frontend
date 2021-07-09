@@ -21,7 +21,7 @@
                 class="btn btn-primary button-background"
                 placement="top-center"
                 type="button"
-                (click)="add(list, entity)"
+                (click)="add(entity)"
               >
                 <span> add {{ entity }} </span>
                 <div class="icon icon-shape text-white">
@@ -53,7 +53,7 @@
                     class="btn btn-primary my-4 button-background"
                     placement="top-center"
                     type="button"
-                    (click)="delete(list, entity)"
+                    (click)="delete(row,entity)"
                   >
                     <i class="ni ni-fat-remove"></i>
                   </button>
@@ -63,7 +63,7 @@
                     class="btn btn-primary my-4 button-background"
                     placement="top-center"
                     type="button"
-                    (click)="edit(list.id, entity)"
+                    (click)="edit(row.id, entity)"
                   >
                     <i class="ni ni-ui-04"></i>
                   </button>

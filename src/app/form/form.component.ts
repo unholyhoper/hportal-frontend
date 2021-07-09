@@ -40,7 +40,7 @@ export class FormComponent implements OnInit {
     let formControls = {};
     let entity = this.route.snapshot.paramMap.get('entity');
     switch (entity) {
-      case 'medecine': {
+      case 'medecines': {
         formControls = {
           id: new FormControl('', [
             Validators.required,
@@ -142,29 +142,27 @@ export class FormComponent implements OnInit {
       }
     }
     this.edit = this.formBuilder.group(formControls);
-    console.log(this.edit);
   }
 
   ngOnInit(): void {
     this.entity = this.route.snapshot.paramMap.get('entity');
-    if (Object.is(parseInt(this.route.snapshot.paramMap.get('id')), NaN)) {
-      this.isUpdate = false;
+    const isNaN= Object.is(parseInt(this.route.snapshot.paramMap.get('id')), NaN)
+    if (isNaN) {
       this.medecineService.medecineCount().subscribe(res => {
         this.id = res;
       });
-
     } else {
       this.id = parseInt(this.route.snapshot.paramMap.get('id'));
     }
     switch (this.entity) {
-      case 'medecine': {
+      case 'medecines': {
         this.fields = [
           {
             label: 'Id',
             type: 'text',
             formControleName: 'id',
             icon: 'fa fa-user',
-            disabled: 'true',
+            disabled: true,
             value: this.id
           },
           {
@@ -193,15 +191,17 @@ export class FormComponent implements OnInit {
           },
         ];
         this.medecineService.getMedecine(this.id).subscribe((res) => {
-          this.editedList = [
-            res.id,
-            res.reference,
-            res.manufacturer,
-            res.quantity,
-            res.expirationDate,
-            res.price,
-          ];
+          console.log(this.edit.value)
+          // this.editedList = [
+            this.edit.value.id= res.id;
+            this.edit.value.reference= res.reference;
+            this.edit.value.manufacturer= res.manufacturer;
+            this.edit.value.quantity= res.quantity;
+            this.edit.value.expirationDate= res.expirationDate;
+            this.edit.value.price= res.price;
+          // ];
         });
+        console.log('edit',this.edit.value)
         break;
       }
       case 'doctor': {
@@ -286,30 +286,34 @@ export class FormComponent implements OnInit {
         break;
       }
     }
+    if(this.id !== undefined)
+      this.isUpdate= true
+    else
+      this.isUpdate= false
+
   }
 
   editForm(form) {
     let data = form.value;
-    console.log('dataaaaa', data);
     if (this.isUpdate) {
       this.medecineService.updateMedecine(data).subscribe(
         (res) => {
           console.log(res);
-          // this.toastr.success(res.message);
-          // this.router.navigate(['/enseignants']);
-          this.router.navigate([`/tables/Medecines`]);
+
+          this.router.navigate([`/tables/medecines`]);
         },
         (err) => {
           console.log(err);
         }
       );
-    } else {
+    } 
+    else {
       this.medecineService.addMedecine(data).subscribe(
         (res) => {
           console.log(res);
           // this.toastr.success(res.message);
           // this.router.navigate(['/enseignants']);
-          this.router.navigate([`/tables/Medecines`]);
+          this.router.navigate([`/tables/medecines`]);
         },
         (err) => {
           console.log(err);
