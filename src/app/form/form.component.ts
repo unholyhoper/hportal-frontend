@@ -52,6 +52,11 @@ export class FormComponent implements OnInit {
             Validators.pattern('[A-Za-z .\'-]+'),
             Validators.minLength(2),
           ]),
+          manufacturer: new FormControl('', [
+            Validators.required,
+            Validators.pattern('[A-Za-z .\'-]+'),
+            Validators.minLength(2),
+          ]),
           quantity: new FormControl('', [
             Validators.required,
             Validators.pattern('[A-Za-z .\'-]+'),
@@ -170,6 +175,12 @@ export class FormComponent implements OnInit {
             type: 'text',
             formControleName: 'reference',
             icon: 'fas fa-barcode',
+          },
+          {
+            label: 'Manufacturer',
+            type: 'text',
+            formControleName: 'manufacturer',
+            icon: 'fas fa-industry',
           },
           {
             label: 'Quantity',
@@ -321,5 +332,7 @@ export class FormComponent implements OnInit {
       );
     }
   }
-
+  back(source){
+    this.router.navigate([`/tables/${source}`])
+  }
 }
