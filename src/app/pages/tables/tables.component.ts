@@ -20,12 +20,10 @@ import { MedicalRecord } from "src/app/model/medical-records";
 export class TablesComponent implements OnInit {
   public medecines: Medecine[];
   thead;
-  theadList;
   entity: string;
   doctors: RegisterUser[];
   patient: RegisterUser[];
   disease: Disease[];
-  list;
   service: string;
   rows;
   headers;
@@ -141,9 +139,11 @@ export class TablesComponent implements OnInit {
   }
 
   public delete(source, entity) {
-    let index = this.list.indexOf(source);
-    this.list.splice(index, 1);
-    switch (this.entity) {
+    let index = this.rows.indexOf(source);
+    console.log(index)
+
+    this.rows.splice(index, 1);
+    switch (entity) {
       case "medecines": {
         this.medecineService.deleteMedecine(source.id).subscribe((res: any) => {
           console.log(res);
@@ -188,7 +188,7 @@ export class TablesComponent implements OnInit {
     this.router.navigate([`form/${screen}/${id}`]);
   }
   add(screen) {
-    console.log();
+    console.log(screen);
     this.router.navigate([`form/${screen}`]);
   }
 }
