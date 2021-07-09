@@ -1,89 +1,116 @@
-Dark table
-<div class="row mt-5">
-  <div class="col">
-    <div class="card bg-default shadow">
-      <div class="card-header bg-transparent border-0">
-        <h3 class="text-white mb-0">Appointments management</h3>
-      </div>
-      <div class="table-responsive">
-        <div class="text-center text-muted mb-4">
-          <div class="row">
-            <div class="col-auto container-fluid">
-              <button
-                placement="top-center"
-                class="btn btn-primary button-background"
-              >
-                Update schedule<i class="ni ni-fat-remove"></i>
-              </button>
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+      <div class="row"></div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid mt--7">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row mt-0">
+        <div class="col">
+          <div class="card bg-default shadow">
+            <div class="card-header bg-transparent border-0">
+              <h3 class="text-white mb-0">Appointments management</h3>
+            </div>
+            <div class="table-responsive">
+              <div class="text-center text-muted mb-4">
+                <div class="row">
+                  <div class="col-auto container-fluid">
+                    <button
+                      placement="top-center"
+                      class="btn btn-primary button-background"
+                    >
+                      Update schedule<i class="ni ni-fat-remove"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <table class="table align-items-center table-dark table-flush">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Doctor</th>
+                    <th scope="col">Patient</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Description</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let appointment of appointments">
+                  <tr>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">{{ appointment.id }}</span>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      <button
+                        *ngIf="!appointment.doctor"
+                        placement="top-center"
+                        type="button"
+                        (click)="assignCurrentUser(appointment.id)"
+                        class="btn btn-primary button-background"
+                      >
+                        Assign to me
+                        <i class="ni ni-fat-remove"></i>
+                      </button>
+                      <p *ngIf="appointment.doctor">
+                        {{ appointment.doctor.first_name }}
+                        {{ appointment.doctor.last_name }}
+                      </p>
+                    </td>
+
+                    <td>
+                      <span
+                        class="badge badge-dot mr-4"
+                        *ngIf="appointment.patient"
+                      >
+                        <i class="bg-warning"></i>
+                        {{ appointment.patient.first_name }}
+                      </span>
+                    </td>
+                    <td>
+                      <span class="badge badge-dot mr-4">
+                        <i class="bg-warning"></i> {{ appointment.date }}
+                      </span>
+                    </td>
+                    <td>
+                      <span class="badge badge-dot mr-4">
+                        <i class="bg-warning"></i> {{ appointment.priority }}
+                      </span>
+                    </td>
+                    <td class="text-right">
+                      <select
+                        class="custom-select"
+                        (change)="changeDropDown($event, role)"
+                        formControlName="role"
+                      >
+                        <option value="status" selected></option>
+                        <option
+                          *ngFor="let status of statusArray"
+                          [ngValue]="status"
+                        >
+                          {{ status }}
+                        </option>
+                      </select>
+                    </td>
+                    <td>
+                      <span class="badge badge-dot mr-4">
+                        <i class="bg-warning"></i> {{ appointment.description }}
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-        <table class="table align-items-center table-dark table-flush">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Doctor</th>
-              <th scope="col">Patient</th>
-              <th scope="col">Date</th>
-              <th scope="col">Priority</th>
-              <th scope="col">Status</th>
-              <th scope="col">Description</th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let appointment of appointments">
-            <tr>
-              <th scope="row">
-                <div class="media align-items-center">
-                  <div class="media-body">
-                    <span class="mb-0 text-sm">{{ appointment.id }}</span>
-                  </div>
-                </div>
-              </th>
-              <td >
-                <button *ngIf="!appointment.doctor"
-                  placement="top-center"
-                  type="button"
-                  (click)="assignCurrentUser(appointment.id)"
-                  class="btn btn-primary button-background">
-                  Assign to me
-                  <i class="ni ni-fat-remove"></i>
-                </button>
-                <p *ngIf="appointment.doctor">{{appointment.doctor.first_name}} {{appointment.doctor.last_name}}</p>
-              <td>
-                <span class="badge badge-dot mr-4" *ngIf="appointment.patient">
-                  <i class="bg-warning"></i> {{ appointment.patient.first_name }}
-                </span>
-              </td>
-              <td>
-                <span class="badge badge-dot mr-4">
-                  <i class="bg-warning"></i> {{ appointment.date }}
-                </span>
-              </td>
-              <td>
-                <span class="badge badge-dot mr-4">
-                  <i class="bg-warning"></i> {{ appointment.priority }}
-                </span>
-              </td>
-              <td class="text-right">
-                <select
-                  class="custom-select"
-                  (change)="changeDropDown($event, role)"
-                  formControlName="role"
-                >
-                  <option value="status" selected></option>
-                  <option *ngFor="let status of statusArray" [ngValue]="status">
-                    {{ status }}
-                  </option>
-                </select>
-              </td>
-              <td>
-                <span class="badge badge-dot mr-4">
-                  <i class="bg-warning"></i> {{ appointment.description }}
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </div>
   </div>
