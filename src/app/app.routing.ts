@@ -14,22 +14,22 @@ const routes: Routes = [
     redirectTo: "dashboard",
     pathMatch: "full",
   },
-  {
-    path: "tables/:model",
-    component: TablesComponent,
-  },
-  {
-    path: "form/:entity/:id",
-    component: FormComponent,
-  },
-  {
-    path: "form/:entity",
-    component: FormComponent,
-  },
-  {
-    path: "form/:entity/:id",
-    component: FormComponent,
-  },
+  // {
+  //   path: "tables/:model",
+  //   component: TablesComponent,
+  // },
+  // {
+  //   path: "form/:entity/:id",
+  //   component: FormComponent,
+  // },
+  // {
+  //   path: "form/:entity",
+  //   component: FormComponent,
+  // },
+  // {
+  //   path: "form/:entity/:id",
+  //   component: FormComponent,
+  // },
   {
     path: "",
     component: AdminLayoutComponent,
