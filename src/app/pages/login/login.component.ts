@@ -52,4 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     let data = loginForm.value;
     this.loginService.login(data.username,data.password)
   }
+  forgotPassword(){
+    this.router.navigate(['/forgotPassword'])
+  }
 }
