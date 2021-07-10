@@ -37,9 +37,20 @@ export class AppointmentService {
     return this.httpClient.get<any>(`${BASE_PATH}/appointment/${id}`);
   }
 
+  cancelAppointmentCurrentUser(id) {
+    return this.httpClient.put<any>(`${BASE_PATH}/cancelAppointment/${id}`, null);
+  }
+
+  rejectAppointment(id) {
+    return this.httpClient.put<any>(`${BASE_PATH}/rejectAppointment/${id}`, null);
+  }
+
 
   assigntoCurrentUser(id) {
     return this.httpClient.put<any>(`${BASE_PATH}/appointmentToCurrentUser/${id}`, null);
+  }
+  canRejectAppointment(id) {
+    return this.httpClient.get<any>(`${BASE_PATH}/canReject/${id}`);
   }
   canAssignToHimself(id) {
     return this.httpClient.get<any>(`${BASE_PATH}/canAssignToHimself/${id}`);

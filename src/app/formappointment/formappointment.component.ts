@@ -18,6 +18,8 @@ export class FormappointmentComponent implements OnInit {
   status = 'PENDING';
   appointment;
   canassign;
+  canReject;
+  role;
 
   constructor(private formBuilder: FormBuilder, private appointmentService: AppointmentService, private router: Router, private route: ActivatedRoute,
   ) {
@@ -60,6 +62,8 @@ export class FormappointmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.role = localStorage.getItem('role');
+
     this.statusArray = ['PENDING', 'DONE', 'CANCELED', 'REOPENED', 'IN FORCE'];
     this.appointment = this.appointmentService.getAppointmentById(this.route.snapshot.paramMap.get('id')).subscribe(
       (res) => {
@@ -76,15 +80,17 @@ export class FormappointmentComponent implements OnInit {
           priority: res.priority,
           status: res.status,
         };
-        this.canAssignToHimself(7);
-        console.log(this.appointment);
+
 
       },
       (err) => {
         console.log(err);
       }
     );
-    this.canAssignToHimself(7);
+    this.canAssignToHimself(this.route.snapshot.paramMap.get('id'));
+    console.log('can assign to himself ', this.canassign);
+    this.canRejectAppointment();
+    console.log('can reject appointment ', this.canReject);
 
   }
 
@@ -92,7 +98,7 @@ export class FormappointmentComponent implements OnInit {
   }
 
   assignToMe() {
-    this.appointmentService.assigntoCurrentUser(this.appointment.id).subscribe(
+    this.appointmentService.assigntoCurrentUser(this.route.snapshot.paramMap.get('id')).subscribe(
       (res) => {
         console.log(res);
       },
@@ -117,9 +123,50 @@ export class FormappointmentComponent implements OnInit {
 
   }
 
+  canRejectAppointment() {
+    this.appointmentService.canRejectAppointment(this.route.snapshot.paramMap.get('id')).subscribe(
+      (res) => {
+        this.canReject = res.canReject;
+      },
+      (err) => {
+        this.canReject = false;
+        console.log(err);
+      }
+    );
+
+  }
+
+  cancelAppointment() {
+    console.log('klik');
+    this.appointmentService.cancelAppointmentCurrentUser(this.route.snapshot.paramMap.get('id')).subscribe(
+      (res) => {
+        console.log('appointment canceled', res);
+        this.appointment.status = 'CANCELED';
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+    window.location.reload();
+  }
+
+  rejectAppointment() {
+    console.log('klik');
+    this.appointmentService.cancelAppointmentCurrentUser(this.appointment.id).subscribe(
+      (res) => {
+        console.log('appointment canceled', res);
+        this.appointment.status = 'CANCELED';
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+    window.location.reload();
+  }
+
+
   addappointment(a) {
     this.router.navigate(['/appointement']);
-
 
   }
 }

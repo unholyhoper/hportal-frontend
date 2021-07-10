@@ -122,7 +122,7 @@
                   (change)="changeDropDown($event, status)"
                   formControlName="status"
                 >
-                  <option value="" selected>{{ appointment.status }}</option>
+                  <option ngModel="appointment.status" selected>{{ appointment.status }}</option>
                   <option *ngFor="let status of statusArray" [ngValue]="status">
                     {{ status }}
                   </option>
@@ -130,7 +130,7 @@
               </div>
               <div class="form-group">
                   <textarea
-                    readonly
+                    [readOnly]="this.role!=='ROLE_USER'"
                     formControlName="description"
                     class="form-control"
                     id="exampleFormControlTextarea1"
@@ -150,15 +150,36 @@
                 </button>
                 <button
                   name="assignToMe"
-                  *ngIf="canassign"
+                  *ngIf="role==='ROLE_DOCTOR'"
                   type="button"
                   class="btn btn-success"
                   type="button"
                   (click)="assignToMe()"
-                >
-                  Assign to me
+                  [disabled]="canassign"
+                >Assign to me
                 </button>
-              </div>
+                <button
+                  *ngIf="role==='ROLE_USER'"
+                  name="cancel-button"
+                  type="button"
+                  class="btn btn-danger"
+                  type="button"
+                  (click)="cancelAppointment()"
+                  [disabled]="appointment.status==='CANCELED'">
+                  Cancel
+                </button>
+
+                <button
+                  *ngIf="this.canReject"
+                  name="reject-button"
+                  type="button"
+                  class="btn btn-danger"
+                  type="button"
+                  (click)="rejectAppointment"
+                  [disabled]="appointment.status==='CANCELED'">
+                  Cancel
+                </button>
+                </div>
             </form>
           </div>
         </div>

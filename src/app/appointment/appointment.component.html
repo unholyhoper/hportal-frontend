@@ -86,19 +86,10 @@
                         <i class="bg-warning"></i> {{ appointment.priority }}
                       </span>
                     </td>
-                    <td class="text-right">
-                      <select
-                        class="custom-select"
-                        (change)="changeDropDown($event, role)"
-                      >
-                        <option value="status" selected></option>
-                        <option
-                          *ngFor="let status of statusArray"
-                          [ngValue]="status"
-                        >
-                          {{ status }}
-                        </option>
-                      </select>
+                    <td>
+                      <span class="badge badge-dot mr-4">
+                        <i class="bg-warning"></i> {{ appointment.status }}
+                      </span>
                     </td>
                     <td>
                       <span class="badge badge-dot mr-4">
