@@ -21,9 +21,8 @@ export class AppointmentComponent implements OnInit {
   currentUser: User;
   changedAppointment: Appointment;
   role: string;
-  private router: Router;
 
-  constructor(private appointmentService: AppointmentService, private userService: UserService) {
+  constructor(private appointmentService: AppointmentService, private userService: UserService, private router: Router) {
     // let formControls = {
     //   id: new FormControl('', [
     //     Validators.required,
@@ -99,14 +98,16 @@ export class AppointmentComponent implements OnInit {
       }
     );
   }
-  canAssignToHimSelf(appointement,role){
-    let a= !appointement.doctor && role !== 'USER_ROLE'
-    console.log(role !== 'USER_ROLE')
-    return a
+
+  canAssignToHimSelf(appointement, role) {
+    let a = !appointement.doctor && role !== 'USER_ROLE';
+    console.log(role !== 'USER_ROLE');
+    return a;
   }
-  viewAppointment(id){
+
+  viewAppointment(id) {
     console.log(id);
-    this.router.navigate([`/appointmentForm${id}`]);
+    this.router.navigate([`/appointmentForm/${id}`]);
 
   }
 }
