@@ -11,7 +11,7 @@ import {FormappointmentComponent} from './formappointment/formappointment.compon
 
 const routes: Routes = [
   {
-    path: "appointmentForm",
+    path: "appointmentForm/:id",
     component: FormappointmentComponent,
   },
   {

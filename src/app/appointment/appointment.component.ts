@@ -5,6 +5,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../model/user';
 import {UserService} from '../services/user.service';
 import {ROUTESADMIN} from '../components/sidebar/sidebar.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-appointment',
@@ -20,6 +21,7 @@ export class AppointmentComponent implements OnInit {
   currentUser: User;
   changedAppointment: Appointment;
   role: string;
+  private router: Router;
 
   constructor(private appointmentService: AppointmentService, private userService: UserService) {
     // let formControls = {
@@ -101,5 +103,10 @@ export class AppointmentComponent implements OnInit {
     let a= !appointement.doctor && role !== 'USER_ROLE'
     console.log(role !== 'USER_ROLE')
     return a
+  }
+  viewAppointment(id){
+    console.log(id);
+    this.router.navigate([`/appointmentForm${id}`]);
+
   }
 }

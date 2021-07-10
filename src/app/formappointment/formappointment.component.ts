@@ -4,6 +4,7 @@ import {changeDropDown} from '../shared-module/service';
 import {AppointmentService} from '../services/appointment.service';
 import {Appointment} from '../model/appointment';
 import {formatDate} from '@angular/common';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-formappointment',
@@ -11,14 +12,15 @@ import {formatDate} from '@angular/common';
   styleUrls: ['./formappointment.component.scss']
 })
 export class FormappointmentComponent implements OnInit {
-  private appointementForm: FormGroup;
   statusArray: any;
+  private appointementForm: FormGroup;
   formControls;
   status = 'PENDING';
   appointment;
   canassign;
 
-  constructor(private formBuilder: FormBuilder, private appointmentService: AppointmentService) {
+  constructor(private formBuilder: FormBuilder, private appointmentService: AppointmentService, private router: Router, private route: ActivatedRoute,
+  ) {
     this.formControls = {
       doctor: new FormControl('', [
         Validators.required,
@@ -59,7 +61,7 @@ export class FormappointmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.statusArray = ['PENDING', 'DONE', 'CANCELED', 'REOPENED', 'IN FORCE'];
-    this.appointment = this.appointmentService.getAppointmentById(7).subscribe(
+    this.appointment = this.appointmentService.getAppointmentById(this.route.snapshot.paramMap.get('id')).subscribe(
       (res) => {
         console.log(res);
         res.date = formatDate(res.date, 'dd/MM/yyyy', 'en-US');
@@ -82,7 +84,7 @@ export class FormappointmentComponent implements OnInit {
         console.log(err);
       }
     );
-    this.canAssignToHimself(7)
+    this.canAssignToHimself(7);
 
   }
 
@@ -116,6 +118,7 @@ export class FormappointmentComponent implements OnInit {
   }
 
   addappointment(a) {
+    this.router.navigate(['/appointement']);
 
 
   }

@@ -46,6 +46,7 @@
                   <label for="input-patient">Patient :</label>
                   <input
                     class="form-control"
+                    readonly
                     id="input-patient"
                     placeholder="Patient"
                     type="text"
@@ -110,6 +111,7 @@
                     type="text"
                     formControlName="priority"
                     [value]="appointment.priority"
+                    readonly
                   />
                 </div>
               </div>
@@ -128,6 +130,7 @@
               </div>
               <div class="form-group">
                   <textarea
+                    readonly
                     formControlName="description"
                     class="form-control"
                     id="exampleFormControlTextarea1"
