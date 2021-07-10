@@ -1,23 +1,25 @@
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NgModule } from "@angular/core";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { RouterModule } from "@angular/router";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
-import { AppComponent } from "./app.component";
-import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
-import { AuthLayoutComponent } from "./layouts/auth-layout/auth-layout.component";
+import { AppComponent } from './app.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { AppRoutingModule } from "./app.routing";
-import { ComponentsModule } from "./components/components.module";
-import { FormComponent } from "./form/form.component";
-import { JwtInterceptor } from "./shared-module/auth.interceptor";
-import { TablesComponent } from "./pages/tables/tables.component";
-import { AppointmentComponent } from "./appointment/appointment.component";
+import { AppRoutingModule } from './app.routing';
+import { ComponentsModule } from './components/components.module';
+import { FormComponent } from './form/form.component';
+import { JwtInterceptor } from './shared-module/auth.interceptor';
+import {TablesComponent} from './pages/tables/tables.component';
+import { AppointmentComponent } from './appointment/appointment.component';
 import { ForgotPasswordComponent } from "./pages/forgot-password/forgot-password.component";
 import { ToastContainerModule, ToastrModule } from "ngx-toastr";
+import { FormappointmentComponent } from './formappointment/formappointment.component';
+
 
 @NgModule({
   imports: [
@@ -41,7 +43,7 @@ import { ToastContainerModule, ToastrModule } from "ngx-toastr";
     FormComponent,
     TablesComponent,
     AppointmentComponent,
-    ForgotPasswordComponent,
+    FormappointmentComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

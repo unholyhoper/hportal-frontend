@@ -17,17 +17,31 @@ export class AppointmentService {
   }
 
 
-
   allAppointments() {
     return this.httpClient.get<any>(`${BASE_PATH}/allAppointments`);
+  }
+
+  getAppointmentsForCurrentUser() {
+    return this.httpClient.get<any>(`${BASE_PATH}/getAppointmentsForCurrentUser`);
   }
 
   addAppointment(appointment) {
     return this.httpClient.post<any>(`${BASE_PATH}/appointment`, appointment);
   }
+
   updateAppointment(appointment) {
     return this.httpClient.put<any>(`${BASE_PATH}/appointment/${appointment.id}`, appointment);
   }
 
+  getAppointmentById(id) {
+    return this.httpClient.get<any>(`${BASE_PATH}/appointment/${id}`);
+  }
 
+
+  assigntoCurrentUser(id) {
+    return this.httpClient.put<any>(`${BASE_PATH}/appointmentToCurrentUser/${id}`, null);
+  }
+  canAssignToHimself(id) {
+    return this.httpClient.get<any>(`${BASE_PATH}/canAssignToHimself/${id}`);
+  }
 }
