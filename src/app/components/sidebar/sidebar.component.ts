@@ -9,6 +9,7 @@ declare interface RouteInfo {
 }
 export const ROUTESCLIENT: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
+    { path: '/appointements', title: 'My appointments ',  icon: 'ni-tv-2 text-primary', class: '' },
 ];
 export const ROUTESADMIN: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
@@ -16,9 +17,9 @@ export const ROUTESADMIN: RouteInfo[] = [
 ];
 export const ROUTESDOCTOR: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
-  { path: '/appointement', title: 'Appointments',  icon: 'ni-tv-2 text-primary', class: '' },
+  { path: '/appointements', title: 'Appointments',  icon: 'ni-tv-2 text-primary', class: '' },
   { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
-]
+];
 
 
 @Component({

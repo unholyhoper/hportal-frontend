@@ -7,14 +7,17 @@ import { UserProfileComponent } from "../../pages/user-profile/user-profile.comp
 import { TablesComponent } from "../../pages/tables/tables.component";
 import { AppointmentComponent } from "../../appointment/appointment.component";
 import { FormComponent } from "src/app/form/form.component";
+import {FormappointmentComponent} from '../../formappointment/formappointment.component';
 
 export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
   { path: "user-profile", component: UserProfileComponent },
   { path: "tables/:model", component: TablesComponent },
   { path: "icons", component: IconsComponent },
-  { path: "appointement", component: AppointmentComponent },
   { path: "form/:entity/:id", component: FormComponent },
   { path: "form/:entity", component: FormComponent },
   { path: "form/:entity/:id", component: FormComponent },
+  {path: "appointments", component: AppointmentComponent},
+  {path: "appointmentForm/:id",component: FormappointmentComponent},
+
 ];

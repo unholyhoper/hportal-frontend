@@ -7,13 +7,9 @@ import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.compon
 import { AuthLayoutComponent } from "./layouts/auth-layout/auth-layout.component";
 import { TablesComponent } from "./pages/tables/tables.component";
 import { FormComponent } from "./form/form.component";
-import {FormappointmentComponent} from './formappointment/formappointment.component';
 
 const routes: Routes = [
-  {
-    path: "appointmentForm/:id",
-    component: FormappointmentComponent,
-  },
+
   {
     path: "",
     redirectTo: "dashboard",
