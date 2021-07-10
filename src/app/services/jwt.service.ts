@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { LoginUser } from '../model/login-user';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-import jwt_decode from "jwt-decode";
+import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
 const BASE_PATH = environment.basePath;
 
 @Injectable({ providedIn: 'root' })
@@ -13,21 +13,10 @@ export class AuthService {
     static getToken(): string {
         return JSON.parse(localStorage.getItem('jwt'))
     }
-    constructor(private http: HttpClient, private router: Router) { }
-    login(username: string, password: string): void {
-       this.http.post(`${BASE_PATH}/login_check`, {username,password})
-            .subscribe(response => {
-                    console.log(response)
-                    // login successful if there's a jwt token in the response
-                    if (response) {
-                        localStorage.setItem('jwt', JSON.stringify(response));
-                        const token_decode = jwt_decode(JSON.stringify(response))
-                        localStorage.setItem('userName',token_decode['username'])
-                        localStorage.setItem('role',token_decode['roles'][0])
-                        this.router.navigate(['/dashboard'])
-                    }else
-                    console.log('error')
-                })
+    constructor(private http: HttpClient, private router: Router,     private toastr: ToastrService
+        ) { }
+    login(username: string, password: string) {
+       return this.http.post(`${BASE_PATH}/login_check`, {username,password})
     }
 
 
