@@ -11,25 +11,26 @@ declare interface RouteInfo {
 }
 export const ROUTESCLIENT: RouteInfo[] = [
     { path: 'dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
-    { path: 'appointment', title: 'My appointments ',  icon: 'ni-tv-2 text-primary', class: '' },
+    { path: 'appointment', title: 'My appointments ',  icon: 'far fa-calendar-check text-primary', class: '' },
 ];
 export const ROUTESADMIN: RouteInfo[] = [
-  { path: 'dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
-  { path: 'medecineTable', title: 'List of medecines',  icon:'ni-bullet-list-67 text-red', class: '' },
-  { path: 'diseaseTable', title: 'List of diseases',  icon:'ni-bullet-list-67 text-red', class: '' },
-  { path: 'patientTable', title: 'List of Patients',  icon:'ni-bullet-list-67 text-red', class: '' },
-  { path: 'doctorTable', title: 'List of doctors',  icon:'ni-bullet-list-67 text-red', class: '' },
-  { path: 'materialTable', title: 'List of materials',  icon:'ni-bullet-list-67 text-red', class: '' },
+  { path: 'dashboard', title: 'Dashboard',  icon: 'ni ni-tv-2 text-primary', class: '' },
+  { path: 'medecineTable', title: 'List of medecines',  icon:'fas fa-pills text-red', class: '' },
+  { path: 'diseaseTable', title: 'List of diseases',  icon:'fas fa-diagnoses text-red', class: '' },
+  { path: 'patientTable', title: 'List of Patients',  icon:'fas fa-users text-red', class: '' },
+  { path: 'doctorTable', title: 'List of doctors',  icon:'fas fa-user-md text-red', class: '' },
+  { path: 'materialTable', title: 'List of materials',  icon:'fas fa-bed text-red', class: '' },
+  { path: 'delegateTable', title: 'List of delegates',  icon:'fas fa-briefcase-medical text-red', class: '' },
 
 ];
 
 export const ROUTESDOCTOR: RouteInfo[] = [
-  { path: 'dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '',  },
-  { path: 'appointment', title: 'Appointments',  icon: 'ni-tv-2 text-primary', class: '' },
-  { path: 'medecineTable', title: 'List of medecines',  icon:'ni-bullet-list-67 text-red', class: '' },
-  { path: 'diseaseTable', title: 'List of diseases',  icon:'ni-bullet-list-67 text-red', class: '' },
-  { path: 'medicalRecordTable', title: 'List of medical records',  icon:'ni-bullet-list-67 text-red', class: '' },
-  { path: 'patientTable', title: 'List of Patients',  icon:'ni-bullet-list-67 text-red', class: '' },
+  { path: 'dashboard', title: 'Dashboard',  icon: 'ni ni-tv-2 text-primary', class: '',  },
+  { path: 'appointment', title: 'Appointments',  icon: 'far fa-calendar-check text-primary', class: '' },
+  { path: 'medecineTable', title: 'List of medecines',  icon:'fas fa-pills text-red', class: '' },
+  { path: 'diseaseTable', title: 'List of diseases',  icon:'fas fa-diagnoses text-red', class: '' },
+  { path: 'medicalRecordTable', title: 'List of medical records',  icon:'fas fa-notes-medical text-red', class: '' },
+  { path: 'patientTable', title: 'List of Patients',  icon:'fas fa-users text-red', class: '' },
 
 ];
 
