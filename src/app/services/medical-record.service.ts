@@ -10,7 +10,16 @@ export class MedicalRecordService {
   allMedicalRecord(){
     return of([])
   }
-  deleteMedecine(id){
+  deleteMedicalRecord(id){
+    return of()
+  }
+  getMedicalRecord(id){
+    return of()
+  }
+  updateMedecine(medicalRecord){
+    return of()
+  }
+  addMedecine(medicalRecord){
     return of()
   }
 }

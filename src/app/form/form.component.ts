@@ -201,18 +201,12 @@ export class FormComponent implements OnInit {
             icon: 'fas fa-dollar-sign',
           },
         ];
-        this.medecineService.getMedecine(this.id).subscribe((res) => {
-          console.log(this.edit.value)
-          // this.editedList = [
-            this.edit.value.id= res.id;
-            this.edit.value.reference= res.reference;
-            this.edit.value.manufacturer= res.manufacturer;
-            this.edit.value.quantity= res.quantity;
-            this.edit.value.expirationDate= res.expirationDate;
-            this.edit.value.price= res.price;
-          // ];
+        this.medecineService.getMedecine(this.id).subscribe(res => {
+            this.fields.forEach(element => {
+              element.value = res[element.formControleName]
+            });  
+
         });
-        console.log('edit',this.edit.value)
         break;
       }
       case 'doctor': {
@@ -287,9 +281,7 @@ export class FormComponent implements OnInit {
           },
         ];
         this.doctorService.getdoctors(this.id).subscribe((res) => {
-          // console.log(res.id)
-          // this.editedList = [res.id, res.reference, res.manufacturer,
-          // res.quantity, res.expirationDate, res.price];
+
         });
         break;
       }
@@ -309,25 +301,18 @@ export class FormComponent implements OnInit {
     if (this.isUpdate) {
       this.medecineService.updateMedecine(data).subscribe(
         (res) => {
-          console.log(res);
-
           this.router.navigate([`/tables/medecines`]);
         },
         (err) => {
-          console.log(err);
         }
       );
     } 
     else {
       this.medecineService.addMedecine(data).subscribe(
         (res) => {
-          console.log(res);
-          // this.toastr.success(res.message);
-          // this.router.navigate(['/enseignants']);
           this.router.navigate([`/tables/medecines`]);
         },
         (err) => {
-          console.log(err);
         }
       );
     }

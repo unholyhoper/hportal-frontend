@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, Routes } from '@angular/router';
+import { FormComponent } from 'src/app/form/form.component';
+import { TablesComponent } from 'src/app/pages/tables/tables.component';
 
 declare interface RouteInfo {
     path: string;
@@ -8,18 +10,27 @@ declare interface RouteInfo {
     class: string;
 }
 export const ROUTESCLIENT: RouteInfo[] = [
-    { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
-    { path: '/appointements', title: 'My appointments ',  icon: 'ni-tv-2 text-primary', class: '' },
+    { path: 'dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
+    { path: 'appointment', title: 'My appointments ',  icon: 'ni-tv-2 text-primary', class: '' },
 ];
 export const ROUTESADMIN: RouteInfo[] = [
-  { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
-  { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
+  { path: 'dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
+  { path: 'medecineTable', title: 'List of medecines',  icon:'ni-bullet-list-67 text-red', class: '' },
+  { path: 'diseaseTable', title: 'List of diseases',  icon:'ni-bullet-list-67 text-red', class: '' },
+  { path: 'patientTable', title: 'List of Patients',  icon:'ni-bullet-list-67 text-red', class: '' },
+
 ];
+
 export const ROUTESDOCTOR: RouteInfo[] = [
-  { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
-  { path: '/appointements', title: 'Appointments',  icon: 'ni-tv-2 text-primary', class: '' },
-  { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
+  { path: 'dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '',  },
+  { path: 'appointment', title: 'Appointments',  icon: 'ni-tv-2 text-primary', class: '' },
+  { path: 'medecineTable', title: 'List of medecines',  icon:'ni-bullet-list-67 text-red', class: '' },
+  { path: 'diseaseTable', title: 'List of diseases',  icon:'ni-bullet-list-67 text-red', class: '' },
+  { path: 'medicalRecordTable', title: 'List of medical records',  icon:'ni-bullet-list-67 text-red', class: '' },
+  { path: 'patientTable', title: 'List of Patients',  icon:'ni-bullet-list-67 text-red', class: '' },
+
 ];
+
 
 
 @Component({

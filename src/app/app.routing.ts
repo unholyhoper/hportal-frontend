@@ -5,8 +5,8 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 import { AuthLayoutComponent } from "./layouts/auth-layout/auth-layout.component";
-import { TablesComponent } from "./pages/tables/tables.component";
-import { FormComponent } from "./form/form.component";
+import { MedecinesComponent } from "./pages/medecines/medecines.component";
+import { MedecinesTableComponent } from "./pages/medecines-table/medecines-table.component";
 
 const routes: Routes = [
 
@@ -16,20 +16,8 @@ const routes: Routes = [
     pathMatch: "full",
   },
   {
-    path: "tables/:model",
-    component: TablesComponent,
-  },
-  {
-    path: "form/:entity/:id",
-    component: FormComponent,
-  },
-  {
-    path: "form/:entity",
-    component: FormComponent,
-  },
-  {
-    path: "form/:entity/:id",
-    component: FormComponent,
+    path: "medecineTable/:model",
+    component: MedecinesTableComponent,
   },
   {
     path: "",

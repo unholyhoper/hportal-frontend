@@ -177,7 +177,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public management(source) {
-    this.router.navigate([`/tables/${source}`]);
+    this.router.navigate([`${source}`]);
   }
 
   showNotification(type,message) {
