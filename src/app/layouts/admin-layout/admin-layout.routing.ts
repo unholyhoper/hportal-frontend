@@ -20,6 +20,8 @@ import { DoctorTableComponent } from "src/app/pages/doctor-table/doctor-table.co
 import { DoctorsComponent } from "src/app/pages/doctors/doctors.component";
 import { MaterialTableComponent } from "src/app/pages/material-table/material-table.component";
 import { MaterialComponent } from "src/app/pages/material/material.component";
+import { DelegateTableComponent } from "src/app/pages/delegate-table/delegate-table.component";
+import { DelegateComponent } from "src/app/pages/delegate/delegate.component";
 
 export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
@@ -47,6 +49,10 @@ export const AdminLayoutRoutes: Routes = [
   { path: "materialTable", component: MaterialTableComponent },
   { path: "materialform/:entity", component: MaterialComponent },
   { path: "materialform/:entity/:id", component: MaterialComponent },
+
+  { path: "delegateTable", component: DelegateTableComponent },
+  { path: "delegateform/:entity", component: DelegateComponent },
+  { path: "delegateform/:entity/:id", component: DelegateComponent },
 
   { path: "appointment", component: AppointmentComponent },
   { path: "appointmentForm/:id", component: FormappointmentComponent },
