@@ -11,6 +11,7 @@ import { MedicalRecordService } from "src/app/services/medical-record.service";
 import { Disease } from "src/app/model/disease";
 import { MaterialService } from "src/app/services/material.service";
 import { MedicalRecord } from "src/app/model/medical-records";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-tables",
@@ -35,7 +36,8 @@ export class TablesComponent implements OnInit {
     private diseaseService: DiseaseService,
     private medicalRecordService: MedicalRecordService,
     private materialService: MaterialService,
-    private router: Router
+    private router: Router,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit() {
@@ -145,8 +147,11 @@ export class TablesComponent implements OnInit {
     this.rows.splice(index, 1);
     switch (entity) {
       case "medecines": {
-        this.medecineService.deleteMedecine(source.id).subscribe((res: any) => {
-          console.log(res);
+        this.medecineService.deleteMedecine(source.id).subscribe(res => {
+          this.showSuccessMessage(`The item is deleted successfuly`)
+        },
+        err => {
+          this.showWarningMessage(`Error when deleting item `)
         });
         break;
       }
@@ -170,7 +175,7 @@ export class TablesComponent implements OnInit {
       }
       case "medicalRecord": {
         this.medicalRecordService
-          .deleteMedecine(source.id)
+          .deleteMedicalRecord(source.id)
           .subscribe((res: any) => {
             console.log(res);
           });
@@ -188,7 +193,38 @@ export class TablesComponent implements OnInit {
     this.router.navigate([`form/${screen}/${id}`]);
   }
   add(screen) {
-    console.log(screen);
     this.router.navigate([`form/${screen}`]);
+  }
+  showSuccessMessage(message) {
+    this.toastrService.show(
+      `<span class="alert-icon ni ni-bell-55" data-notify="icon"></span> <div class="alert-text"</div> <span data-notify="message">${message}</span></div>`,
+      "",
+      {
+        timeOut: 10000,
+        closeButton: false,
+        enableHtml: true,
+        tapToDismiss: false,
+        titleClass: "alert-title",
+        positionClass: "toast-top-center",
+        toastClass:
+          "ngx-toastr alert alert-dismissible alert-success alert-notify",
+      }
+    );
+  }
+  showWarningMessage(message) {
+    this.toastrService.show(
+      `<span class="alert-icon ni ni-bell-55" data-notify="icon"></span> <div class="alert-text"></div> <span data-notify="message">${message}</span></div>`,
+      "",
+      {
+        timeOut: 10000,
+        closeButton: false,
+        enableHtml: true,
+        tapToDismiss: false,
+        titleClass: "alert-title",
+        positionClass: "toast-top-center",
+        toastClass:
+          "ngx-toastr alert alert-dismissible alert-warning alert-notify",
+      }
+    );
   }
 }

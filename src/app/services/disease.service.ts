@@ -24,4 +24,10 @@ export class DiseaseService {
   deleteMedecine(id: number) {
     return this.httpClient.delete<any>(`${BASE_PATH}/user/${id}`);
   }
+  updateDisease(disease){
+    return of()
+  }
+  addDisease(disease){
+    return of()
+  }
 }

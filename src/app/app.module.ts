@@ -19,6 +19,14 @@ import { AppointmentComponent } from './appointment/appointment.component';
 import { ForgotPasswordComponent } from "./pages/forgot-password/forgot-password.component";
 import { ToastContainerModule, ToastrModule } from "ngx-toastr";
 import { FormappointmentComponent } from './formappointment/formappointment.component';
+import { MedecinesComponent } from './pages/medecines/medecines.component';
+import { PatientsComponent } from './pages/patients/patients.component';
+import { MedicalRecordsComponent } from './pages/medical-records/medical-records.component';
+import { DiseasesComponent } from './pages/diseases/diseases.component';
+import { MedecinesTableComponent } from './pages/medecines-table/medecines-table.component';
+import { DiseaseTableComponent } from './pages/disease-table/disease-table.component';
+import { MedicalRecordTableComponent } from './pages/medical-record-table/medical-record-table.component';
+import { PatientTableComponent } from './pages/patient-table/patient-table.component';
 
 
 @NgModule({
@@ -43,7 +51,15 @@ import { FormappointmentComponent } from './formappointment/formappointment.comp
     FormComponent,
     TablesComponent,
     AppointmentComponent,
-    FormappointmentComponent
+    FormappointmentComponent,
+    MedecinesComponent,
+    PatientsComponent,
+    MedicalRecordsComponent,
+    DiseasesComponent,
+    MedecinesTableComponent,
+    DiseaseTableComponent,
+    MedicalRecordTableComponent,
+    PatientTableComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
