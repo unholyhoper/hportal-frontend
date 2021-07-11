@@ -65,7 +65,7 @@ export class FormappointmentComponent implements OnInit {
       .getAppointmentById(this.route.snapshot.paramMap.get('id'))
       .subscribe(
         res => {
-          res.date = formatDate(res.date, 'dd/MM/yyyy', 'en-US');
+          res.date = formatDate(res.date, 'yyyy-MM-dd', 'en-US');
           this.appointment = {
             id: res.id,
             date: res.date,
