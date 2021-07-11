@@ -156,13 +156,13 @@ export class TablesComponent implements OnInit {
         break;
       }
       case "doctor": {
-        this.doctorService.deleteMedecine(source.id).subscribe((res: any) => {
+        this.doctorService.deleteDoctor(source.id).subscribe((res: any) => {
           console.log(res);
         });
         break;
       }
       case "patient": {
-        this.patientService.deleteMedecine(source.id).subscribe((res: any) => {
+        this.patientService.deletePatient(source.id).subscribe((res: any) => {
           console.log(res);
         });
         break;

@@ -16,6 +16,8 @@ import { MedicalRecordsComponent } from "src/app/pages/medical-records/medical-r
 import { MedicalRecordTableComponent } from "src/app/pages/medical-record-table/medical-record-table.component";
 import { PatientTableComponent } from "src/app/pages/patient-table/patient-table.component";
 import { PatientsComponent } from "src/app/pages/patients/patients.component";
+import { DoctorTableComponent } from "src/app/pages/doctor-table/doctor-table.component";
+import { DoctorsComponent } from "src/app/pages/doctors/doctors.component";
 
 export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
@@ -35,6 +37,10 @@ export const AdminLayoutRoutes: Routes = [
   { path: "patientTable", component: PatientTableComponent },
   { path: "patientform/:entity", component: PatientsComponent },
   { path: "patientform/:entity/:id", component: PatientsComponent },
+
+  { path: "doctorTable", component: DoctorTableComponent },
+  { path: "doctorform/:entity", component: DoctorsComponent },
+  { path: "doctorform/:entity/:id", component: DoctorsComponent },
 
   { path: "appointment", component: AppointmentComponent },
   { path: "appointmentForm/:id", component: FormappointmentComponent },

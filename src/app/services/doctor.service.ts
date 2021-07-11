@@ -10,7 +10,7 @@ const BASE_PATH = environment.basePath;
 export class DoctorService {
 
   constructor(private httpClient: HttpClient) { }
-  getdoctors(id){
+  getdoctor(id){
     return this.httpClient.get<any>(`${BASE_PATH}/doctor/id`)
   }
   addDoctor(doctor){
@@ -19,7 +19,10 @@ export class DoctorService {
   allDoctor(){
     return of()
   }
-  deleteMedecine(id){
+  deleteDoctor(id){
     return of()
+  }
+  updateDoctor(data){
+    return of ()
   }
 }
