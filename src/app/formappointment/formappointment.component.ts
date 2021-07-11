@@ -1,30 +1,32 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, OnInit} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
-} from "@angular/forms";
-import { changeDropDown } from "../shared-module/service";
-import { AppointmentService } from "../services/appointment.service";
-import { Appointment } from "../model/appointment";
-import { formatDate } from "@angular/common";
-import { ActivatedRoute, Router } from "@angular/router";
+} from '@angular/forms';
+import {changeDropDown} from '../shared-module/service';
+import {AppointmentService} from '../services/appointment.service';
+import {Appointment} from '../model/appointment';
+import {formatDate} from '@angular/common';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
-  selector: "app-formappointment",
-  templateUrl: "./formappointment.component.html",
-  styleUrls: ["./formappointment.component.scss"],
+  selector: 'app-formappointment',
+  templateUrl: './formappointment.component.html',
+  styleUrls: ['./formappointment.component.scss'],
 })
 export class FormappointmentComponent implements OnInit {
   statusArray: any;
   private appointementForm: FormGroup;
   formControls;
-  status = "PENDING";
+  status = 'PENDING';
   appointment;
   canassign;
   canReject;
   role;
+  canValidate;
+  canReopen;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,22 +35,22 @@ export class FormappointmentComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.formControls = {
-      doctor: new FormControl("", [
+      doctor: new FormControl('', [
         Validators.required,
       ]),
-      patient: new FormControl("", [
+      patient: new FormControl('', [
         Validators.required,
       ]),
-      date: new FormControl("", [
+      date: new FormControl('', [
         Validators.required,
       ]),
-      priority: new FormControl("", [
+      priority: new FormControl('', [
         Validators.required,
       ]),
-      status: new FormControl("", [
+      status: new FormControl('', [
         Validators.required,
       ]),
-      description: new FormControl("", [
+      description: new FormControl('', [
         Validators.required,
       ]),
     };
@@ -56,14 +58,14 @@ export class FormappointmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.role = localStorage.getItem("role");
-    
-    this.statusArray = ["PENDING", "DONE", "CANCELED", "REOPENED", "IN FORCE"];
+    this.role = localStorage.getItem('role');
+
+    this.statusArray = ['PENDING', 'DONE', 'CANCELED', 'REOPENED', 'IN FORCE'];
     this.appointment = this.appointmentService
-      .getAppointmentById(this.route.snapshot.paramMap.get("id"))
+      .getAppointmentById(this.route.snapshot.paramMap.get('id'))
       .subscribe(
         res => {
-          res.date = formatDate(res.date, "dd/MM/yyyy", "en-US");
+          res.date = formatDate(res.date, 'dd/MM/yyyy', 'en-US');
           this.appointment = {
             id: res.id,
             date: res.date,
@@ -79,33 +81,38 @@ export class FormappointmentComponent implements OnInit {
           console.log(err);
         }
       );
-    this.canAssignToHimself(this.route.snapshot.paramMap.get("id"));
-    console.log("can assign to himself ", this.canassign);
+    this.canAssignToHimself(this.route.snapshot.paramMap.get('id'));
+    console.log('can assign to himself ', this.canassign);
     this.canRejectAppointment();
-    console.log("can reject appointment ", this.canReject);
+    console.log('can reject appointment ', this.canReject);
+    this.canValidateAppointment();
+    this.canReoppentAppointment();
+    console.log('Can reject :', this.canReject);
   }
 
-  submit() {}
+  submit() {
+  }
 
   assignToMe() {
     this.appointmentService
-      .assigntoCurrentUser(this.route.snapshot.paramMap.get("id"))
+      .assigntoCurrentUser(this.route.snapshot.paramMap.get('id'))
       .subscribe(
         res => {
           console.log(res);
+
+          window.location.reload();
         },
         err => {
           console.log(err);
         }
       );
-    window.location.reload();
   }
 
   canAssignToHimself(id) {
     this.appointmentService.canAssignToHimself(id).subscribe(
       res => {
         this.canassign = res.canAssign;
-        console.log("can assign:::::::", res);
+        console.log('can assign:::::::', res);
       },
       err => {
         this.canassign = false;
@@ -116,7 +123,7 @@ export class FormappointmentComponent implements OnInit {
 
   canRejectAppointment() {
     this.appointmentService
-      .canRejectAppointment(this.route.snapshot.paramMap.get("id"))
+      .canRejectAppointment(this.route.snapshot.paramMap.get('id'))
       .subscribe(
         res => {
           this.canReject = res.canReject;
@@ -129,13 +136,13 @@ export class FormappointmentComponent implements OnInit {
   }
 
   cancelAppointment() {
-    console.log("klik");
+    console.log('klik');
     this.appointmentService
-      .cancelAppointmentCurrentUser(this.route.snapshot.paramMap.get("id"))
+      .cancelAppointmentCurrentUser(this.route.snapshot.paramMap.get('id'))
       .subscribe(
         res => {
-          console.log("appointment canceled", res);
-          this.appointment.status = "CANCELED";
+          console.log('appointment canceled', res);
+          this.appointment.status = 'CANCELED';
         },
         err => {
           console.log(err);
@@ -145,13 +152,13 @@ export class FormappointmentComponent implements OnInit {
   }
 
   rejectAppointment() {
-    console.log("klik");
+    console.log('klik');
     this.appointmentService
-      .cancelAppointmentCurrentUser(this.appointment.id)
+      .rejectAppointment(this.appointment.id)
       .subscribe(
         res => {
-          console.log("appointment canceled", res);
-          this.appointment.status = "CANCELED";
+          console.log('appointment canceled', res);
+          this.appointment.status = 'REJECTED';
         },
         err => {
           console.log(err);
@@ -160,7 +167,65 @@ export class FormappointmentComponent implements OnInit {
     window.location.reload();
   }
 
+  validateAppointment() {
+    console.log('validate');
+    this.appointmentService
+      .validateAppointment(this.appointment.id).subscribe(
+      res => {
+        this.appointment.status = 'VALIDATED';
+        window.location.reload();
+      },
+      err => {
+        console.log(err);
+      }
+    );
+    window.location.reload();
+  }
+
+  reopenAppointment() {
+    console.log('validate');
+    this.appointmentService
+      .reopenAppointment(this.appointment.id).subscribe(
+      res => {
+        this.appointment.status = 'REOPENED';
+        window.location.reload();
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
   addappointment(a) {
-    this.router.navigate(["/appointment"]);
+    this.router.navigate(['/appointment']);
+  }
+
+  canValidateAppointment() {
+    this.appointmentService
+      .canValidateAppointment(this.route.snapshot.paramMap.get('id'))
+      .subscribe(
+        res => {
+          this.canValidate = res.canValidate;
+        },
+        err => {
+          this.canValidate = false;
+          console.log(err);
+        }
+      );
+  }
+
+  canReoppentAppointment() {
+    this.appointmentService
+      .canRepoenAppointment(this.route.snapshot.paramMap.get('id'))
+      .subscribe(
+        res => {
+          this.canReopen = res.canReopen;
+        },
+        err => {
+          this.canReopen = false;
+          console.log(err);
+        }
+      );
+    console.log('can reopen :', this.canReopen);
   }
 }

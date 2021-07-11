@@ -44,6 +44,12 @@ export class AppointmentService {
   rejectAppointment(id) {
     return this.httpClient.put<any>(`${BASE_PATH}/rejectAppointment/${id}`, null);
   }
+  validateAppointment(id) {
+    return this.httpClient.put<any>(`${BASE_PATH}/validateAppointment/${id}`, null);
+  }
+  reopenAppointment(id) {
+    return this.httpClient.put<any>(`${BASE_PATH}/reopenAppointment/${id}`, null);
+  }
 
 
   assigntoCurrentUser(id) {
@@ -53,6 +59,12 @@ export class AppointmentService {
     return this.httpClient.get<any>(`${BASE_PATH}/canReject/${id}`);
   }
   canAssignToHimself(id) {
-    return this.httpClient.get<any>(`${BASE_PATH}/canAssignToHimself/${id}`);
+      return this.httpClient.get<any>(`${BASE_PATH}/canAssignToHimself/${id}`);
+  }
+  canValidateAppointment(id) {
+      return this.httpClient.get<any>(`${BASE_PATH}/canValidateAppointment/${id}`);
+  }
+  canRepoenAppointment(id) {
+      return this.httpClient.get<any>(`${BASE_PATH}/canReopenOppointment/${id}`);
   }
 }

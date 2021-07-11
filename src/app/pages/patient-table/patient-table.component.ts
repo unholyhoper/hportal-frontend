@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { UserInfo } from 'os';
 import { RegisterUser } from 'src/app/model/register-user';
 import { PatientService } from 'src/app/services/patient.service';
 

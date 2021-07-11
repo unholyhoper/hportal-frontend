@@ -12,96 +12,97 @@
         <div class="card-header bg-transparent pb-5">
           <div id="" class="card-body px-lg-5 py-lg-5">
             <form
-            class="form"
-            [formGroup]="appointementForm"
-            (ngSubmit)="addappointment(appointementForm)"
+              class="form"
+              [formGroup]="appointementForm"
+              (ngSubmit)="addappointment(appointementForm)"
             >
-            <div class="form-group mb-3">
-              <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
+              <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
                   <span class="input-group-text"
-                    ><i class="ni ni-badge"></i
+                  ><i class="ni ni-badge"></i
                   ></span>
+                  </div>
+                  <input
+                    class="form-control"
+                    placeholder="Patient"
+                    type="text"
+                    readonly
+                    formControlName="patient"
+                    [value]="appointment?.patient_lastName"
+                  />
                 </div>
-                <input
-                  class="form-control"
-                  placeholder="Patient"
-                  type="text"
-                  readonly
-                  formControlName="patient"
-                  [value]="appointment?.patient_lastName"
-                />
               </div>
-            </div>
-            <div class="form-group mb-3">
-              <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
+              <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
                   <span class="input-group-text"
-                    ><i class="ni ni-badge"></i
+                  ><i class="ni ni-badge"></i
                   ></span>
-                </div>
+                  </div>
 
-                <input
-                  id="input-doctor"
-                  class="form-control"
-                  placeholder="Doctor"
-                  type="text"
-                  formControlName="doctor"
-                  [value]="
+                  <input
+                    id="input-doctor"
+                    class="form-control"
+                    placeholder="Doctor"
+                    type="text"
+                    formControlName="doctor"
+                    [value]="
                     appointment?.doctor_firstName +
                     appointment?.doctor_lastName
                   "
-                />
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"
-                    ><i class="ni ni-lock-circle-open"></i
-                  ></span>
+                    readonly
+                  />
                 </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                  <span class="input-group-text"
+                  ><i class="ni ni-lock-circle-open"></i
+                  ></span>
+                  </div>
 
-                <input
-                  id="input-date"
-                  class="form-control"
-                  type="date"
-                  formControlName="date"
-                />
-              </div>
-            </div>
-            <div class="form-group mb-3">
-              <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"
-                    ><i class="ni ni-badge"></i
-                  ></span>
+                  <input
+                    id="input-date"
+                    class="form-control"
+                    type="date"
+                    formControlName="date"
+                  />
                 </div>
-                <input
-                  class="form-control"
-                  placeholder="Priority"
-                  type="text"
-                  formControlName="priority"
-                  [value]="appointment.priority"
-                  readonly
-                />
               </div>
-            </div>
-            <div class="form-group">
-              <select
-                class="custom-select"
-                (change)="changeDropDown($event, status)"
-                formControlName="status"
-              >
-                <option value="" selected>
-                  {{ appointment.status }}
-                </option>
-                <option *ngFor="let status of statusArray" [ngValue]="status">
-                  {{ status }}
-                </option>
-              </select>
-            </div>
-            <div class="form-group">
+              <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                  <span class="input-group-text"
+                  ><i class="ni ni-badge"></i
+                  ></span>
+                  </div>
+                  <input
+                    class="form-control"
+                    placeholder="Priority"
+                    type="text"
+                    formControlName="priority"
+                    [value]="appointment.priority"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <select
+                  class="custom-select"
+                  (change)="changeDropDown($event, status)"
+                  formControlName="status"
+                >
+                  <option value="" selected>
+                    {{ appointment.status }}
+                  </option>
+                  <option *ngFor="let status of statusArray" [ngValue]="status">
+                    {{ status }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
               <textarea
                 [readOnly]="this.role !== 'ROLE_USER'"
                 class="form-control"
@@ -111,7 +112,7 @@
                 formControlName="description"
                 [value]="appointment.description"
               ></textarea>
-            </div>
+              </div>
               <div class="text-center">
                 <button
                   type="submit"
@@ -124,10 +125,10 @@
                   name="assignToMe"
                   *ngIf="role === 'ROLE_DOCTOR'"
                   type="button"
-                  class="btn btn-success"
+                  class="btn btn-primary"
                   type="button"
                   (click)="assignToMe()"
-                  [disabled]="canassign"
+                  [disabled]="!canassign"
                 >
                   Assign to me
                 </button>
@@ -140,19 +141,44 @@
                   (click)="cancelAppointment()"
                   [disabled]="appointment.status === 'CANCELED'"
                 >
-                  Cancel
+                  Return
                 </button>
 
                 <button
-                  *ngIf="this.canReject"
+                  *ngIf="this.role ==='ROLE_DOCTOR'"
                   name="reject-button"
                   type="button"
                   class="btn btn-danger"
                   type="button"
-                  (click)="(rejectAppointment)"
-                  [disabled]="appointment.status === 'CANCELED'"
+                  (click)="rejectAppointment()"
+                  [disabled]="!this.canReject"
                 >
-                  Cancel
+                  Reject
+                </button>
+
+
+                <button
+                  *ngIf="this.role ==='ROLE_DOCTOR'"
+                  name="reject-button"
+                  type="button"
+                  class="btn btn-success"
+                  type="button"
+                  (click)="validateAppointment()"
+                  [disabled]="!this.canValidate"
+                >
+                  Validate
+                </button>
+
+
+                <button
+                  *ngIf="this.role ==='ROLE_USER'"
+                  name="reject-button"
+                  type="button"
+                  class="btn btn-success"
+                  type="button"
+                  (click)="reopenAppointment()"
+                  [disabled]="!this.canReopen">
+                  Reopen
                 </button>
               </div>
             </form>
