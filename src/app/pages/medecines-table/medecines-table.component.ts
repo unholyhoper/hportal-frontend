@@ -110,8 +110,9 @@ export class MedecinesTableComponent implements OnInit {
 
   searchFormquerry(form){
     let data = form.value
+    console.log(data)
     this.medecineService
-    .filterMedecines(data)
+    .allMedecines(data)
     .subscribe((medecineList: Medecine[]) => {
       this.rows = medecineList;
       console.log('rows',this.rows)

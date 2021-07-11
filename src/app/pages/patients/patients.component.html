@@ -24,8 +24,12 @@
               </div>
             </div>
           </div>
-          <form class="form" [formGroup]="medecinesForm" (ngSubmit)="editForm(medecinesForm)">
-            <!--firstName-->
+          <form
+            class="form"
+            [formGroup]="medecinesForm"
+            (ngSubmit)="editForm(medecinesForm)"
+          >
+            <!---->
             <div class="form-group">
               <div *ngFor="let field of fields">
                 <div
@@ -62,6 +66,43 @@
                     </option>
                   </select>
                 </div>
+                <div *ngIf="field.label === 'Gender'">
+                  <div class="form-group">
+                    <div class="row justify-content-center">
+                      <div class="col-lg-4 col-md-4" style="padding-top: 10px">
+                        <i class="fas fa-restroom"></i> Gender :
+                      </div>
+                      <div class="col-lg-8 col-md-8">
+                        <div class="custom-control custom-radio">
+                          <input
+                            id="male"
+                            type="radio"
+                            class="custom-control-input"
+                            value="male"
+                            name="gender"
+                            formControlName="gender"
+                          />
+                          <label class="custom-control-label" for="male"
+                            >Male</label
+                          >
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input
+                            id="female"
+                            type="radio"
+                            class="custom-control-input"
+                            value="female"
+                            name="gender"
+                            formControlName="gender"
+                          />
+                          <label class="custom-control-label" for="female"
+                            >Female</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <!--agree Privacy-->
@@ -73,7 +114,12 @@
               <button type="button" class="btn btn-primary" type="submit">
                 Save
               </button>
-              <button type="button" class="btn btn-danger" type="reset" (click)="back()">
+              <button
+                type="button"
+                class="btn btn-danger"
+                type="reset"
+                (click)="back()"
+              >
                 Cancel
               </button>
             </div>
