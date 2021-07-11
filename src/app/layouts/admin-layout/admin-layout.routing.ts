@@ -18,6 +18,8 @@ import { PatientTableComponent } from "src/app/pages/patient-table/patient-table
 import { PatientsComponent } from "src/app/pages/patients/patients.component";
 import { DoctorTableComponent } from "src/app/pages/doctor-table/doctor-table.component";
 import { DoctorsComponent } from "src/app/pages/doctors/doctors.component";
+import { MaterialTableComponent } from "src/app/pages/material-table/material-table.component";
+import { MaterialComponent } from "src/app/pages/material/material.component";
 
 export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
@@ -41,6 +43,10 @@ export const AdminLayoutRoutes: Routes = [
   { path: "doctorTable", component: DoctorTableComponent },
   { path: "doctorform/:entity", component: DoctorsComponent },
   { path: "doctorform/:entity/:id", component: DoctorsComponent },
+
+  { path: "materialTable", component: MaterialTableComponent },
+  { path: "materialform/:entity", component: MaterialComponent },
+  { path: "materialform/:entity/:id", component: MaterialComponent },
 
   { path: "appointment", component: AppointmentComponent },
   { path: "appointmentForm/:id", component: FormappointmentComponent },
