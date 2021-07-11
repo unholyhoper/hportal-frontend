@@ -280,7 +280,7 @@ export class FormComponent implements OnInit {
             disable: 'false'
           },
         ];
-        this.doctorService.getdoctors(this.id).subscribe((res) => {
+        this.doctorService.getdoctor(this.id).subscribe((res) => {
 
         });
         break;
