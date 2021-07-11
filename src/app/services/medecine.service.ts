@@ -18,6 +18,9 @@ export class MedecineService {
   allMedecines() {
     return this.httpClient.get<any>(`${BASE_PATH}/allMedecines`);
   }
+  filterMedecines(data){
+    return this.httpClient.post<any>(`${BASE_PATH}/allMedecines`,data)
+  }
 
   deleteMedecine(id: number) {
     return this.httpClient.delete<any>(`${BASE_PATH}/medecine/${id}`);
