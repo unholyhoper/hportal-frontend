@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { Medecine } from "src/app/model/medecine";
@@ -13,12 +14,30 @@ export class MedecinesTableComponent implements OnInit {
   rows;
   headers;
   entity = 'Medecines'
+  searchForm: FormGroup
+  formControls
+  fields: { label: string; type: string; formControleName: string; icon: string; }[];
   constructor(
     private route: ActivatedRoute,
     private medecineService: MedecineService,
     private toastrService: ToastrService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private formBuilder: FormBuilder,
+  ) {
+    this.formControls = {
+      reference: new FormControl("", [
+        Validators.required,
+        Validators.pattern("[A-Za-z .'-]+"),
+        Validators.minLength(2),
+      ]),
+      manufacturer: new FormControl("", [
+        Validators.required,
+        Validators.pattern("[A-Za-z .'-]+"),
+        Validators.minLength(2),
+      ]),
+    };
+    this.searchForm = this.formBuilder.group(this.formControls);
+  }
 
   ngOnInit(): void {
     this.medecineService
@@ -86,6 +105,28 @@ export class MedecinesTableComponent implements OnInit {
         toastClass:
           "ngx-toastr alert alert-dismissible alert-warning alert-notify",
       }
+    );
+  }
+
+  searchFormquerry(form){
+    let data = form.value
+    this.medecineService
+    .filterMedecines(data)
+    .subscribe((medecineList: Medecine[]) => {
+      this.rows = medecineList;
+      console.log('rows',this.rows)
+      this.headers = [
+        { label: "ID", value: "id" },
+        { label: "Reference", value: "reference" },
+        { label: "Manufacturer", value: "manufacturer" },
+        { label: "Quantity", value: "quantity" },
+        { label: "Expiration date", value: "expirationDate" },
+        { label: "Price", value: "price" },
+      ];
+      this.showSuccessMessage('')
+    },err =>{
+      this.showWarningMessage('')
+    }
     );
   }
 }
