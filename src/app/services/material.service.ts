@@ -10,7 +10,16 @@ export class MaterialService {
   allMaterial(){
     return of([])
   }
-  deleteMedecine(id){
+  deleteMaterial(id){
+    return of()
+  }
+  getMaterial(id){
+    return of()
+  }
+  updateMaterial(data){
+    return of()
+  }
+  addmMaterial(data){
     return of()
   }
 }

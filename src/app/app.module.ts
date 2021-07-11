@@ -29,6 +29,8 @@ import { MedicalRecordTableComponent } from './pages/medical-record-table/medica
 import { PatientTableComponent } from './pages/patient-table/patient-table.component';
 import { DoctorsComponent } from './pages/doctors/doctors.component';
 import { DoctorTableComponent } from './pages/doctor-table/doctor-table.component';
+import { MaterialComponent } from './pages/material/material.component';
+import { MaterialTableComponent } from './pages/material-table/material-table.component';
 
 
 @NgModule({
@@ -63,7 +65,9 @@ import { DoctorTableComponent } from './pages/doctor-table/doctor-table.componen
     MedicalRecordTableComponent,
     PatientTableComponent,
     DoctorsComponent,
-    DoctorTableComponent
+    DoctorTableComponent,
+    MaterialComponent,
+    MaterialTableComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
