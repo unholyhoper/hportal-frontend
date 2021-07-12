@@ -67,4 +67,7 @@ export class AppointmentService {
   canRepoenAppointment(id) {
       return this.httpClient.get<any>(`${BASE_PATH}/canReopenOppointment/${id}`);
   }
+  canCancelAppointment(id) {
+      return this.httpClient.get<any>(`${BASE_PATH}/canCancelOppointment/${id}`);
+  }
 }

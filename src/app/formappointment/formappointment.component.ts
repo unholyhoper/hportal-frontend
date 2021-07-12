@@ -24,6 +24,7 @@ export class FormappointmentComponent implements OnInit {
   appointment;
   canassign;
   canReject;
+  canCancel;
   role;
   canValidate;
   canReopen;
@@ -87,6 +88,7 @@ export class FormappointmentComponent implements OnInit {
     console.log('can reject appointment ', this.canReject);
     this.canValidateAppointment();
     this.canReoppentAppointment();
+    this.canCancelAppointment();
     console.log('Can reject :', this.canReject);
   }
 
@@ -143,12 +145,12 @@ export class FormappointmentComponent implements OnInit {
         res => {
           console.log('appointment canceled', res);
           this.appointment.status = 'CANCELED';
+          window.location.reload();
         },
         err => {
           console.log(err);
         }
       );
-    window.location.reload();
   }
 
   rejectAppointment() {
@@ -227,5 +229,19 @@ export class FormappointmentComponent implements OnInit {
         }
       );
     console.log('can reopen :', this.canReopen);
+  }
+  canCancelAppointment() {
+    this.appointmentService
+      .canRepoenAppointment(this.route.snapshot.paramMap.get('id'))
+      .subscribe(
+        res => {
+          this.canCancel = res.canCancel;
+        },
+        err => {
+          this.canCancel = false;
+          console.log(err);
+        }
+      );
+    console.log('can canCancel :', this.canCancel);
   }
 }
