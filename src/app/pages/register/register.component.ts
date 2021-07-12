@@ -12,7 +12,7 @@ import { Region } from "src/app/model/enum/region.enum";
 import { RegisterUser } from "src/app/model/register-user";
 import { RegisterService } from "src/app/services/register.service";
 import { enumToArray , changeDropDown} from "src/app/shared-module/service";
-    
+
 @Component({
   selector: "app-register",
   templateUrl: "./register.component.html",
@@ -33,6 +33,11 @@ export class RegisterComponent implements OnInit {
     // private toast: ToastrService
     ) {
     let formControls = {
+      username: new FormControl("", [
+        Validators.required,
+        Validators.pattern("[A-Za-z .'-]+"),
+        Validators.minLength(2),
+      ]),
       firstname: new FormControl("", [
         Validators.required,
         Validators.pattern("[A-Za-z .'-]+"),
@@ -57,6 +62,7 @@ export class RegisterComponent implements OnInit {
       password: [null, [Validators.required]],
       confirmPasword: [null, [Validators.required]],
       privacyPolicy: [false, [Validators.required]],
+      birthDate: [false, [Validators.required]],
       phone: new FormControl(null, [Validators.required]),
       country: ["", [Validators.required]],
       adress: [
@@ -145,6 +151,8 @@ export class RegisterComponent implements OnInit {
   }
   addPerson(registerForm) {
     console.log(this.register.value);
+    console.log("Birth date : ",this.register.value.birthDate);
+
     let data = registerForm.value;
     let user = new RegisterUser(data.username,data.firstname,data.lastname,data.email,data.gender,data.country,data.region,data.password,data.role,data.medicalSerial,data.cin,data.adress,data.privacyPolicy,data.phone,data.hospitalName,data.birthDate);
     this.regiterService.addUser(user).subscribe(
