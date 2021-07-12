@@ -4,7 +4,9 @@
 
 export const environment = {
   basePath: '/api',
-  production: false
+  production: false,
+  registerPath: '/register',
+
 };
 
 /*
