@@ -150,19 +150,27 @@
               <div class="form-group">
                 <div class="input-group input-group-alternative">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                    <span class="input-group-text"
+                      ><i class="ni ni-calendar-grid-58"></i
+                    ></span>
                   </div>
-                  <input class="form-control datepicker" placeholder="Select date"
-                   name="dp"  ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" type="text"
-                   formControlName="birthDate"
+                  <input
+                    class="form-control datepicker"
+                    placeholder="Select date"
+                    name="dp"
+                    ngbDatepicker
+                    #d="ngbDatepicker"
+                    (click)="d.toggle()"
+                    type="text"
+                    formControlName="birthDate"
                   />
                 </div>
               </div>
-<!--              <div *ngIf="birthDate.touched && lastname.invalid">-->
-<!--                <small *ngIf="lastname.errors.required" class="text-danger"-->
-<!--                  >Birth date is required<br-->
-<!--                /></small>-->
-<!--              </div>-->
+              <!--              <div *ngIf="birthDate.touched && lastname.invalid">-->
+              <!--                <small *ngIf="lastname.errors.required" class="text-danger"-->
+              <!--                  >Birth date is required<br-->
+              <!--                /></small>-->
+              <!--              </div>-->
             </div>
             <!--email-->
             <div class="form-group">
@@ -371,6 +379,7 @@
                     >
                   </div> -->
                 </div>
+                <!--region-->
                 <div class="col-lg-6 col-md-6">
                   <select
                     class="custom-select"
@@ -387,6 +396,19 @@
                   </select>
                 </div>
               </div>
+            </div>
+            <!--photo-->
+            <div class="form-group">
+                <div class="col-lg-4 col-md-4" style="padding-top: 10px">
+                  <label for="frontImage">Profile Picture </label>
+                </div>
+                <div class="col-lg-4 col-md-4" style="padding-top: 10px">
+                  <input
+                    (change)="handleFileSelect($event)"
+                    type="file"
+                    formControlName="profilePicture"
+                  />
+                </div>
             </div>
             <!--password-->
             <div class="form-group">
@@ -462,7 +484,11 @@
             </div>
             <!--createA account-->
             <div class="text-center">
-              <button type="button" class="btn btn-primary mt-4 button-background" type="submit">
+              <button
+                type="button"
+                class="btn btn-primary mt-4 button-background"
+                type="submit"
+              >
                 Create account
               </button>
             </div>

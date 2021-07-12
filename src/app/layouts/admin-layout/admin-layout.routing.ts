@@ -56,4 +56,5 @@ export const AdminLayoutRoutes: Routes = [
 
   { path: "appointment", component: AppointmentComponent },
   { path: "appointmentForm/:id", component: FormappointmentComponent },
+  { path: "user-profile", component: UserProfileComponent },
 ];

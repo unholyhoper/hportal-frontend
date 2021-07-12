@@ -28,6 +28,8 @@ export class RegisterComponent implements OnInit {
   countries = Country;
   arrayOfRegion;
   arrayOfCountry;
+  selectedFile: File;
+  base64textString: string;
   constructor(private formBuilder: FormBuilder,    private regiterService: RegisterService,
     private router: Router,
     // private toast: ToastrService
@@ -74,6 +76,7 @@ export class RegisterComponent implements OnInit {
         ],
       ],
       region: ["", [Validators.required]],
+      profilePicture: ["", [Validators.required]],
     };
     this.register = this.formBuilder.group(formControls);
   }
@@ -149,12 +152,32 @@ export class RegisterComponent implements OnInit {
       this.pswdMatchColor = "text-danger";
     }
   }
+
+  handleFileSelect(evt){
+    var files = evt.target.files;
+    var file = files[0];
+  
+  if (files && file) {
+      var reader = new FileReader();
+
+      reader.onload =this._handleReaderLoaded.bind(this);
+
+      reader.readAsBinaryString(file);
+  }
+}
+
+_handleReaderLoaded(readerEvt) {
+   var binaryString = readerEvt.target.result;
+          this.base64textString= btoa(binaryString);
+          console.log(this.base64textString);
+  }
   addPerson(registerForm) {
     console.log(this.register.value);
     console.log("Birth date : ",this.register.value.birthDate);
 
     let data = registerForm.value;
-    let user = new RegisterUser(data.username,data.firstname,data.lastname,data.email,data.gender,data.country,data.region,data.password,data.role,data.medicalSerial,data.cin,data.adress,data.privacyPolicy,data.phone,data.hospitalName,data.birthDate);
+    data.profilePicture=this.base64textString
+    let user = new RegisterUser(data.username,data.firstname,data.lastname,data.email,data.gender,data.country,data.region,data.password,data.role,data.medicalSerial,data.cin,data.adress,data.privacyPolicy,data.phone,data.hospitalName,data.birthDate,data.profilePicture);
     this.regiterService.addUser(user).subscribe(
       res=>{
         // this.toastr.success(res.message);

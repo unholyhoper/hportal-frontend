@@ -21,7 +21,7 @@ export class RegisterUser {
   phone: number;
   hospitalName: string;
   birthDate: any;
-
+  profilePicture:Blob;
   constructor(
     username: string,
     firstname: String,
@@ -38,7 +38,8 @@ export class RegisterUser {
     privacyPolicy: boolean,
     phone: number,
     hospitalName: string,
-    birthDate: CompositeDate
+    birthDate: CompositeDate,
+    profilePicture:Blob
 ) {
     this.username = username;
     this.firstname = firstname;
@@ -56,6 +57,6 @@ export class RegisterUser {
     this.phone = phone;
     this.hospitalName = hospitalName;
     this.birthDate = birthDate;
-
+    this.profilePicture=profilePicture
   }
 }
