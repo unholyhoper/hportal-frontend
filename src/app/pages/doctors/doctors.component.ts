@@ -94,7 +94,7 @@ export class DoctorsComponent implements OnInit {
       },
       {
         label: "Gender",
-        type: "text",
+        type: "radio",
         formControleName: "gender",
         value: ["male", "female"],
         icon: "",

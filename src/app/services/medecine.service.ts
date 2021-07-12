@@ -1,25 +1,26 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {LoginUser} from '../model/login-user';
-import {environment} from '../../environments/environment';
-import { Medecine } from '../model/medecine';
-import { AuthService } from './jwt.service';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { LoginUser } from "../model/login-user";
+import { environment } from "../../environments/environment";
+import { Medecine } from "../model/medecine";
+import { AuthService } from "./jwt.service";
 
 const BASE_PATH = environment.basePath;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class MedecineService {
+  constructor(private httpClient: HttpClient) {}
 
-  constructor(private httpClient: HttpClient) {
-  }
-
-  allMedecines() {
-    return this.httpClient.get<any>(`${BASE_PATH}/allMedecines`);
-  }
-  filterMedecines(data){
-    return this.httpClient.post<any>(`${BASE_PATH}/allMedecines`,data)
+  allMedecines(data?) {
+    if (data) {
+      return this.httpClient.get<any>(
+        `${BASE_PATH}/allMedecines?manufacturer=${data.manufacturer}&reference=${data.reference}`
+      );
+    } else {
+      return this.httpClient.get<any>(`${BASE_PATH}/allMedecines`);
+    }
   }
 
   deleteMedecine(id: number) {
@@ -30,10 +31,13 @@ export class MedecineService {
     return this.httpClient.get<any>(`${BASE_PATH}/medecine/${id}`);
   }
   addMedecine(medecine) {
-    return this.httpClient.post<any>(`${BASE_PATH}/medecine`,medecine);
+    return this.httpClient.post<any>(`${BASE_PATH}/medecine`, medecine);
   }
   updateMedecine(medecine) {
-    return this.httpClient.put<any>(`${BASE_PATH}/medecine/${medecine.id}`, medecine);
+    return this.httpClient.put<any>(
+      `${BASE_PATH}/medecine/${medecine.id}`,
+      medecine
+    );
   }
   medecineCount() {
     return this.httpClient.get<any>(`${BASE_PATH}/countMedecines`);

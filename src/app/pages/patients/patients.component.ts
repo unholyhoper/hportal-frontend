@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Country } from 'src/app/model/enum/country.enum';
 import { PatientService } from 'src/app/services/patient.service';
+import { enumToArray } from 'src/app/shared-module/service';
 
 @Component({
   selector: 'app-patients',
@@ -15,6 +17,7 @@ export class PatientsComponent implements OnInit {
   entity = 'Patient'
   id: any;
   fields: any;
+  arrayOfCountry: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,32 +26,32 @@ export class PatientsComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.formControls = {
-      id: new FormControl("", [
+      firstname: new FormControl("", [
         Validators.required,
         Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(2),
       ]),
-      reference: new FormControl("", [
+      lastname: new FormControl("", [
         Validators.required,
         Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(2),
       ]),
-      manufacturer: new FormControl("", [
+      gender: new FormControl("", [
         Validators.required,
         Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(2),
       ]),
-      quantity: new FormControl("", [
+      cin: new FormControl("", [
         Validators.required,
         Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(2),
       ]),
-      expirationdate: new FormControl("", [
+      phone: new FormControl("", [
         Validators.required,
         Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(2),
       ]),
-      price: new FormControl("", [
+      country: new FormControl("", [
         Validators.required,
         Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(2),
@@ -64,44 +67,44 @@ export class PatientsComponent implements OnInit {
 
   ngOnInit(): void {
     this.id=this.route.snapshot.paramMap.get('id')
+    this.arrayOfCountry = enumToArray(Country);
       this.fields = [
         {
-          label: 'Id',
+          label: 'Firstname',
           type: 'text',
-          formControleName: 'id',
+          formControleName: 'firstname',
           icon: 'fa fa-user',
-          disabled: true,
-          value: this.id
         },
         {
-          label: 'Reference',
+          label: 'Lastname',
           type: 'text',
-          formControleName: 'reference',
-          icon: 'fas fa-barcode',
+          formControleName: 'lastname',
+          icon: 'fa fa-user',
         },
         {
-          label: 'Manufacturer',
-          type: 'text',
-          formControleName: 'manufacturer',
-          icon: 'fas fa-industry',
+          label: 'Gender',
+          type: 'radio',
+          formControleName: 'gender',
+          icon: 'fas fa-venus-mars',
         },
         {
-          label: 'Quantity',
-          type: 'text',
-          formControleName: 'quantity',
+          label: 'CIN',
+          type: 'number',
+          formControleName: 'cin',
           icon: 'fas fa-cubes',
         },
         {
-          label: 'Expiration date',
-          type: 'text',
-          formControleName: 'expirationdate',
+          label: 'Phone',
+          type: 'number',
+          formControleName: 'phone',
           icon: 'fas fa-clock',
         },
         {
-          label: 'Price',
-          type: 'text',
-          formControleName: 'price',
+          label: 'Country',
+          type: 'dropdown',
+          formControleName: 'country',
           icon: 'fas fa-dollar-sign',
+          value: this.arrayOfCountry
         },
       ];
       this.patientService.getPatient(this.id).subscribe(res => {
@@ -130,6 +133,6 @@ export class PatientsComponent implements OnInit {
     }
   }
   back() {
-    this.router.navigate([`/medecineTable`]);
+    this.router.navigate([`/patientTable`]);
   }
 }

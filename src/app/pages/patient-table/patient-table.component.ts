@@ -30,7 +30,7 @@ export class PatientTableComponent implements OnInit {
             this.headers = [
               { label: "FirstName", value: "firstName" },
               { label: "LastName", value: "lastName" },
-              { label: "Serial Number", value: "serialNumber" },
+              { label: "CIN", value: "cin" },
               { label: "Gender", value: "gender" },
               { label: "Country", value: "country" },
             ];
