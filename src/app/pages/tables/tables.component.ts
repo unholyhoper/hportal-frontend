@@ -182,7 +182,7 @@ export class TablesComponent implements OnInit {
         break;
       }
       case "material": {
-        this.materialService.deleteMedecine(source.id).subscribe((res: any) => {
+        this.materialService.deleteMaterial(source.id).subscribe((res: any) => {
           console.log(res);
         });
         break;
