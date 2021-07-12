@@ -61,6 +61,34 @@
             [formGroup]="register"
             (ngSubmit)="addPerson(register)"
           >
+            <!--User name-->
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="fa fa-user"></i
+                  ></span>
+                </div>
+                <input
+                  class="form-control"
+                  placeholder="User name"
+                  type="text"
+                  formControlName="username"
+                  required
+                />
+              </div>
+              <div *ngIf="firstname.touched && firstname.invalid">
+                <small *ngIf="firstname.errors.required" class="text-danger"
+                  >Firstname is required<br
+                /></small>
+                <small *ngIf="firstname.errors.pattern" class="text-danger"
+                  >Invalid Firstname<br
+                /></small>
+                <small *ngIf="firstname.errors.minlength" class="text-danger"
+                  >Firstname must contain two characters at least</small
+                >
+              </div>
+            </div>
             <!--firstName-->
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
@@ -116,6 +144,25 @@
                   >Lastname must contain two characters at least</small
                 >
               </div>
+            </div>
+            <!--Birth date-->
+            <div class="form-group">
+              <div class="form-group">
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                  </div>
+                  <input class="form-control datepicker" placeholder="Select date"
+                   name="dp"  ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" type="text"
+                   formControlName="birthDate"
+                  />
+                </div>
+              </div>
+<!--              <div *ngIf="birthDate.touched && lastname.invalid">-->
+<!--                <small *ngIf="lastname.errors.required" class="text-danger"-->
+<!--                  >Birth date is required<br-->
+<!--                /></small>-->
+<!--              </div>-->
             </div>
             <!--email-->
             <div class="form-group">
