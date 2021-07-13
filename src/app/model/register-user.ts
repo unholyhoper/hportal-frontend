@@ -16,7 +16,7 @@ export class RegisterUser {
   role: Role;
   medicalSerial: number;
   cin: number;
-  adress: string;
+  address: string;
   privacyPolicy: boolean;
   phone: number;
   hospitalName: string;
@@ -34,7 +34,7 @@ export class RegisterUser {
     role: Role,
     medicalSerial: number,
     cin: number,
-    adress: string,
+    address: string,
     privacyPolicy: boolean,
     phone: number,
     hospitalName: string,
@@ -52,7 +52,7 @@ export class RegisterUser {
     this.role = role;
     this.medicalSerial = medicalSerial;
     this.cin = cin;
-    this.adress = adress;
+    this.address = address;
     this.privacyPolicy = privacyPolicy;
     this.phone = phone;
     this.hospitalName = hospitalName;

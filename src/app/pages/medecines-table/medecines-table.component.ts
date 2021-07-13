@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { DomSanitizer } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { Medecine } from "src/app/model/medecine";
@@ -17,12 +18,14 @@ export class MedecinesTableComponent implements OnInit {
   searchForm: FormGroup
   formControls
   fields: { label: string; type: string; formControleName: string; icon: string; }[];
+  pdp: any;
   constructor(
     private route: ActivatedRoute,
     private medecineService: MedecineService,
     private toastrService: ToastrService,
     private router: Router,
     private formBuilder: FormBuilder,
+    private sanitizer: DomSanitizer
   ) {
     this.formControls = {
       reference: new FormControl("", [
@@ -44,7 +47,6 @@ export class MedecinesTableComponent implements OnInit {
           .allMedecines()
           .subscribe((medecineList: Medecine[]) => {
             this.rows = medecineList;
-            console.log('rows',this.rows)
             this.headers = [
               { label: "ID", value: "id" },
               { label: "Reference", value: "reference" },
@@ -52,7 +54,17 @@ export class MedecinesTableComponent implements OnInit {
               { label: "Quantity", value: "quantity" },
               { label: "Expiration date", value: "expirationDate" },
               { label: "Price", value: "price" },
+              { label: "Medecine photo", value: "image" },
             ];
+            // console.log(this.rows)
+            this.rows.map(data => {
+              if(data.image)
+              data.image =this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/jpg;base64,
+              ${data.image}`)
+              console.log(data)
+            })
+            // this. = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/jpg;base64,
+            // ${this.base64textString}`);
           });
   }
   public delete(source) {
@@ -123,6 +135,7 @@ export class MedecinesTableComponent implements OnInit {
         { label: "Quantity", value: "quantity" },
         { label: "Expiration date", value: "expirationDate" },
         { label: "Price", value: "price" },
+        { label: "Medecine photo", value: "image" },
       ];
       this.showSuccessMessage('')
     },err =>{
