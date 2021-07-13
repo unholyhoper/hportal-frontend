@@ -18,6 +18,7 @@ import { Router } from "@angular/router";
 import { Appointment } from "../../model/appointment";
 import { AppointmentService } from "../../services/appointment.service";
 import { ToastrService } from "ngx-toastr";
+import { DiseaseService } from "src/app/services/disease.service";
 
 @Component({
   selector: "app-dashboard",
@@ -33,7 +34,7 @@ export class DashboardComponent implements OnInit {
   numberOfDelegates = 50;
   numberOfDisease = 100;
   private BookAppointmetForm: FormGroup;
-  diseasesArray: string[];
+  diseasesArray;
   emergencyArray: string[];
   //multiselect
   dropdownList: { item_id: number; item_text: string }[];
@@ -54,6 +55,7 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private appointmentService: AppointmentService,
+    private diseaseService: DiseaseService,
     private toastr: ToastrService
   ) {
     let formControls = {
@@ -85,7 +87,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.role = localStorage.getItem("role");
     this.name = localStorage.getItem("userName");
-    this.diseasesArray = ["corona-virus"];
+    this.diseaseService.getDiseaseName().subscribe(data =>{
+      this.diseasesArray = data
+    })
     this.emergencyArray = ["low", "medium", "high"];
     if (this.role === "ROLE_ADMIN") {
       this.roleIcon = "fas fa-user-shield";
