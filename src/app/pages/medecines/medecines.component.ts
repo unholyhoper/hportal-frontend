@@ -15,6 +15,7 @@ export class MedecinesComponent implements OnInit {
   entity = 'medecines'
   id: any;
   fields: any;
+  base64textString: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -49,6 +50,11 @@ export class MedecinesComponent implements OnInit {
         Validators.minLength(2),
       ]),
       price: new FormControl("", [
+        Validators.required,
+        Validators.pattern("[A-Za-z .'-]+"),
+        Validators.minLength(2),
+      ]),
+      image: new FormControl("", [
         Validators.required,
         Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(2),
@@ -103,6 +109,10 @@ export class MedecinesComponent implements OnInit {
           formControleName: 'price',
           icon: 'fas fa-dollar-sign',
         },
+        {
+          type: "image",
+          formControleName: "image",
+        },
       ];
       this.medecineService.getMedecine(this.id).subscribe(res => {
           this.fields.forEach(element => {
@@ -111,8 +121,27 @@ export class MedecinesComponent implements OnInit {
 
       });
   }
+
+  handleFileSelect(evt) {
+    var files = evt.target.files;
+    var file = files[0];
+
+    if (files && file) {
+      var reader = new FileReader();
+
+      reader.onload = this._handleReaderLoaded.bind(this);
+
+      reader.readAsBinaryString(file);
+    }
+  }
+
+  _handleReaderLoaded(readerEvt) {
+    var binaryString = readerEvt.target.result;
+    this.base64textString = btoa(binaryString);
+  }
   editForm(form) {
     let data = form.value;
+    data.image = this.base64textString;
     if (this.isUpdate) {
       this.medecineService.updateMedecine(data).subscribe(
         (res) => {

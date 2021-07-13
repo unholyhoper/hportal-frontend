@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit {
       birthDate: [false, [Validators.required]],
       phone: new FormControl(null, [Validators.required]),
       country: ["", [Validators.required]],
-      adress: [
+      address: [
         "",
         [
           Validators.required,
@@ -177,7 +177,7 @@ _handleReaderLoaded(readerEvt) {
 
     let data = registerForm.value;
     data.profilePicture=this.base64textString
-    let user = new RegisterUser(data.username,data.firstname,data.lastname,data.email,data.gender,data.country,data.region,data.password,data.role,data.medicalSerial,data.cin,data.adress,data.privacyPolicy,data.phone,data.hospitalName,data.birthDate,data.profilePicture);
+    let user = new RegisterUser(data.username,data.firstname,data.lastname,data.email,data.gender,data.country,data.region,data.password,data.role,data.medicalSerial,data.cin,data.address,data.privacyPolicy,data.phone,data.hospitalName,data.birthDate,data.profilePicture);
     this.regiterService.addUser(user).subscribe(
       res=>{
         // this.toastr.success(res.message);

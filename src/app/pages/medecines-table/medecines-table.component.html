@@ -99,6 +99,16 @@
                   {{ row[column.value] }}
                 </td>
                 <td>
+                  <div *ngIf="pdp">
+                    <img
+                      width="128"
+                      height="128"
+                      [src]="row[column.value]"
+                      alt="Image Source"
+                    />
+                  </div>
+                </td>
+                <td>
                   <button
                     class="btn btn-primary my-4 button-background"
                     placement="top-center"
