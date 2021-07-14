@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { RegisterUser } from 'src/app/model/register-user';
 import { PatientService } from 'src/app/services/patient.service';
+import {DoctorService} from '../../services/doctor.service';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-patient-table',
@@ -11,37 +13,65 @@ import { PatientService } from 'src/app/services/patient.service';
 })
 export class PatientTableComponent implements OnInit {
 
-
   rows;
   headers;
-  entity = 'Patient'
+  entity = 'Doctor';
+  doctorsList;
+
   constructor(
     private route: ActivatedRoute,
-    private patientService: PatientService,
+    private doctorService: DoctorService,
     private toastrService: ToastrService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private userService: UserService,
+  ) {
+
+  }
 
   ngOnInit(): void {
-    this.patientService
-          .allPatient()
-          .subscribe((patient: RegisterUser[]) => {
-            this.rows = patient;
-            this.headers = [
-              { label: "FirstName", value: "firstName" },
-              { label: "LastName", value: "lastName" },
-              { label: "CIN", value: "cin" },
-              { label: "Gender", value: "gender" },
-              { label: "Country", value: "country" },
-            ];
+    this.headers = [
+      {label: 'id', value: 'id'},
+      {label: 'username', value: 'username'},
+      {label: 'firstname', value: 'firstname'},
+      {label: 'lastname', value: 'lastname'},
+      {label: 'email', value: 'email'},
+    ];
+    console.log('headers :', this.headers);
+
+    this.doctorService.allDoctor().subscribe((doctor: RegisterUser[]) => {
+      this.rows = doctor;
+    });
+    this.userService.getAllUsers().subscribe(
+      res => {
+        let doctors = new Array();
+        res.forEach(function (doc) {
+          doctors.push({
+            id: doc.id,
+            username: doc.username,
+            firstname: doc.firstname,
+            lastname: doc.lastname,
+            email: doc.email,
+            enabled: doc.enabled
           });
+          console.log('doctorsssss:', doctors);
+
+
+        });
+        this.showSuccessMessage(`Doctors loaded successfully`);
+        this.doctorsList = doctors;
+      },
+      (err) => {
+        this.showWarningMessage(`Error when loading doctors `);
+      }
+    );
   }
+
   public delete(source) {
     let index = this.rows.indexOf(source);
     console.log(index);
 
     this.rows.splice(index, 1);
-    this.patientService.deletePatient(source.id).subscribe(
+    this.doctorService.deleteDoctor(source.id).subscribe(
       (res) => {
         this.showSuccessMessage(`The item is deleted successfuly`);
       },
@@ -50,42 +80,62 @@ export class PatientTableComponent implements OnInit {
       }
     );
   }
+
   edit(id, item) {
-    this.router.navigate([`patientform/${item}/${id}`]);
+    this.router.navigate([`doctorform/${item}/${id}`]);
   }
+
   add(item) {
-    this.router.navigate([`patientform/${item}`]);
+    this.router.navigate([`doctorform/${item}`]);
   }
+
   showSuccessMessage(message) {
     this.toastrService.show(
       `<span class="alert-icon ni ni-bell-55" data-notify="icon"></span> <div class="alert-text"</div> <span data-notify="message">${message}</span></div>`,
-      "",
+      '',
       {
         timeOut: 10000,
         closeButton: false,
         enableHtml: true,
         tapToDismiss: false,
-        titleClass: "alert-title",
-        positionClass: "toast-top-center",
+        titleClass: 'alert-title',
+        positionClass: 'toast-top-center',
         toastClass:
-          "ngx-toastr alert alert-dismissible alert-success alert-notify",
+          'ngx-toastr alert alert-dismissible alert-success alert-notify',
       }
     );
   }
+
   showWarningMessage(message) {
     this.toastrService.show(
       `<span class="alert-icon ni ni-bell-55" data-notify="icon"></span> <div class="alert-text"></div> <span data-notify="message">${message}</span></div>`,
-      "",
+      '',
       {
         timeOut: 10000,
         closeButton: false,
         enableHtml: true,
         tapToDismiss: false,
-        titleClass: "alert-title",
-        positionClass: "toast-top-center",
+        titleClass: 'alert-title',
+        positionClass: 'toast-top-center',
         toastClass:
-          "ngx-toastr alert alert-dismissible alert-warning alert-notify",
+          'ngx-toastr alert alert-dismissible alert-warning alert-notify',
       }
     );
+  }
+
+  //
+  // submitData() {
+  //   this.doctorsList.forEach(function (doc) {
+  //     this.userService.setEnabled(doc.id, {enabled: doc.enabled}).subscribe((res) => {
+  //       console.log(res);
+  //     });
+  //   });
+  //
+  //
+  // }
+  toggleEnabled(id, flag) {
+    this.userService.setEnabled(id, {'enabled': flag}).subscribe((res) => {
+      console.log(res);
+    });
   }
 }

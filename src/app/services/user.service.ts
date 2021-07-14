@@ -17,5 +17,19 @@ export class UserService {
     return this.httpClient.get<any>(`${BASE_PATH}/user/${id}`);
   }
 
+  // gets all users with role ROLE_DOCTOR
+  getAllDoctors() {
+    return this.httpClient.get<any>(`${BASE_PATH}/user/doctors`);
+  }
+
+  // gets all users with role ROLE_USER
+  getAllUsers() {
+    return this.httpClient.get<any>(`${BASE_PATH}/user/users`);
+  }
+
+  setEnabled(id: number, enable) {
+    return this.httpClient.put<any>(`${BASE_PATH}/user/enabled/${id}`, enable);
+  }
+
 
 }

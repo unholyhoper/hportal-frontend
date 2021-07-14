@@ -17,56 +17,49 @@
                 <h2 class="title">{{ entity }} management</h2>
               </div>
               <div class="col-xl-6 col-lg-12">
-                <button
-                  class="btn btn-primary button-background"
-                  placement="top-center"
-                  type="button"
-                  (click)="add(entity)"
-                >
-                  <span> add {{ entity }} </span>
-                  <div class="icon icon-shape text-white">
-                    <i class="fas fa-plus"></i>
-                  </div>
-                </button>
+                <button type="button" class="btn btn-danger" (click)="submitData()" >Submit</button>
+<!--                <button-->
+<!--                  class="btn btn-primary button-background"-->
+<!--                  placement="top-center"-->
+<!--                  type="button"-->
+<!--                  (click)="add(entity)"-->
+<!--                >-->
+<!--                  <span> add {{ entity }} </span>-->
+<!--                  <div class="icon icon-shape text-white">-->
+<!--                    <i class="fas fa-plus"></i>-->
+<!--                  </div>-->
+<!--                </button>-->
               </div>
             </div>
           </div>
           <div class="table-responsive">
+
             <table class="table align-items-center table-flush">
               <thead class="thead-light">
                 <tr>
                   <th *ngFor="let column of headers">
                     {{ column.label }}
                   </th>
-                  <th scope="col">Remove</th>
-                  <th scope="col">Edit</th>
+                 <th>
+                   Enabled
+                 </th>
+<!--                  <th scope="col">Remove</th>-->
+<!--                  <th scope="col">Edit</th>-->
                 </tr>
               </thead>
-  
+
               <tbody>
-                <tr *ngFor="let row of rows">
+                <tr *ngFor="let doctor of doctorsList">
                   <td *ngFor="let column of headers">
-                    {{ row[column.value] }}
+                    {{ doctor[column?.value] }}
                   </td>
                   <td>
-                    <button
-                      class="btn btn-primary my-4 button-background"
-                      placement="top-center"
-                      type="button"
-                      (click)="delete(row)"
-                    >
-                      <i class="fas fa-minus-circle"></i>
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      class="btn btn-primary my-4 button-background"
-                      placement="top-center"
-                      type="button"
-                      (click)="edit(row.id, entity)"
-                    >
-                      <i class="fas fa-edit"></i>
-                    </button>
+                    <br>
+                  <label class="custom-toggle">
+                    <input  type="checkbox" [(ngModel)]="doctor.enabled"
+                            (change)="toggleEnabled(doctor.id,doctor.enabled)">
+                    <span class="custom-toggle-slider rounded-circle"></span>
+                  </label>
                   </td>
                 </tr>
               </tbody>
@@ -78,4 +71,3 @@
       </div>
     </div>
   </div>
-  

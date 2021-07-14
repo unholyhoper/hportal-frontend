@@ -29,8 +29,8 @@ export class DashboardComponent implements OnInit {
   name;
   role;
   roleIcon;
-  numberOfDoctors = 100;
-  numberOfPatients = 300;
+  numberOfDoctors ;
+  numberOfPatients ;
   numberOfDelegates = 50;
   numberOfDisease = 100;
   private BookAppointmetForm: FormGroup;
