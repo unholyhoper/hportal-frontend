@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
-import { DomSanitizer } from "@angular/platform-browser";
+import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { Medecine } from "src/app/model/medecine";
@@ -17,7 +17,7 @@ import { MedecineService } from "src/app/services/medecine.service";
   styleUrls: ["./medecines-table.component.scss"],
 })
 export class MedecinesTableComponent implements OnInit {
-  rows;
+  // rows;
   headers;
   entity = "Medecines";
   searchForm: FormGroup;
@@ -28,7 +28,7 @@ export class MedecinesTableComponent implements OnInit {
     formControleName: string;
     icon: string;
   }[];
-  pdp: any;
+  rows: {id: number,  reference:string, quantity: number, price: number,  image : SafeResourceUrl}[]
   constructor(
     private route: ActivatedRoute,
     private medecineService: MedecineService,
@@ -55,7 +55,7 @@ export class MedecinesTableComponent implements OnInit {
   ngOnInit(): void {
     this.medecineService
       .allMedecines()
-      .subscribe((medecineList: Medecine[]) => {
+      .subscribe((medecineList) => {
         this.rows = medecineList;
         this.headers = [
           { label: "ID", value: "id" },
@@ -70,13 +70,12 @@ export class MedecinesTableComponent implements OnInit {
         this.rows.map((data) => {
           if (data.image) {
             this.medecineService.getMedecineImage(data.id).subscribe((res) => {
-              data.image = this.sanitizer
-              .bypassSecurityTrustResourceUrl(`data:image/jpg;base64,${res.image}`);
-              console.log(res.image);
+              data.image = this.sanitizer.bypassSecurityTrustResourceUrl(
+                `data:image/jpg;base64,${res.image}`
+              );
             });
-            
-            console.log(data);
           }
+          console.log(data)
         });
 
         // this. = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/jpg;base64,
@@ -140,7 +139,7 @@ export class MedecinesTableComponent implements OnInit {
     let data = form.value;
     console.log(data);
     this.medecineService.allMedecines(data).subscribe(
-      (medecineList: Medecine[]) => {
+      (medecineList) => {
         this.rows = medecineList;
         console.log("rows", this.rows);
         this.headers = [

@@ -96,17 +96,16 @@
             <tbody>
               <tr *ngFor="let row of rows">
                 <td *ngFor="let column of headers">
-                  {{ row[column.value] }}
-                </td>
-                <td>
-                  <div *ngIf="pdp">
-                    <img
+                  <div *ngIf="column.value !== 'image'">
+                  {{ row[column?.value] }}
+                  </div>  
+                  <img 
+                      *ngIf="column.value === 'image' && row[column?.value] !== undefined && row[column?.value] !== null"
                       width="128"
-                      height="128"
-                      [src]="row[column.value]"
+                      height="70"
+                      [src]="row[column?.value]"
                       alt="Image Source"
                     />
-                  </div>
                 </td>
                 <td>
                   <button
