@@ -42,4 +42,7 @@ export class MedecineService {
   medecineCount() {
     return this.httpClient.get<any>(`${BASE_PATH}/countMedecines`);
   }
+  getMedecineImage(id: number) {
+    return this.httpClient.get<any>(`${BASE_PATH}/medecine/image/${id}`);
+  }
 }

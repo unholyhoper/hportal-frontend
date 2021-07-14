@@ -1,5 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
 import { DomSanitizer } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
@@ -14,10 +19,15 @@ import { MedecineService } from "src/app/services/medecine.service";
 export class MedecinesTableComponent implements OnInit {
   rows;
   headers;
-  entity = 'Medecines'
-  searchForm: FormGroup
-  formControls
-  fields: { label: string; type: string; formControleName: string; icon: string; }[];
+  entity = "Medecines";
+  searchForm: FormGroup;
+  formControls;
+  fields: {
+    label: string;
+    type: string;
+    formControleName: string;
+    icon: string;
+  }[];
   pdp: any;
   constructor(
     private route: ActivatedRoute,
@@ -44,28 +54,34 @@ export class MedecinesTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.medecineService
-          .allMedecines()
-          .subscribe((medecineList: Medecine[]) => {
-            this.rows = medecineList;
-            this.headers = [
-              { label: "ID", value: "id" },
-              { label: "Reference", value: "reference" },
-              { label: "Manufacturer", value: "manufacturer" },
-              { label: "Quantity", value: "quantity" },
-              { label: "Expiration date", value: "expirationDate" },
-              { label: "Price", value: "price" },
-              { label: "Medecine photo", value: "image" },
-            ];
-            // console.log(this.rows)
-            this.rows.map(data => {
-              if(data.image)
-              data.image =this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/jpg;base64,
-              ${data.image}`)
-              console.log(data)
-            })
-            // this. = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/jpg;base64,
-            // ${this.base64textString}`);
-          });
+      .allMedecines()
+      .subscribe((medecineList: Medecine[]) => {
+        this.rows = medecineList;
+        this.headers = [
+          { label: "ID", value: "id" },
+          { label: "Reference", value: "reference" },
+          { label: "Manufacturer", value: "manufacturer" },
+          { label: "Quantity", value: "quantity" },
+          { label: "Expiration date", value: "expirationDate" },
+          { label: "Price", value: "price" },
+          { label: "Medecine photo", value: "image" },
+        ];
+        // console.log(this.rows)
+        this.rows.map((data) => {
+          if (data.image) {
+            this.medecineService.getMedecineImage(data.id).subscribe((res) => {
+              data.image = this.sanitizer
+              .bypassSecurityTrustResourceUrl(`data:image/jpg;base64,${res.image}`);
+              console.log(res.image);
+            });
+            
+            console.log(data);
+          }
+        });
+
+        // this. = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/jpg;base64,
+        // ${this.base64textString}`);
+      });
   }
   public delete(source) {
     let index = this.rows.indexOf(source);
@@ -120,27 +136,27 @@ export class MedecinesTableComponent implements OnInit {
     );
   }
 
-  searchFormquerry(form){
-    let data = form.value
-    console.log(data)
-    this.medecineService
-    .allMedecines(data)
-    .subscribe((medecineList: Medecine[]) => {
-      this.rows = medecineList;
-      console.log('rows',this.rows)
-      this.headers = [
-        { label: "ID", value: "id" },
-        { label: "Reference", value: "reference" },
-        { label: "Manufacturer", value: "manufacturer" },
-        { label: "Quantity", value: "quantity" },
-        { label: "Expiration date", value: "expirationDate" },
-        { label: "Price", value: "price" },
-        { label: "Medecine photo", value: "image" },
-      ];
-      this.showSuccessMessage('')
-    },err =>{
-      this.showWarningMessage('')
-    }
+  searchFormquerry(form) {
+    let data = form.value;
+    console.log(data);
+    this.medecineService.allMedecines(data).subscribe(
+      (medecineList: Medecine[]) => {
+        this.rows = medecineList;
+        console.log("rows", this.rows);
+        this.headers = [
+          { label: "ID", value: "id" },
+          { label: "Reference", value: "reference" },
+          { label: "Manufacturer", value: "manufacturer" },
+          { label: "Quantity", value: "quantity" },
+          { label: "Expiration date", value: "expirationDate" },
+          { label: "Price", value: "price" },
+          { label: "Medecine photo", value: "image" },
+        ];
+        this.showSuccessMessage("");
+      },
+      (err) => {
+        this.showWarningMessage("");
+      }
     );
   }
 }
