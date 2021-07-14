@@ -15,8 +15,7 @@ export class DiseaseService {
   }
 
   allDiseases() {
-    return of([])
-    // return this.httpClient.get<any>(`${BASE_PATH}/allDiseases`);
+    return this.httpClient.get<any>(`${BASE_PATH}/allDiseases`);
   }
   getDisease(id: number) {
     return this.httpClient.get<any>(`${BASE_PATH}/disease/${id}`);
@@ -29,5 +28,8 @@ export class DiseaseService {
   }
   addDisease(disease){
     return of()
+  }
+  getDiseaseName(){
+    return this.httpClient.get<any>(`${BASE_PATH}/diseaseNames`);
   }
 }
