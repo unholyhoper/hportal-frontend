@@ -15,9 +15,8 @@ export class PatientTableComponent implements OnInit {
 
   rows;
   headers;
-  entity = 'Doctor';
+  entity = 'Patient';
   doctorsList;
-
   constructor(
     private route: ActivatedRoute,
     private doctorService: DoctorService,

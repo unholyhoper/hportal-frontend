@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit {
   public location: Location;
   role: string;
   useName: string;
+  notificationCount: number;
   constructor(
     location: Location,
     private element: ElementRef,
@@ -33,6 +34,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.role = localStorage.getItem("role");
     this.useName = localStorage.getItem("userName");
+    this.notificationCount = 1
     switch (this.role) {
       case "ROLE_ADMIN": {
         this.listTitles = ROUTESADMIN.filter((listTitle) => listTitle);
@@ -67,5 +69,8 @@ export class NavbarComponent implements OnInit {
     localStorage.removeItem("userName");
     localStorage.removeItem("role");
     return this.router.navigate(["/login"]);
+  }
+  updateNotification(){
+    this.notificationCount = 0
   }
 }
