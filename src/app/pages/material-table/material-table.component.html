@@ -2,6 +2,56 @@
   <div class="container-fluid">
     <div class="header-body">
       <!-- Card stats -->
+      <div class="card card-stats mb-4 mb-xl-0">
+        <div class="card-body">
+          <form
+            class="form"
+            [formGroup]="searchForm"
+            (ngSubmit)="searchFormquerry(searchForm)"
+          >
+            <div class="row">
+              <div class="col-6">
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="fas fa-barcode"></i
+                    ></span>
+                  </div>
+                  <input
+                    class="form-control"
+                    placeholder="Type"
+                    type="text"
+                    formControlName="type"
+                  />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="fas fa-industry"></i
+                    ></span>
+                  </div>
+                  <input
+                    class="form-control"
+                    placeholder="Name"
+                    type="text"
+                    formControlName="name"
+                  />
+                </div>
+              </div>
+            </div>
+            <p class="mb-0 text-muted text-sm">
+              <button
+                type="submit"
+                class="btn btn-primary my-4 button-background"
+              >
+                Search
+              </button>
+            </p>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>
