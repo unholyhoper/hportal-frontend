@@ -1,5 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MedecineService } from "src/app/services/medecine.service";
 
@@ -12,7 +17,7 @@ export class MedecinesComponent implements OnInit {
   formControls;
   medecinesForm: FormGroup;
   isUpdate: any;
-  entity = 'medecines'
+  entity = "medecines";
   id: any;
   fields: any;
   base64textString: string;
@@ -61,65 +66,62 @@ export class MedecinesComponent implements OnInit {
       ]),
     };
     this.medecinesForm = this.formBuilder.group(this.formControls);
-    if (this.id !== undefined){
-      this.isUpdate = true
-    }
-    else
-      this.isUpdate = false
   }
 
   ngOnInit(): void {
-    this.id=this.route.snapshot.paramMap.get('id')
-      this.fields = [
-        {
-          label: 'Id',
-          type: 'text',
-          formControleName: 'id',
-          icon: 'fa fa-user',
-          disabled: true,
-          value: this.id
-        },
-        {
-          label: 'Reference',
-          type: 'text',
-          formControleName: 'reference',
-          icon: 'fas fa-barcode',
-        },
-        {
-          label: 'Manufacturer',
-          type: 'text',
-          formControleName: 'manufacturer',
-          icon: 'fas fa-industry',
-        },
-        {
-          label: 'Quantity',
-          type: 'text',
-          formControleName: 'quantity',
-          icon: 'fas fa-cubes',
-        },
-        {
-          label: 'Expiration date',
-          type: 'text',
-          formControleName: 'expirationdate',
-          icon: 'fas fa-clock',
-        },
-        {
-          label: 'Price',
-          type: 'text',
-          formControleName: 'price',
-          icon: 'fas fa-dollar-sign',
-        },
-        {
-          type: "image",
-          formControleName: "image",
-        },
-      ];
-      this.medecineService.getMedecine(this.id).subscribe(res => {
-          this.fields.forEach(element => {
-            element.value = res[element.formControleName]
-          });  
-
+    this.id = this.route.snapshot.paramMap.get("id");
+    this.fields = [
+      {
+        label: "Id",
+        type: "text",
+        formControleName: "id",
+        icon: "fa fa-user",
+        disabled: true,
+        value: this.id,
+      },
+      {
+        label: "Reference",
+        type: "text",
+        formControleName: "reference",
+        icon: "fas fa-barcode",
+      },
+      {
+        label: "Manufacturer",
+        type: "text",
+        formControleName: "manufacturer",
+        icon: "fas fa-industry",
+      },
+      {
+        label: "Quantity",
+        type: "text",
+        formControleName: "quantity",
+        icon: "fas fa-cubes",
+      },
+      {
+        label: "Expiration date",
+        type: "text",
+        formControleName: "expirationdate",
+        icon: "fas fa-clock",
+      },
+      {
+        label: "Price",
+        type: "text",
+        formControleName: "price",
+        icon: "fas fa-dollar-sign",
+      },
+      {
+        type: "image",
+        formControleName: "image",
+      },
+    ];
+    if (this.id !== undefined || this.id !== null) {
+      this.isUpdate = true;
+    } else this.isUpdate = false;
+    this.medecineService.getMedecine(this.id).subscribe((res) => {
+      this.fields.forEach((element) => {
+        element.value = res[element.formControleName];
       });
+    });
   }
 
   handleFileSelect(evt) {

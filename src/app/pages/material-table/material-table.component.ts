@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Material } from 'src/app/model/material';
@@ -10,30 +11,39 @@ import { MaterialService } from 'src/app/services/material.service';
   styleUrls: ['./material-table.component.scss']
 })
 export class MaterialTableComponent implements OnInit {
-  rows;
   headers;
   entity = 'Material'
+  rows: {id: number,  name:string, type: number, quantity: number, image : SafeResourceUrl}[]
+
   constructor(
     private route: ActivatedRoute,
     private materialService: MaterialService,
     private toastrService: ToastrService,
-    private router: Router
+    private router: Router,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
     this.materialService
           .allMaterial()
-          .subscribe((medecineList: Material[]) => {
-            this.rows = medecineList;
+          .subscribe((materialList) => {
+            this.rows = materialList;
             console.log('rows',this.rows)
             this.headers = [
-              { label: "ID", value: "id" },
-              { label: "Reference", value: "reference" },
-              { label: "Manufacturer", value: "manufacturer" },
+              { label: "name", value: "name" },
+              { label: "type", value: "type" },
               { label: "Quantity", value: "quantity" },
-              { label: "Expiration date", value: "expirationDate" },
-              { label: "Price", value: "price" },
+              { label: "image", value: "image" },
             ];
+            this.rows.map((data) => {
+              if (data.image) {
+                this.materialService.getMaterialImage(data.id).subscribe((res) => {
+                  data.image = this.sanitizer.bypassSecurityTrustResourceUrl(
+                    `data:image/jpg;base64,${res.image}`
+                  );
+                });
+              }
+            });
           });
   }
   public delete(source) {

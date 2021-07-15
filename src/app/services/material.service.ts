@@ -1,25 +1,33 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs/internal/observable/of';
+import { environment } from 'src/environments/environment';
+const BASE_PATH = environment.basePath;
 
 @Injectable({
   providedIn: 'root'
 })
 export class MaterialService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
   allMaterial(){
-    return of([])
+    return this.httpClient.get<any>(`${BASE_PATH}/allMaterial`);
+  }
+  getMaterialImage(id: number) {
+    return this.httpClient.get<any>(`${BASE_PATH}/material/image/${id}`);
   }
   deleteMaterial(id){
-    return of()
+    return this.httpClient.delete<any>(`${BASE_PATH}/material/${id}`);
   }
   getMaterial(id){
-    return of()
+    return this.httpClient.get<any>(`${BASE_PATH}/material/${id}`);
   }
-  updateMaterial(data){
-    return of()
-  }
-  addmMaterial(data){
-    return of()
+  updateMaterial(material){
+    return this.httpClient.put<any>(
+      `${BASE_PATH}/material/${material.id}`,
+      material
+    );  }
+  addmMaterial(material){
+    return this.httpClient.post<any>(`${BASE_PATH}/material`, material);
   }
 }

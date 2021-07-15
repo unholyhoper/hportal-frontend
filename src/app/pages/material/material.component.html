@@ -24,7 +24,7 @@
               </div>
             </div>
           </div>
-          <form class="form" [formGroup]="medecinesForm" (ngSubmit)="editForm(medecinesForm)">
+          <form class="form" [formGroup]="materialForm" (ngSubmit)="editForm(materialForm)">
             <!--firstName-->
             <div class="form-group">
               <div *ngFor="let field of fields">
@@ -46,6 +46,20 @@
                     disabled="{{ field.disabled }}"
                     required
                   />
+                </div>
+                <div *ngIf="field.type === 'image'">
+                  <div class="form-group">
+                    <div class="col-lg-4 col-md-4" style="padding-top: 10px">
+                      <label for="frontImage">Material photo</label>
+                    </div>
+                    <div class="col-lg-4 col-md-4" style="padding-top: 10px">
+                      <input
+                        (change)="handleFileSelect($event)"
+                        type="file"
+                        formControlName="{{ field.formControleName }}"
+                      />
+                    </div>
+                  </div>
                 </div>
                 <div
                   class="input-group input-group-alternative mb-3"
