@@ -61,6 +61,7 @@ export class MaterialComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get("id");
+
     this.fields = [
       {
         label: "Id",
@@ -93,10 +94,11 @@ export class MaterialComponent implements OnInit {
         formControleName: "image",
       },
     ];
-    if (this.id !== undefined || this.id !== null) {
+    console.log(this.id)
+    if (this.id !== undefined && this.id !== null)
       this.isUpdate = true;
-    } else this.isUpdate = false;
-
+    else this.isUpdate = false;
+    console.log(this.isUpdate)
     this.mateialService.getMaterial(this.id).subscribe((res) => {
       this.fields.forEach((element) => {
         element.value = res[element.formControleName];
