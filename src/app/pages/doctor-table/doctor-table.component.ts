@@ -68,8 +68,6 @@ export class DoctorTableComponent implements OnInit {
 
   public delete(source) {
     let index = this.rows.indexOf(source);
-    console.log(index);
-
     this.rows.splice(index, 1);
     this.doctorService.deleteDoctor(source.id).subscribe(
       (res) => {
