@@ -5,16 +5,16 @@
   <div class="container-fluid d-flex align-items-center">
     <div class="row">
       <div class="col-lg-12 col-md-12">
-        <h1 *ngIf="role.name === 'doctor'" class="display-2 text-white">{{medicalUser.firstname}}</h1>
-        <h1 *ngIf="role.name === 'admin'" class="display-2 text-white">{{medicalPatient.firstname}}</h1>
-        <h1 *ngIf="role.name === 'client'" class="display-2 text-white">{{medicalPatient.firstname}}</h1>
+        <h1 *ngIf="this.role === 'ROLE_DOCTOR'" class="display-2 text-white">Greetings Dr.{{this.currentUser.user_firstName}}</h1>
+        <h1 *ngIf="this.role === 'ROLE_ADMIN'" class="display-2 text-white">{{this.currentUser.user_firstName}}, the best Admin</h1>
+        <h1 *ngIf="this.role === 'ROLE_USER'" class="display-2 text-white">Greetings, {{this.currentUser.user_firstName}}</h1>
         <p class="text-white mt-0 mb-5">This is your profile page</p>
-        <a href="#!" class="btn btn-info">Edit profile</a>
+        <a (click)="isEditClicked($event)" class="btn btn-info">Edit profile</a>
       </div>
     </div>
   </div>
 </div>
-<div class="container-fluid mt--7">
+<div *ngIf="this.documentReady == true" class="container-fluid mt--7">
   <div class="row">
     <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
       <div class="card card-profile shadow">
@@ -37,14 +37,12 @@
             </div>
           </div>
           <div class="text-center">
-            <h3>
-              {{medicalUser.firstname}}<span class="font-weight-light"></span>
-            </h3>
+              {{this.currentUser.user_firstName}}<span class="font-weight-light"></span>
             <div class="h5 font-weight-300">
-              <i class="ni location_pin mr-2"></i>{{role.name}}
+              <i class="ni location_pin mr-2"></i>{{this.shownRole}}
             </div>
             <div>
-              <i class="ni education_hat mr-2"></i>{{medicalUser.hospitalName}}
+              <i class="ni education_hat mr-2"></i>Fattouma Bourguiba Hospital
             </div>
           </div>
         </div>
@@ -60,22 +58,22 @@
           </div>
         </div>
         <div class="card-body">
-          <form>
+          <form [formGroup]="profileForm">
             <h6 class="heading-small text-muted mb-4">User information</h6>
             <div class="pl-lg-4">
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-first-name">First name</label>
-                    <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" value="{{medicalUser.firstname}}"
-                    disabled="isEditModeEnabled">
+                    <input type="text" id="input-first-name" class="form-control form-control-alternative" formControlName="firstname" placeholder="First name" value="{{this.currentUser.user_firstName}}"
+                    [disabled]="!isEditModeEnabled">
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-last-name">Last Name</label>
-                    <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" value="{{medicalUser.lastname}}"
-                    disabled="isEditModeEnabled">
+                    <input type="text" id="input-last-name" class="form-control form-control-alternative" formControlName="lastname" placeholder="Last name" value="{{this.userLastName}}"
+                    [disabled]="!isEditModeEnabled">
                   </div>
                 </div>
               </div>
@@ -83,13 +81,13 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-email">Email address</label>
-                    <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="{{medicalUser.email}}" disabled="isEditModeEnabled">
+                    <input type="email" id="input-email" class="form-control form-control-alternative" formControlName="email" placeholder="Email address" value="{{this.currentUser.email}}" [disabled]="!isEditModeEnabled">
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-email">Gender</label>
-                    <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="Male" disabled="isEditModeEnabled">
+                    <label class="form-control-label" for="input-email">Username</label>
+                    <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="Username" value="{{this.userName}}" [disabled]="!isEditModeEnabled">
                   </div>
                 </div>
               </div>
@@ -102,34 +100,42 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="form-control-label" for="input-address">Address</label>
-                    <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
+                    <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address" value="{{this.currentUser.address}}" type="text"
+                    [disabled]="!isEditModeEnabled">
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-4">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-city">City</label>
-                    <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" value="New York">
+                    <label class="form-control-label" for="input-city">National ID Number</label>
+                    <input type="text" id="input-city" class="form-control form-control-alternative" formControlName="cin" placeholder="National ID Number" value="{{this.currentUser.cin}}"
+                    [disabled]="!isEditModeEnabled">
                   </div>
                 </div>
                 <div class="col-lg-4">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-country">Country</label>
-                    <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" value="United States">
+                    <label class="form-control-label" for="input-country">Phone Number</label>
+                    <input type="text" id="input-country" class="form-control form-control-alternative" formControlName="phone" placeholder="Phone Number" value="{{this.currentUser.phone}}"
+                    [disabled]="!isEditModeEnabled">
                   </div>
                 </div>
                 <div class="col-lg-4">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-country">Postal code</label>
-                    <input type="number" id="input-postal-code" class="form-control form-control-alternative" placeholder="Postal code">
+                    <label class="form-control-label" for="input-country">Medical Serial</label>
+                    <input *ngIf="this.role === 'ROLE_DOCTOR'" type="number" id="input-postal-code" formControlName="medicalSerial" class="form-control form-control-alternative" placeholder="Medical Serial" value="{{this.userMedicalSerial}}"
+                    [disabled]="!isEditModeEnabled">
                   </div>
                 </div>
               </div>
             </div>
           </form>
+          <button *ngIf="isEditModeEnabled" (click)="saveProfile($event)" style="position:right;" class="btn btn-info">Save profile</button>
         </div>
+
       </div>
+
     </div>
+
   </div>
 </div>
