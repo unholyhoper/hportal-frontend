@@ -1,7 +1,6 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from 'src/environments/environment';
-import {RegisterUser} from '../model/register-user';
 
 const BASE_PATH = environment.basePath;
 
@@ -17,19 +16,15 @@ export class UserService {
     return this.httpClient.get<any>(`${BASE_PATH}/user/${id}`);
   }
 
-  // gets all users with role ROLE_DOCTOR
-  getAllDoctors() {
-    return this.httpClient.get<any>(`${BASE_PATH}/user/doctors`);
+  getCurrentUser() {
+    return this.httpClient.get<any>(`${BASE_PATH}/currentUser`);
   }
 
-  // gets all users with role ROLE_USER
   getAllUsers() {
-    return this.httpClient.get<any>(`${BASE_PATH}/user/users`);
+    return this.httpClient.get<any>(`${BASE_PATH}/users`);
   }
 
-  setEnabled(id: number, enable) {
-    return this.httpClient.put<any>(`${BASE_PATH}/user/enabled/${id}`, enable);
+  updateCurrentUser(id: number) {
+    return this.httpClient.put<any>(`${BASE_PATH}/user/${id}`, "");
   }
-
-
 }
