@@ -24,7 +24,11 @@
               </div>
             </div>
           </div>
-          <form class="form" [formGroup]="medecinesForm" (ngSubmit)="editForm(medecinesForm)">
+          <form
+            class="form"
+            [formGroup]="medecinesForm"
+            (ngSubmit)="editForm(medecinesForm)"
+          >
             <!--firstName-->
             <div class="form-group">
               <div *ngFor="let field of fields">
@@ -49,6 +53,18 @@
                 </div>
                 <div
                   class="input-group input-group-alternative mb-3"
+                  *ngIf="field.type === 'textarea'"
+                >
+                  <textarea
+                    class="form-control"
+                    placeholder="{{ field.label }}"
+                    formControlName="{{ field.formControleName }}"
+                    [(ngModel)]="field.value"
+                    rows="5"
+                  ></textarea>
+                </div>
+                <div
+                  class="input-group input-group-alternative mb-3"
                   *ngIf="field.type === 'dropdown'"
                 >
                   <select
@@ -63,6 +79,21 @@
                   </select>
                 </div>
               </div>
+              <div class="form-group">
+                <ng-multiselect-dropdown
+                  [placeholder]="'Medecines'"
+                  [settings]="dropdownSettings"
+                  [data]="dropdownList"
+                  [(ngModel)]="selectedItems"
+                  (onSelect)="onItemSelect($event)"
+                  (onSelectAll)="onSelectAll($event)"
+                  [required]="requiredField"
+                  [ngClass]="setClass()"
+                  name="medecinSelect"
+                  formControlName="medecines"
+                >
+                </ng-multiselect-dropdown>
+              </div>
             </div>
             <!--agree Privacy-->
             <div class="row my-4">
@@ -73,7 +104,12 @@
               <button type="button" class="btn btn-primary" type="submit">
                 Save
               </button>
-              <button type="button" class="btn btn-danger" type="reset" (click)="back()">
+              <button
+                type="button"
+                class="btn btn-danger"
+                type="reset"
+                (click)="back()"
+              >
                 Cancel
               </button>
             </div>

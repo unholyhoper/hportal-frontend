@@ -114,7 +114,7 @@ export class MedecinesComponent implements OnInit {
         formControleName: "image",
       },
     ];
-    if (this.id !== undefined || this.id !== null) {
+    if (this.id !== undefined && this.id !== null) {
       this.isUpdate = true;
     } else this.isUpdate = false;
     this.medecineService.getMedecine(this.id).subscribe((res) => {

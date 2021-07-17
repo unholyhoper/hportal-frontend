@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DiseaseService } from 'src/app/services/disease.service';
+import { MedecineService } from 'src/app/services/medecine.service';
 
 @Component({
   selector: 'app-diseases',
@@ -15,10 +16,15 @@ export class DiseasesComponent implements OnInit {
   entity = 'Disease'
   id: any;
   fields: any;
-
+  dropdownList = [];
+  selectedItems = [];
+  dropdownSettings = {};
+  requiredField: boolean;
+  
   constructor(
     private formBuilder: FormBuilder,
     private diseaseService: DiseaseService,
+    private medecineService: MedecineService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -28,27 +34,17 @@ export class DiseasesComponent implements OnInit {
         Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(2),
       ]),
-      reference: new FormControl("", [
+      name: new FormControl("", [
         Validators.required,
         Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(2),
       ]),
-      manufacturer: new FormControl("", [
+      description: new FormControl("", [
         Validators.required,
         Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(2),
       ]),
-      quantity: new FormControl("", [
-        Validators.required,
-        Validators.pattern("[A-Za-z .'-]+"),
-        Validators.minLength(2),
-      ]),
-      expirationdate: new FormControl("", [
-        Validators.required,
-        Validators.pattern("[A-Za-z .'-]+"),
-        Validators.minLength(2),
-      ]),
-      price: new FormControl("", [
+      medecines: new FormControl("", [
         Validators.required,
         Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(2),
@@ -74,43 +70,77 @@ export class DiseasesComponent implements OnInit {
           value: this.id
         },
         {
-          label: 'Reference',
+          label: 'Name',
           type: 'text',
-          formControleName: 'reference',
-          icon: 'fas fa-barcode',
+          formControleName: 'name',
+          icon: 'fas fa-user',
         },
         {
-          label: 'Manufacturer',
-          type: 'text',
-          formControleName: 'manufacturer',
+          label: 'description',
+          type: 'textarea',
+          formControleName: 'description',
           icon: 'fas fa-industry',
         },
-        {
-          label: 'Quantity',
-          type: 'text',
-          formControleName: 'quantity',
-          icon: 'fas fa-cubes',
-        },
-        {
-          label: 'Expiration date',
-          type: 'text',
-          formControleName: 'expirationdate',
-          icon: 'fas fa-clock',
-        },
-        {
-          label: 'Price',
-          type: 'text',
-          formControleName: 'price',
-          icon: 'fas fa-dollar-sign',
-        },
       ];
+      this.getData()
+      this.dropdownSettings = {
+        singleSelection: false,
+        idField: 'item_id',
+        textField: 'item_text',
+        selectAllText: 'Select All',
+        unSelectAllText: 'UnSelect All',
+        itemsShowLimit: 3,
+        allowSearchFilter: true
+      };
+      this.setStatus();
+
       this.diseaseService.getDisease(this.id).subscribe(res => {
           this.fields.forEach(element => {
             element.value = res[element.formControleName]
           });  
-
       });
+      if (this.id !== undefined && this.id !== null) {
+        this.isUpdate = true;
+        this.diseaseService.getDisease(this.id).subscribe((res) => {
+          this.fields.forEach((element) => {
+            element.value = res[element.formControleName];
+          });
+        });
+      } else this.isUpdate = false;
+      
   }
+  getData(): void {
+    let tmp = [];
+    this.medecineService.getMedecinesName().subscribe(data => {
+      for(let i=0; i < data.length; i++) {
+        tmp.push({ item_id: i, item_text: data[i].name });
+      }
+      this.dropdownList = tmp;
+    });
+  }
+  
+  setStatus() {
+    this.selectedItems.length > 0
+      ? (this.requiredField = true)
+      : (this.requiredField = false);
+  }
+  onItemSelect(item: any) {
+    this.setClass();
+  }
+
+  onSelectAll(items: any) {
+    this.setClass();
+  }
+
+  setClass() {
+    this.setStatus();
+    if (this.selectedItems.length > 0) {
+      return "validField";
+    } else {
+      return "invalidField";
+    }
+  }
+  
   editForm(form) {
     let data = form.value;
     if (this.isUpdate) {
@@ -130,6 +160,6 @@ export class DiseasesComponent implements OnInit {
     }
   }
   back() {
-    this.router.navigate([`/medecineTable`]);
+    this.router.navigate([`/diseaseTable`]);
   }
 }

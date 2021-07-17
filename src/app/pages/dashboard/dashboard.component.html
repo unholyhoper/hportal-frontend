@@ -398,8 +398,8 @@
                           />
                         </div>
                         <!--medecins-->
-                        <div class="form-group">
-                          Did you take Medecines ?
+                         <div class="form-group"> 
+                         Did you take Medecines ?
                           <ng-multiselect-dropdown
                             [placeholder]="'Medecines'"
                             [settings]="dropdownSettings"
@@ -410,10 +410,18 @@
                             [required]="requiredField"
                             [ngClass]="setClass()"
                             name="medecinSelect"
-                            formControlName="medicines"
+                            formControlName="medecines"
                           >
                           </ng-multiselect-dropdown>
+                         
+                          <!-- <mat-form-field appearance="fill">
+                            <mat-label>Toppings</mat-label>
+                            <mat-select [formControl]="toppings" multiple>
+                              <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                            </mat-select>
+                          </mat-form-field> -->
                         </div>
+
                         <!--emergency-->
                         <div class="form-group">
                           <select

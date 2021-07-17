@@ -52,6 +52,10 @@ export class DiseaseTableComponent implements OnInit {
   add(item) {
     this.router.navigate([`diseaseform/${item}`]);
   }
+  minimiseDescription(description){
+    return description.substring(0, 125)
+  }
+
   showSuccessMessage(message) {
     this.toastrService.show(
       `<span class="alert-icon ni ni-bell-55" data-notify="icon"></span> <div class="alert-text"</div> <span data-notify="message">${message}</span></div>`,

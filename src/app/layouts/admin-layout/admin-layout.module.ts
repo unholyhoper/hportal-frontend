@@ -12,6 +12,7 @@ import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import {MatSelectModule} from '@angular/material/select';
 
 // import { ToastrModule } from 'ngx-toastr';
 
@@ -24,7 +25,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     NgbModule,
     ClipboardModule,
     ReactiveFormsModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    MatSelectModule
   ],
   declarations: [
     DashboardComponent,

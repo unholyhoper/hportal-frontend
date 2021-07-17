@@ -32,4 +32,7 @@ export class DiseaseService {
   getDiseaseName(){
     return this.httpClient.get<any>(`${BASE_PATH}/diseaseNames`);
   }
+  getDiseaseCount(){
+    return this.httpClient.get<any>(`${BASE_PATH}/countDisease`);
+  }
 }
