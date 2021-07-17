@@ -16,7 +16,6 @@ import { FormComponent } from './form/form.component';
 import { JwtInterceptor } from './shared-module/auth.interceptor';
 import {TablesComponent} from './pages/tables/tables.component';
 import { AppointmentComponent } from './appointment/appointment.component';
-import { ForgotPasswordComponent } from "./pages/forgot-password/forgot-password.component";
 import { ToastContainerModule, ToastrModule } from "ngx-toastr";
 import { FormappointmentComponent } from './formappointment/formappointment.component';
 import { MedecinesComponent } from './pages/medecines/medecines.component';
@@ -34,6 +33,7 @@ import { MaterialTableComponent } from './pages/material-table/material-table.co
 import { DelegateComponent } from './pages/delegate/delegate.component';
 import { DelegateTableComponent } from './pages/delegate-table/delegate-table.component';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @NgModule({
@@ -47,6 +47,8 @@ import { ForgetPasswordComponent } from './pages/forget-password/forget-password
     RouterModule,
     AppRoutingModule,
     ToastrModule.forRoot({closeButton : true,progressBar:true,positionClass:'toast-bottom-center'}),
+    NgMultiSelectDropDownModule,
+
   ],
   exports: [
     ToastrModule
@@ -73,7 +75,8 @@ import { ForgetPasswordComponent } from './pages/forget-password/forget-password
     MaterialTableComponent,
     DelegateComponent,
     DelegateTableComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -45,4 +45,7 @@ export class MedecineService {
   getMedecineImage(id: number) {
     return this.httpClient.get<any>(`${BASE_PATH}/medecine/image/${id}`);
   }
+  getMedecinesName(){
+    return this.httpClient.get<any>(`${BASE_PATH}/medecinesNames`);
+  }
 }

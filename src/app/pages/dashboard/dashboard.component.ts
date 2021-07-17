@@ -31,16 +31,15 @@ export class DashboardComponent implements OnInit {
   name;
   role;
   roleIcon;
-  numberOfDoctors ;
-  numberOfPatients ;
+  numberOfDoctors;
+  numberOfPatients;
   numberOfDelegates = 50;
-  numberOfDisease = 100;
   private BookAppointmetForm: FormGroup;
   diseasesArray;
   emergencyArray: string[];
   //multiselect
-  dropdownList: { item_id: number; item_text: string }[];
-  selectedItems: { item_id: number; item_text: string }[];
+  dropdownList = [];
+  selectedItems = [];
   dropdownSettings: {
     singleSelection: boolean;
     idField: string;
@@ -53,22 +52,26 @@ export class DashboardComponent implements OnInit {
   requiredField: boolean = false;
   roleName: string;
   numberOfMedicines: any;
-  numberOfMaterial:any;
+  numberOfMaterial: any;
+  numberOfDisease: any;
+  tmp: any;
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private appointmentService: AppointmentService,
     private diseaseService: DiseaseService,
-    private medecinesService : MedecineService,
-    private materialService : MaterialService,
+    private medecinesService: MedecineService,
+    private materialService: MaterialService,
     private toastr: ToastrService
   ) {
     let formControls = {
       diseases: new FormControl("", []),
-      date: ["", [Validators.required]],
-      emergency: ["", [Validators.required]],
-      description: ["", [Validators.required]],
-      medicines: ["", [Validators.required]],
+      date:new FormControl ("", [Validators.required]),
+      emergency:new FormControl ("", [Validators.required]),
+      description:new FormControl ("", [Validators.required]),
+      medecines: new FormControl(),
+
     };
     this.BookAppointmetForm = this.formBuilder.group(formControls);
   }
@@ -92,9 +95,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.role = localStorage.getItem("role");
     this.name = localStorage.getItem("userName");
-    this.diseaseService.getDiseaseName().subscribe(data =>{
-      this.diseasesArray = data
-    })
+    this.diseaseService.getDiseaseName().subscribe((data) => {
+      this.diseasesArray = data;
+    });
     this.emergencyArray = ["low", "medium", "high"];
     if (this.role === "ROLE_ADMIN") {
       this.roleIcon = "fas fa-user-shield";
@@ -109,22 +112,13 @@ export class DashboardComponent implements OnInit {
       this.roleIcon = "fas fa-user";
       this.roleName = "Patient";
     }
-    this.dropdownList = [
-      { item_id: 1, item_text: "Panadol" },
-      { item_id: 2, item_text: "doliprane" },
-      { item_id: 3, item_text: "smecta" },
-      { item_id: 4, item_text: "alergica" },
-      { item_id: 5, item_text: "deslore" },
-      { item_id: 6, item_text: "analgon" },
-    ];
-
-    this.selectedItems = [];
-    this.medecinesService.medecineCount().subscribe(res =>{ 
-      this.numberOfMedicines =res.doctorCount
-    })
-    this.materialService.getCountMaterial().subscribe(res=>{
-      this.numberOfMaterial =res.MaterialCount
-    })
+    this.getData();
+    this.medecinesService.medecineCount().subscribe((res) => {
+      this.numberOfMedicines = res.doctorCount;
+    });
+    this.materialService.getCountMaterial().subscribe((res) => {
+      this.numberOfMaterial = res.MaterialCount;
+    });
     this.dropdownSettings = {
       singleSelection: false,
       idField: "item_id",
@@ -134,7 +128,19 @@ export class DashboardComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true,
     };
+    this.diseaseService.getDiseaseCount().subscribe((res) => {
+      this.numberOfDisease = res.DiseaseCount;
+    });
     this.setStatus();
+  }
+  getData(): void {
+    let tmp = [];
+    this.medecinesService.getMedecinesName().subscribe(data => {
+      for(let i=0; i < data.length; i++) {
+        tmp.push({ item_id: i, item_text: data[i].name });
+      }
+      this.dropdownList = tmp;
+    });
   }
 
   changeDropDown(e, component) {
@@ -155,7 +161,6 @@ export class DashboardComponent implements OnInit {
       null,
       appointementForm.value.description.toString()
     );
-    console.log("Appintment :::::!", appointment);
     this.appointmentService.addAppointment(appointment).subscribe(
       (res) => {
         console.log(res);
@@ -194,7 +199,7 @@ export class DashboardComponent implements OnInit {
     this.router.navigate([`${source}`]);
   }
 
-  showNotification(type,message) {
+  showNotification(type, message) {
     if (type === "default") {
       this.toastr.show(
         `<span class="alert-icon ni ni-bell-55" data-notify="icon"></span><div class="alert-text"><span data-notify="message">${message}</span></div>`,
@@ -258,18 +263,19 @@ export class DashboardComponent implements OnInit {
         }
       );
     }
-    if (type === 'info') {
+    if (type === "info") {
       this.toastr.show(
         `<span class="alert-icon ni ni-bell-55" data-notify="icon"></span> <div class="alert-text"></div><span data-notify="message">${message}</span></div>`,
-        '',
+        "",
         {
           timeOut: 10000,
           closeButton: false,
           enableHtml: true,
           tapToDismiss: false,
-          titleClass: 'alert-title',
-          positionClass: 'toast-top-right',
-          toastClass: "ngx-toastr alert alert-dismissible alert-info alert-notify",
+          titleClass: "alert-title",
+          positionClass: "toast-top-right",
+          toastClass:
+            "ngx-toastr alert alert-dismissible alert-info alert-notify",
         }
       );
     }
