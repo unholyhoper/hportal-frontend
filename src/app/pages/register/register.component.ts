@@ -80,6 +80,9 @@ export class RegisterComponent implements OnInit {
     };
     this.register = this.formBuilder.group(formControls);
   }
+  get username() {
+    return this.register.get("firstname");
+  }
   get firstname() {
     return this.register.get("firstname");
   }
@@ -105,20 +108,24 @@ export class RegisterComponent implements OnInit {
     return this.register.get("phone");
   }
   get country() {
-    return this.country.get("country");
+    return this.register.get("country");
   }
   get password() {
     return this.register.get("password");
   }
+  get confirmPasword() {
+    return this.register.get("confirmPasword");
+  }
   get privacyPolicy() {
-    return this.privacyPolicy.get("password");
+    return this.register.get("password");
   }
   get adress() {
-    return this.adress.get("adress");
+    return this.register.get("adress");
   }
   get region() {
-    return this.region.get("region");
+    return this.register.get("region");
   }
+
 
   ngOnInit() {
     this.arrayOfCountry = enumToArray(Country);
@@ -142,7 +149,7 @@ export class RegisterComponent implements OnInit {
       this.pwdstrengthColor = "text-danger";
     }
   }
-  confirmPassword(pswd) {
+  confirm_Password(pswd) {
     console.log(this.password);
     if (pswd === this.password.value) {
       this.pswdMatch = " matching";
@@ -187,5 +194,8 @@ _handleReaderLoaded(readerEvt) {
         console.log(err);
       }
     )
+  }
+  forgotPassword() {
+    this.router.navigate(["/forgotPassword"]);
   }
 }

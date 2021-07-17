@@ -24,11 +24,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private toastrService: ToastrService
   ) {}
-  get cin() {
-    return this.cin.get("cin");
+  get username() {
+    return this.loginForm.get("username");
   }
   get password() {
-    return this.password.get("password");
+    return this.loginForm.get("password");
   }
 
   ngOnInit() {
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       data.username=null
     if(data.password === '')
       data.password=null
-
+   
     this.loginService.login(data.username, data.password).subscribe(
       (response) => {
         console.log(response);
