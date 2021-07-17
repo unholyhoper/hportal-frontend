@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'argon-dashboard-angular';
+  title = 'HPortal';
+  constructor() {
+    localStorage.setItem('token', '123');
+
+  }
 }

@@ -19,6 +19,7 @@ import { Appointment } from "../../model/appointment";
 import { AppointmentService } from "../../services/appointment.service";
 import { ToastrService } from "ngx-toastr";
 import { DiseaseService } from "src/app/services/disease.service";
+import { MedecineService } from "src/app/services/medecine.service";
 
 @Component({
   selector: "app-dashboard",
@@ -50,12 +51,14 @@ export class DashboardComponent implements OnInit {
   };
   requiredField: boolean = false;
   roleName: string;
+  numberOfMedicines: any;
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private appointmentService: AppointmentService,
     private diseaseService: DiseaseService,
+    private medecinesService : MedecineService,
     private toastr: ToastrService
   ) {
     let formControls = {
@@ -114,7 +117,9 @@ export class DashboardComponent implements OnInit {
     ];
 
     this.selectedItems = [];
-
+    this.medecinesService.medecineCount().subscribe(res =>{ 
+      this.numberOfMedicines =res.doctorCount
+    })
     this.dropdownSettings = {
       singleSelection: false,
       idField: "item_id",
