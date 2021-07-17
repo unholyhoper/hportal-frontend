@@ -44,11 +44,11 @@ export class DiseasesComponent implements OnInit {
         Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(2),
       ]),
-      medecines: new FormControl("", [
-        Validators.required,
-        Validators.pattern("[A-Za-z .'-]+"),
-        Validators.minLength(2),
-      ]),
+      // medecines: new FormControl("", [
+      //   Validators.required,
+      //   Validators.pattern("[A-Za-z .'-]+"),
+      //   Validators.minLength(2),
+      // ]),
     };
     this.medecinesForm = this.formBuilder.group(this.formControls);
     if (this.id !== undefined){
@@ -146,14 +146,14 @@ export class DiseasesComponent implements OnInit {
     if (this.isUpdate) {
       this.diseaseService.updateDisease(data).subscribe(
         (res) => {
-          this.router.navigate([`/medecineTable`]);
+          this.router.navigate([`/diseaseTable`]);
         },
         (err) => {}
       );
     } else {
       this.diseaseService.addDisease(data).subscribe(
         (res) => {
-          this.router.navigate([`/medecineTable`]);
+          this.router.navigate([`/diseaseTable`]);
         },
         (err) => {}
       );

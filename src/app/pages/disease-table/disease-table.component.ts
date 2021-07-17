@@ -25,10 +25,9 @@ export class DiseaseTableComponent implements OnInit {
     this.diseaseService.allDiseases().subscribe((disease: Disease[]) => {
       this.rows = disease;
       this.headers = [
-        { label: "ID", value: "id" },
         { label: "Name", value: "name" },
         { label: "Description", value: "description" },
-        { label: "Medecines", value: "medecines" },
+        // { label: "Medecines", value: "medecines" },
       ];
     });
   }
