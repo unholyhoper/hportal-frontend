@@ -18,8 +18,6 @@ import jwt_decode from "jwt-decode";
 export class LoginComponent implements OnInit, OnDestroy {
   private loginForm: FormGroup;
   role: any;
-  @ViewChild(ToastContainerDirective, { static: true })
-  toastContainer: ToastContainerDirective;
   constructor(
     private formBuilder: FormBuilder,
     private loginService: AuthService,
@@ -34,7 +32,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.toastrService.overlayContainer = this.toastContainer;
     let formControls = {
       username: new FormControl(null, [
         Validators.required,
@@ -46,6 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(2),
       ]),
+      rememberMe: new FormControl(null, []),
     };
     this.loginForm = this.formBuilder.group(formControls);
   }
@@ -53,6 +51,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login(loginForm) {
     let data = loginForm.value;
+    if(data.rememberMe === true){
+      localStorage.setItem('username',data.username)
+      localStorage.setItem('password',data.password)
+    }
     if(data.username === '')
       data.username=null
     if(data.password === '')
