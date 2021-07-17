@@ -38,4 +38,8 @@ export class UserService {
   updateCurrentUser(id: number) {
     return this.httpClient.put<any>(`${BASE_PATH}/user/${id}`, "");
   }
+
+  getAllDelegates() {
+    return this.httpClient.get<any>(`${BASE_PATH}/user/delegates`);
+  }
 }
