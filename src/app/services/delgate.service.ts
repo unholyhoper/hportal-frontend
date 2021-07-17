@@ -1,23 +1,29 @@
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs/internal/observable/of';
+const BASE_PATH = environment.basePath;
 
 @Injectable({
   providedIn: 'root'
 })
 export class DelgateService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
   allDiseases(){
     return of()
   }
-  getDelegate(id){
+  allDelegates(){
     return of()
   }
   updateDelegate(data){
     return of()
   }
-  addDelegate(data){
-    return of()
+  getDelegate(id){
+    return this.httpClient.get<any>(`${BASE_PATH}/doctor/id`);
+  }
+  addDelegate(doctor){
+    return this.httpClient.post<any>(`${BASE_PATH}/doctor`,doctor);
   }
   deleteDelegate(id){
     return of()

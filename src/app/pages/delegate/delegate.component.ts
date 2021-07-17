@@ -1,3 +1,6 @@
+import { Region } from 'src/app/model/enum/region.enum';
+import { Country } from 'src/app/model/enum/country.enum';
+import { enumToArray } from 'src/app/shared-module/service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,7 +14,7 @@ import { DelgateService } from '../../services/delgate.service';
 export class DelegateComponent implements OnInit {
 
   formControls;
-  medecinesForm: FormGroup;
+  delegateForm: FormGroup;
   isUpdate: any;
   entity = 'delegate'
   id: any;
@@ -24,38 +27,53 @@ export class DelegateComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.formControls = {
-      id: new FormControl("", [
+      firstname: new FormControl("", [
         Validators.required,
         Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(2),
       ]),
-      reference: new FormControl("", [
+      lastname: new FormControl("", [
         Validators.required,
         Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(2),
       ]),
-      manufacturer: new FormControl("", [
+      email: new FormControl("", [
+        Validators.required,
+        Validators.pattern("^^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"),
+      ]),
+      gender: ["male", [Validators.required]],
+      role: ["", [Validators.required]],
+      medicalSerial: [null, [Validators.required, Validators.minLength(8)]],
+      cin: [
+        null,
+        [Validators.required, Validators.minLength(8), Validators.maxLength(8)],
+      ],
+      password: [null, [Validators.required]],
+      confirmPasword: [null, [Validators.required]],
+      privacyPolicy: [false, [Validators.required]],
+      phone: new FormControl(null, [Validators.required]),
+      country: ["", [Validators.required]],
+      adress: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern("[A-Za-z .'-]+"),
+          Validators.minLength(2),
+        ],
+      ],
+      region: ["", [Validators.required]],
+      /*laboratory: new FormControl("", [
         Validators.required,
         Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(2),
       ]),
-      quantity: new FormControl("", [
+      fieldOfTraining: new FormControl("", [
         Validators.required,
         Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(2),
-      ]),
-      expirationdate: new FormControl("", [
-        Validators.required,
-        Validators.pattern("[A-Za-z .'-]+"),
-        Validators.minLength(2),
-      ]),
-      price: new FormControl("", [
-        Validators.required,
-        Validators.pattern("[A-Za-z .'-]+"),
-        Validators.minLength(2),
-      ]),
+      ]),*/
     };
-    this.medecinesForm = this.formBuilder.group(this.formControls);
+    this.delegateForm = this.formBuilder.group(this.formControls);
     if (this.id !== undefined){
       this.isUpdate = true
     }
@@ -65,50 +83,94 @@ export class DelegateComponent implements OnInit {
 
   ngOnInit(): void {
     this.id=this.route.snapshot.paramMap.get('id')
-      this.fields = [
-        {
-          label: 'Id',
-          type: 'text',
-          formControleName: 'id',
-          icon: 'fa fa-user',
-          disabled: true,
-          value: this.id
-        },
-        {
-          label: 'Reference',
-          type: 'text',
-          formControleName: 'reference',
-          icon: 'fas fa-barcode',
-        },
-        {
-          label: 'Manufacturer',
-          type: 'text',
-          formControleName: 'manufacturer',
-          icon: 'fas fa-industry',
-        },
-        {
-          label: 'Quantity',
-          type: 'text',
-          formControleName: 'quantity',
-          icon: 'fas fa-cubes',
-        },
-        {
-          label: 'Expiration date',
-          type: 'text',
-          formControleName: 'expirationdate',
-          icon: 'fas fa-clock',
-        },
-        {
-          label: 'Price',
-          type: 'text',
-          formControleName: 'price',
-          icon: 'fas fa-dollar-sign',
-        },
-      ];
+    let arrayOfCountry = enumToArray(Country);
+    let arrayOfRegion = enumToArray(Region);
+    this.fields = [
+      {
+        label: "First Name",
+        type: "text",
+        formControleName: "firstname",
+        icon: "fa fa-user",
+        disable: "false",
+      },
+      {
+        label: "Last Name",
+        type: "text",
+        formControleName: "lastname",
+        icon: "fa fa-user",
+        disable: "false",
+      },
+      {
+        label: "Gender",
+        type: "radio",
+        formControleName: "gender",
+        value: ["male", "female"],
+        icon: "",
+        disable: "false",
+      },
+      {
+        label: "Medical Serial",
+        type: "text",
+        formControleName: "medicalSerial",
+        icon: "ni ni-badge",
+        disable: "false",
+      },
+      {
+        label: "National ID Card",
+        type: "number",
+        formControleName: "cin",
+        icon: "fas fa-dollar-sign",
+        disable: "false",
+      },
+      {
+        label: "Phone number",
+        type: "number",
+        formControleName: "phone",
+        icon: "fa fa-phone",
+        disable: "false",
+      },
+      {
+        label: "country",
+        type: "dropdown",
+        value: arrayOfCountry,
+        formControleName: "country",
+        icon: "",
+        disable: "false",
+      },
+      {
+        label: "Adress",
+        type: "number",
+        formControleName: "adress",
+        icon: "",
+        disable: "false",
+      },
+      {
+        label: "region",
+        type: "dropdown",
+        formControleName: "region",
+        value: arrayOfRegion,
+        icon: "",
+        disable: "false",
+      },
+      /*{
+        label: "Laboratory",
+        type: "text",
+        formControleName: "laboratory",
+        icon: "fas fa-flask",
+        disable: "false",
+      },
+      {
+        label: "Field of Training",
+        type: "text",
+        formControleName: "fieldOfTraining",
+        icon: "fas fa-sign-language",
+        disable: "false",
+      },*/
+    ];
       this.delegateService.getDelegate(this.id).subscribe(res => {
           this.fields.forEach(element => {
             element.value = res[element.formControleName]
-          });  
+          });
 
       });
   }
