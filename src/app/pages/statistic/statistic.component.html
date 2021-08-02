@@ -29,6 +29,8 @@
       </div>
     </div>
   </div>
+  <div class="row">
+      <div class="col-6">
   <h3 style="text-align: center;">Number of Clients per doctor</h3>
   <div  style="text-align: center;">
     <canvas mdbChart
@@ -42,3 +44,21 @@
         (chartClick)="chartClicked($event)">
     </canvas>
   </div>
+</div>
+<div class="col-6">
+    <h3 style="text-align: center;">Number of patients per diseases</h3>
+
+  <div style="display: block">
+    <canvas mdbChart
+        [chartType]="chartTypes"
+        [datasets]="chartDatasetss"
+        [labels]="chartLabelss"
+        [colors]="chartColorss"
+        [options]="chartOptionss"
+        [legend]="true"
+        (chartHover)="chartHovereds($event)"
+        (chartClick)="chartClickeds($event)">
+    </canvas>
+  </div>
+</div>
+</div>

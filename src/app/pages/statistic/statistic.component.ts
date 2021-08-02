@@ -329,5 +329,29 @@ export class StatisticComponent implements OnInit {
     public chartClicked(e: any): void { }
     public chartHovered(e: any): void { }
 
+
+
+    public chartTypes: string = 'pie';
+
+  public chartDatasetss: Array<any> = [
+    { data: [300, 50, 100, 40, 120], label: 'Number of patients per diseases' }
+  ];
+
+  public chartLabelss: Array<any> = ['Dengue', 'COVID', 'Hepatitis B', 'Tuberculosis', 'Diabete'];
+
+  public chartColorss: Array<any> = [
+    {
+      backgroundColors: ['#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
+      hoverBackgroundColors: ['#FF5A5E', '#5AD3D1', '#FFC870', '#A8B3C5', '#616774'],
+      borderWidth: 2,
+    }
+  ];
+
+  public chartOptionss: any = {
+    responsive: true
+  };
+  public chartClickeds(e: any): void { }
+  public chartHovereds(e: any): void { }
+
   }
 
