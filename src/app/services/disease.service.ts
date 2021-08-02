@@ -21,15 +21,21 @@ export class DiseaseService {
     return this.httpClient.get<any>(`${BASE_PATH}/disease/${id}`);
   }
   deleteMedecine(id: number) {
-    return this.httpClient.delete<any>(`${BASE_PATH}/user/${id}`);
+    return this.httpClient.delete<any>(`${BASE_PATH}/disease/${id}`);
   }
   updateDisease(disease){
-    return of()
+    return this.httpClient.put<any>(
+      `${BASE_PATH}/disease/${disease.id}`,
+      disease
+    );
   }
   addDisease(disease){
-    return of()
+    return this.httpClient.post<any>(`${BASE_PATH}/disease`,disease)
   }
   getDiseaseName(){
     return this.httpClient.get<any>(`${BASE_PATH}/diseaseNames`);
+  }
+  getDiseaseCount(){
+    return this.httpClient.get<any>(`${BASE_PATH}/countDisease`);
   }
 }

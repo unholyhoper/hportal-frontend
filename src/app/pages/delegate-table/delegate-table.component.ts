@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { RegisterUser } from 'src/app/model/register-user';
 import { DelgateService } from 'src/app/services/delgate.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-delegate-table',
@@ -14,23 +15,48 @@ export class DelegateTableComponent implements OnInit {
   rows;
   headers;
   entity = 'Delegate'
+  delegateList;
   constructor(
     private route: ActivatedRoute,
     private delagateService: DelgateService,
+    private userService : UserService,
     private toastrService: ToastrService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.delagateService.allDiseases().subscribe((disease: RegisterUser[]) => {
-      this.rows = disease;
-      this.headers = [
-        { label: "ID", value: "id" },
-        { label: "Name", value: "name" },
-        { label: "Description", value: "description" },
-        { label: "Medecines", value: "medecines" },
-      ];
+    this.headers = [
+      {label: 'id', value: 'id'},
+      {label: 'username', value: 'username'},
+      {label: 'firstname', value: 'firstname'},
+      {label: 'lastname', value: 'lastname'},
+      {label: 'email', value: 'email'},
+    ];
+    this.delagateService.allDelegates().subscribe((delegate : RegisterUser[]) => {
+      this.rows = delegate;
     });
+    this.userService.getAllDelegates().subscribe(
+      res => {
+        let delegates = new Array();
+        res.forEach(function (del) {
+          delegates.push({
+            username: del.username,
+            firstname: del.firstname,
+            lastname: del.lastname,
+            email: del.email,
+            enabled: del.enabled
+          });
+          console.log('delegatesssss:', delegates);
+
+
+        });
+        this.showSuccessMessage(`Delegates loaded successfully`);
+        this.delegateList = delegates;
+      },
+      (err) => {
+        this.showWarningMessage(`Error when loading delegates`);
+      }
+    );
   }
   public delete(source) {
     let index = this.rows.indexOf(source);
@@ -83,5 +109,8 @@ export class DelegateTableComponent implements OnInit {
           "ngx-toastr alert alert-dismissible alert-warning alert-notify",
       }
     );
+  }
+  submitData(){
+    console.log("data submitted");
   }
 }

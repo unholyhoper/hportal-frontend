@@ -34,4 +34,7 @@ export class MaterialService {
   addmMaterial(material) {
     return this.httpClient.post<any>(`${BASE_PATH}/material`, material);
   }
+  getCountMaterial() {
+    return this.httpClient.get<any>(`${BASE_PATH}/countMaterial`);
+  }
 }

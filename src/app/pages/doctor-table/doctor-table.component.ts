@@ -136,4 +136,8 @@ export class DoctorTableComponent implements OnInit {
       console.log(res);
     });
   }
+  submitData(){
+    console.log("data submitted");
+
+  }
 }

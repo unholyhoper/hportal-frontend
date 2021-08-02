@@ -77,16 +77,13 @@
                   required
                 />
               </div>
-              <div *ngIf="firstname.touched && firstname.invalid">
-                <small *ngIf="firstname.errors.required" class="text-danger"
-                  >Firstname is required<br
+              <div *ngIf="username.touched && username.invalid">
+                <small *ngIf="username.errors.required" class="text-danger"
+                  >username is required<br
                 /></small>
-                <small *ngIf="firstname.errors.pattern" class="text-danger"
-                  >Invalid Firstname<br
+                <small *ngIf="username.errors.pattern" class="text-danger"
+                  >Invalid username<br
                 /></small>
-                <small *ngIf="firstname.errors.minlength" class="text-danger"
-                  >Firstname must contain two characters at least</small
-                >
               </div>
             </div>
             <!--firstName-->
@@ -426,6 +423,14 @@
                   formControlName="password"
                 />
               </div>
+              <div *ngIf="password.touched && password.invalid">
+                <small *ngIf="password.errors.required" class="text-danger"
+                  >password number is required<br
+                /></small>
+                <small *ngIf="password.errors.pattern" class="text-danger"
+                  >Invalid password number<br
+                /></small>
+              </div>
               <div class="text-muted font-italic">
                 <small
                   >password strength:
@@ -447,9 +452,17 @@
                   class="form-control"
                   placeholder="confirm the Password"
                   type="password"
-                  (keyup)="confirmPassword($event.target.value)"
+                  (keyup)="confirm_Password($event.target.value)"
                   formControlName="confirmPasword"
                 />
+              </div>
+              <div *ngIf="confirmPasword.touched && confirmPasword.invalid">
+                <small *ngIf="confirmPasword.errors.required" class="text-danger"
+                  >confirm password number is required<br
+                /></small>
+                <small *ngIf="confirmPasword.errors.pattern" class="text-danger"
+                  >Invalid confirm password number<br
+                /></small>
               </div>
               <div class="text-muted font-italic">
                 <small
@@ -493,6 +506,11 @@
               </button>
             </div>
           </form>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-6">
+          <a class="text-light" (click)='forgotPassword()'><small>Forgot password?</small></a>
         </div>
       </div>
     </div>
