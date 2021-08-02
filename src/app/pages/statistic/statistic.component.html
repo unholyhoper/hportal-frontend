@@ -1,1 +1,44 @@
-<p>statistic works!</p>
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+        <div class="row">
+          <div class="col-xl-12 col-lg-12">
+            <div class="card card-stats mb-12 mb-xl-12">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-auto container-fluid">
+                    Welcome {{ name }} ({{ roleName }})
+                    <div
+                      class="
+                        icon icon-shape
+                        bg-danger
+                        text-white
+                        rounded-circle
+                        shadow
+                      "
+                    >
+                      <i [ngClass]="roleIcon"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3 style="text-align: center;">Number of Clients per doctor</h3>
+  <div  style="text-align: center;">
+    <canvas mdbChart
+        [chartType]="chartType"
+        [datasets]="chartDatasets"
+        [labels]="chartLabels"
+        [colors]="chartColors"
+        [options]="chartOptions"
+        [legend]="true"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)">
+    </canvas>
+  </div>
