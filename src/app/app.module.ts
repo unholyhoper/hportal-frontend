@@ -33,6 +33,7 @@ import { MaterialComponent } from './pages/material/material.component';
 import { MaterialTableComponent } from './pages/material-table/material-table.component';
 import { DelegateComponent } from './pages/delegate/delegate.component';
 import { DelegateTableComponent } from './pages/delegate-table/delegate-table.component';
+import { StatisticComponent } from './pages/statistic/statistic.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { DelegateTableComponent } from './pages/delegate-table/delegate-table.co
     MaterialComponent,
     MaterialTableComponent,
     DelegateComponent,
-    DelegateTableComponent
+    DelegateTableComponent,
+    StatisticComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
