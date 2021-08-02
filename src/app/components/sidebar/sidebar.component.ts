@@ -21,6 +21,7 @@ export const ROUTESADMIN: RouteInfo[] = [
   { path: 'doctorTable', title: 'List of doctors',  icon:'fas fa-user-md text-red', class: '' },
   { path: 'materialTable', title: 'List of materials',  icon:'fas fa-bed text-red', class: '' },
   { path: 'delegateTable', title: 'List of delegates',  icon:'fas fa-briefcase-medical text-red', class: '' },
+  { path: 'statistic', title: 'Statistics',  icon:'fas fa-chart-pie text-red', class: '' },
 
 ];
 
