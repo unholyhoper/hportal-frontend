@@ -22,9 +22,11 @@ import { MaterialTableComponent } from "src/app/pages/material-table/material-ta
 import { MaterialComponent } from "src/app/pages/material/material.component";
 import { DelegateTableComponent } from "src/app/pages/delegate-table/delegate-table.component";
 import { DelegateComponent } from "src/app/pages/delegate/delegate.component";
+import { StatisticComponent } from "src/app/pages/statistic/statistic.component";
 
 export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
+  { path: "statistic", component: StatisticComponent },
 
   { path: "medecineTable", component: MedecinesTableComponent },
   { path: "medecinesform/:entity/:id", component: MedecinesComponent },
