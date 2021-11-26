@@ -51,6 +51,7 @@ export class StatisticComponent implements OnInit {
     };
     requiredField: boolean = false;
     roleName: string;
+  doctorsList: any[];
   
     constructor(
       private userService: UserService,
@@ -353,5 +354,38 @@ export class StatisticComponent implements OnInit {
   public chartClickeds(e: any): void { }
   public chartHovereds(e: any): void { }
 
+  showSuccessMessage(message) {
+    this.toastr.show(
+      `<span class="alert-icon ni ni-bell-55" data-notify="icon"></span> <div class="alert-text"</div> <span data-notify="message">${message}</span></div>`,
+      "",
+      {
+        timeOut: 10000,
+        closeButton: false,
+        enableHtml: true,
+        tapToDismiss: false,
+        titleClass: "alert-title",
+        positionClass: "toast-top-center",
+        toastClass:
+          "ngx-toastr alert alert-dismissible alert-success alert-notify",
+      }
+    );
+  }
+
+  showWarningMessage(message) {
+    this.toastr.show(
+      `<span class="alert-icon ni ni-bell-55" data-notify="icon"></span> <div class="alert-text"></div> <span data-notify="message">${message}</span></div>`,
+      "",
+      {
+        timeOut: 10000,
+        closeButton: false,
+        enableHtml: true,
+        tapToDismiss: false,
+        titleClass: "alert-title",
+        positionClass: "toast-top-center",
+        toastClass:
+          "ngx-toastr alert alert-dismissible alert-warning alert-notify",
+      }
+    );
+  }
   }
 

@@ -72,7 +72,10 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.router.navigate(["/dashboard"]);
           // success toast
           this.toastrService.show(
-            `<span class="alert-icon ni ni-bell-55" data-notify="icon"></span> <div class="alert-text"></div> <span data-notify="message"> Welcome ! </span></div>`,
+            `<span class="alert-icon ni ni-bell-55 successfulMessage" data-notify="icon"></span> 
+            <div class="alert-text"></div> 
+              <span data-notify="message" class=""> Welcome ! </span>
+            </div>`,
             "",
             {
               timeOut: 5000,
@@ -101,7 +104,10 @@ export class LoginComponent implements OnInit, OnDestroy {
           }
           else{
             this.toastrService.show(
-              `<span class="alert-icon ni ni-bell-55" data-notify="icon"></span> <div class="alert-text"></div> <span data-notify="message"> User or password incorrect</span></div>`,
+              `<span class="alert-icon ni ni-bell-55 dangerMessage" data-notify="icon"></span> 
+                <div class="alert-text"></div> 
+                  <span data-notify="message" class=""> User or password incorrect</span>
+                </div>`,
               "",
               {
                 timeOut: 5000,
@@ -121,12 +127,18 @@ export class LoginComponent implements OnInit, OnDestroy {
   forgotPassword() {
     this.router.navigate(["/forgotPassword"]);
   }
+  createNewAccount() {
+    this.router.navigate(["/register"]);
+  }
   showWarningMessage(message) {
     this.toastrService.show(
-      `<span class="alert-icon ni ni-bell-55" data-notify="icon"></span> <div class="alert-text"></div> <span data-notify="message">${message}</span></div>`,
+      `<span class="alert-icon ni ni-bell-55 warningMessage" data-notify="icon"></span> 
+        <div class="alert-text">
+          </div> <span data-notify="message" >${message}</span>
+        </div>`,
       "",
       {
-        timeOut: 10000,
+        timeOut: 5000,
         closeButton: false,
         enableHtml: true,
         tapToDismiss: true,

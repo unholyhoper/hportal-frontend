@@ -48,10 +48,10 @@
         </div>
         <ul class="nav justify-content-center">
           <li class="nav-item">
-            <a class="nav-link" href="#login">Login</a>
+            <a class="nav-link logine2e" href="#login">Login</a>
           </li>
           <li>
-            <a class="nav-link active" href="#register">Register</a>
+            <a class="nav-link active registere2e" href="#register">Register</a>
           </li>
         </ul>
         <div class="card-body px-lg-5 py-lg-5">
@@ -70,7 +70,7 @@
                   ></span>
                 </div>
                 <input
-                  class="form-control"
+                  class="form-control userName"
                   placeholder="User name"
                   type="text"
                   formControlName="username"
@@ -78,10 +78,10 @@
                 />
               </div>
               <div *ngIf="username.touched && username.invalid">
-                <small *ngIf="username.errors.required" class="text-danger"
+                <small *ngIf="username.errors.required" class="text-danger userNameRequired"
                   >username is required<br
                 /></small>
-                <small *ngIf="username.errors.pattern" class="text-danger"
+                <small *ngIf="username.errors.pattern" class="text-danger userNameInvalid"
                   >Invalid username<br
                 /></small>
               </div>
@@ -95,7 +95,7 @@
                   ></span>
                 </div>
                 <input
-                  class="form-control"
+                  class="form-control firstname"
                   placeholder="First Name"
                   type="text"
                   formControlName="firstname"
@@ -103,13 +103,13 @@
                 />
               </div>
               <div *ngIf="firstname.touched && firstname.invalid">
-                <small *ngIf="firstname.errors.required" class="text-danger"
+                <small *ngIf="firstname.errors.required" class="text-danger firstnameRequired"
                   >Firstname is required<br
                 /></small>
-                <small *ngIf="firstname.errors.pattern" class="text-danger"
+                <small *ngIf="firstname.errors.pattern" class="text-danger firstnameInvalid"
                   >Invalid Firstname<br
                 /></small>
-                <small *ngIf="firstname.errors.minlength" class="text-danger"
+                <small *ngIf="firstname.errors.minlength" class="text-danger firstnameLenghtError"
                   >Firstname must contain two characters at least</small
                 >
               </div>
@@ -123,7 +123,7 @@
                   ></span>
                 </div>
                 <input
-                  class="form-control"
+                  class="form-control lastname"
                   placeholder="Last Name"
                   type="text"
                   required
@@ -131,13 +131,13 @@
                 />
               </div>
               <div *ngIf="lastname.touched && lastname.invalid">
-                <small *ngIf="lastname.errors.required" class="text-danger"
+                <small *ngIf="lastname.errors.required" class="text-danger lastnameRequied"
                   >Lastname is required<br
                 /></small>
-                <small *ngIf="lastname.errors.pattern" class="text-danger"
+                <small *ngIf="lastname.errors.pattern" class="text-danger lastnameInvalid"
                   >Invalid Lastname<br
                 /></small>
-                <small *ngIf="lastname.errors.minlength" class="text-danger"
+                <small *ngIf="lastname.errors.minlength" class="text-danger lastnameLenghtError"
                   >Lastname must contain two characters at least</small
                 >
               </div>
@@ -152,7 +152,7 @@
                     ></span>
                   </div>
                   <input
-                    class="form-control datepicker"
+                    class="form-control datepicker date"
                     placeholder="Select date"
                     name="dp"
                     ngbDatepicker
@@ -178,7 +178,7 @@
                   ></span>
                 </div>
                 <input
-                  class="form-control"
+                  class="form-control email"
                   placeholder="E-mail"
                   type="email"
                   required
@@ -186,10 +186,10 @@
                 />
               </div>
               <div *ngIf="email.touched && email.invalid">
-                <small *ngIf="email.errors.required" class="text-danger"
+                <small *ngIf="email.errors.required" class="text-danger emailRequired"
                   >E-mail is required<br
                 /></small>
-                <small *ngIf="email.errors.pattern" class="text-danger"
+                <small *ngIf="email.errors.pattern" class="text-danger emailInvalid"
                   >Invalid E-mail<br
                 /></small>
               </div>
@@ -200,12 +200,12 @@
                 <div class="col-lg-4 col-md-4" style="padding-top: 10px">
                   <i class="fas fa-restroom"></i> Gender :
                 </div>
-                <div class="col-lg-8 col-md-8">
+                <div class="col-lg-8 col-md-8 gender">
                   <div class="custom-control custom-radio">
                     <input
                       id="male"
                       type="radio"
-                      class="custom-control-input"
+                      class="custom-control-input "
                       value="male"
                       name="gender"
                       formControlName="gender"
@@ -231,7 +231,7 @@
             <!--Role-->
             <div class="form-group">
               <select
-                class="custom-select"
+                class="custom-select userType"
                 (change)="changeDropDown($event, role)"
                 formControlName="role"
               >
@@ -255,7 +255,7 @@
                     ></span>
                   </div>
                   <input
-                    class="form-control"
+                    class="form-control medicalSerial"
                     placeholder="Medial serial"
                     type="number"
                     required
@@ -264,7 +264,7 @@
                   <div *ngIf="medicalSerial.touched && medicalSerial.invalid">
                     <small
                       *ngIf="medicalSerial.errors.required"
-                      class="text-danger"
+                      class="text-danger medicalSerialRequired"
                       >Medical Serial is required<br
                     /></small>
                     <small
@@ -272,7 +272,7 @@
                         medicalSerial.errors.minlength &&
                         medicalSerial.errors.maxlength
                       "
-                      class="text-danger"
+                      class="text-danger medicalSerialInvalid"
                       >Medical Serial must contain eight least</small
                     >
                   </div>
@@ -288,7 +288,7 @@
                   ></span>
                 </div>
                 <input
-                  class="form-control"
+                  class="form-control cin"
                   placeholder="Carte d'Identité National"
                   type="number"
                   required
@@ -297,10 +297,10 @@
                 />
               </div>
               <div *ngIf="cin.touched && cin.invalid">
-                <small *ngIf="cin.errors.required" class="text-danger"
+                <small *ngIf="cin.errors.required" class="text-danger cinRequired"
                   >Carte d'Identité National is required<br
                 /></small>
-                <small *ngIf="cin.errors.minlength" class="text-danger"
+                <small *ngIf="cin.errors.minlength" class="text-danger cinInvalid"
                   >Carte d'Identité National must contain eight number</small
                 >
               </div>
@@ -314,7 +314,7 @@
                   ></span>
                 </div>
                 <input
-                  class="form-control"
+                  class="form-control phone"
                   placeholder="+216 00 00 00 00"
                   type="tel"
                   formControlName="phone"
@@ -322,10 +322,10 @@
                 />
               </div>
               <div *ngIf="phone.touched && phone.invalid">
-                <small *ngIf="phone.errors.required" class="text-danger"
+                <small *ngIf="phone.errors.required" class="text-danger phoneRequired"
                   >Phone number is required<br
                 /></small>
-                <small *ngIf="phone.errors.pattern" class="text-danger"
+                <small *ngIf="phone.errors.pattern" class="text-danger phoneInvalid"
                   >Invalid phone number<br
                 /></small>
               </div>
@@ -333,7 +333,7 @@
             <!--Country-->
             <div class="form-group">
               <select
-                class="custom-select"
+                class="custom-select country"
                 (change)="changeDropDown($event, country)"
                 formControlName="country"
               >
@@ -357,7 +357,7 @@
                       ></span>
                     </div>
                     <input
-                      class="form-control"
+                      class="form-control address"
                       placeholder="adress"
                       type="text"
                       formControlName="address"
@@ -401,6 +401,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4" style="padding-top: 10px">
                   <input
+                  class="profilePicture"
                     (change)="handleFileSelect($event)"
                     type="file"
                     formControlName="profilePicture"
@@ -416,7 +417,7 @@
                   ></span>
                 </div>
                 <input
-                  class="form-control"
+                  class="form-control password"
                   placeholder="Password"
                   type="password"
                   (keyup)="verifPassword($event.target.value)"
@@ -424,14 +425,14 @@
                 />
               </div>
               <div *ngIf="password.touched && password.invalid">
-                <small *ngIf="password.errors.required" class="text-danger"
+                <small *ngIf="password.errors.required" class="text-danger passwordRequired"
                   >password number is required<br
                 /></small>
-                <small *ngIf="password.errors.pattern" class="text-danger"
+                <small *ngIf="password.errors.pattern" class="text-danger passwordInvalid"
                   >Invalid password number<br
                 /></small>
               </div>
-              <div class="text-muted font-italic">
+              <div class="text-muted font-italic passwordStrength">
                 <small
                   >password strength:
                   <span class="font-weight-700" [ngClass]="pwdstrengthColor">{{
@@ -449,7 +450,7 @@
                   ></span>
                 </div>
                 <input
-                  class="form-control"
+                  class="form-control confirmPasword"
                   placeholder="confirm the Password"
                   type="password"
                   (keyup)="confirm_Password($event.target.value)"
@@ -457,10 +458,10 @@
                 />
               </div>
               <div *ngIf="confirmPasword.touched && confirmPasword.invalid">
-                <small *ngIf="confirmPasword.errors.required" class="text-danger"
+                <small *ngIf="confirmPasword.errors.required" class="text-danger confirmPaswordRequired"
                   >confirm password number is required<br
                 /></small>
-                <small *ngIf="confirmPasword.errors.pattern" class="text-danger"
+                <small *ngIf="confirmPasword.errors.pattern" class="text-danger confirmPaswordInvalid"
                   >Invalid confirm password number<br
                 /></small>
               </div>
@@ -475,14 +476,14 @@
             </div>
             <!--agree Privacy-->
             <div class="row my-4">
-              <div class="col-12">
+              <div class="col-12 privacyPolicy">
                 <div
                   class="
-                    custom-control custom-control-alternative custom-checkbox
+                    custom-control custom-control-alternative custom-checkbox 
                   "
                 >
                   <input
-                    class="custom-control-input"
+                    class="custom-control-input "
                     id="customCheckRegister"
                     type="checkbox"
                     formControlName="privacyPolicy"
@@ -499,7 +500,7 @@
             <div class="text-center">
               <button
                 type="button"
-                class="btn btn-primary mt-4 button-background"
+                class="btn btn-primary mt-4 button-background createAccounte2e"
                 type="submit"
               >
                 Create account

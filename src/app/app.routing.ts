@@ -9,12 +9,12 @@ import { MedecinesComponent } from "./pages/medecines/medecines.component";
 import { MedecinesTableComponent } from "./pages/medecines-table/medecines-table.component";
 
 const routes: Routes = [
-
   {
     path: "",
-    redirectTo: "dashboard",
+    redirectTo: "login",
     pathMatch: "full",
   },
+
   {
     path: "medecineTable/:model",
     component: MedecinesTableComponent,
