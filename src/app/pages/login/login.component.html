@@ -46,10 +46,10 @@
         </div>
         <ul class="nav justify-content-center">
           <li class="nav-item">
-            <a class="nav-link active" href="#login">Login</a>
+            <a class="nav-link active logine2e" href="#login">Login</a>
           </li>
           <li>
-            <a class="nav-link" href="#register">Register</a>
+            <a class="nav-link registere2e" href="#register">Register</a>
           </li>
         </ul>
         <div id="login" class="card-body px-lg-5 py-lg-5">
@@ -61,13 +61,13 @@
                     ><i class="ni ni-badge"></i
                   ></span>
                 </div>
-                <input class="form-control" placeholder="user Name" type="text" formControlName='username'/>
+                <input class="form-control userName" placeholder="user Name" type="text" formControlName='username'/>
               </div>
               <div *ngIf="username.touched && username.invalid">
-                <small *ngIf="username.errors.required" class="text-danger"
+                <small *ngIf="username.errors.required" class="text-danger requiredUserName"
                   >username is required<br
                 /></small>
-                <small *ngIf="username.errors.pattern" class="text-danger"
+                <small *ngIf="username.errors.pattern" class="text-danger invalidUserName"
                   >Invalid username<br
                 /></small>
 
@@ -81,17 +81,17 @@
                   ></span>
                 </div>
                 <input
-                  class="form-control"
+                  class="form-control password"
                   placeholder="Password"
                   type="password"
                   formControlName='password'
                 />
               </div>
               <div *ngIf="password.touched && password.invalid">
-                <small *ngIf="password.errors.required" class="text-danger"
+                <small *ngIf="password.errors.required" class="text-danger requiredPassword"
                   >password is required<br
                 /></small>
-                <small *ngIf="password.errors.pattern" class="text-danger"
+                <small *ngIf="password.errors.pattern" class="text-danger invalidPassword"
                   >Invalid password<br
                 /></small>
 
@@ -101,18 +101,17 @@
               class="custom-control custom-control-alternative custom-checkbox"
             >
               <input
-                class="custom-control-input"
+                class="custom-control-input rememberMeButton "
                 id=" customCheckLogin"
                 type="checkbox"
                 formControlName="rememberMe"
-
               />
-              <label class="custom-control-label" for=" customCheckLogin">
+              <label class="custom-control-label rememberMe" for=" customCheckLogin">
                 <span class="text-muted">Remember me</span>
               </label>
             </div>
             <div class="text-center">
-              <button type="button" class="btn btn-primary my-4 button-background" type="submit">
+              <button type="button" class="btn btn-primary my-4 button-background signInButton" type="submit">
                 Sign in
               </button>
             </div>
@@ -121,10 +120,10 @@
       </div>
       <div class="row mt-3">
         <div class="col-6">
-          <a class="text-light" (click)='forgotPassword()'><small>Forgot password?</small></a>
+          <a class="text-light forgetPassword" (click)='forgotPassword()'><small>Forgot password?</small></a>
         </div>
         <div class="col-6 text-right">
-          <a href="javascript:void(0)" class="text-light"
+          <a class="text-light createAccount" (click)='createNewAccount()' 
             ><small>Create new account</small>
           </a>
         </div>
